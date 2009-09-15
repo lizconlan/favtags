@@ -12,6 +12,7 @@
 ActiveRecord::Schema.define(:version => 20090915152441) do
 
   create_table "tags", :force => true do |t|
+    t.integer  "user_id"
     t.string   "name"
     t.boolean  "public",     :default => true
     t.datetime "created_at"
@@ -24,10 +25,10 @@ ActiveRecord::Schema.define(:version => 20090915152441) do
   end
 
   create_table "tweets", :force => true do |t|
-    t.string   "body",            :limit => 140
-    t.string   "status"
-    t.string   "user_id"
-    t.string   "posted_from"
+    t.integer  "user_id"
+    t.string   "text",            :limit => 140
+    t.string   "twitterer_name"
+    t.string   "twitterer_id"
     t.string   "reply_to_status"
     t.string   "reply_to_user"
     t.datetime "posted"

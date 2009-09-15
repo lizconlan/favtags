@@ -8,6 +8,7 @@ class CreateDatabase < ActiveRecord::Migration
     end
     
     create_table :tags do |t|
+      t.integer :user_id
       t.string :name
       t.boolean :public, :default => true
       
@@ -15,10 +16,10 @@ class CreateDatabase < ActiveRecord::Migration
     end
     
     create_table :tweets do |t|
-      t.string :body, :limit => 140
-      t.string :status
-      t.string :user_id
-      t.string :posted_from
+      t.integer :user_id
+      t.string :text, :limit => 140
+      t.string :twitterer_name
+      t.string :twitterer_id
       t.string :reply_to_status
       t.string :reply_to_user
       t.timestamp :posted
