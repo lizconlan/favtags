@@ -12,11 +12,15 @@ class User < ActiveRecord::Base
     User.find_or_create_by_id 1
     xml = get_favorites_xml(user, page_num)
     xml["status"].each do |tweet|
-      Tweet.create( :user_id => 1, :text => tweet["text"], :twitterer_name => tweet["user"][0]["screen_name"].strip, :twitterer_id => tweet["user"][0]["id"])
-      #puts %Q| #{tweet["user"][0]["screen_name"]}: #{tweet["text"]}|
-      #puts ""
+      Tweet.create( 
+        :user_id => 1, 
+        :text => tweet["text"].to_s, 
+        :twitterer_name => tweet["user"][0]["screen_name"].to_s.strip, 
+        :twitterer_id => tweet["user"][0]["id"].to_s,
+        :reply_to_status => tweet["user"][0]["in_reply_to_status_id"].to_s,
+        :reply_to_user => tweet["user"][0]["in_reply_to_screen_name"].to_s,
+        :posted => tweet["created_at"].to_s)
     end
-    return ""
   end
 
   private
