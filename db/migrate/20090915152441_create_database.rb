@@ -1,12 +1,5 @@
 class CreateDatabase < ActiveRecord::Migration
-  def self.up
-    create_table :users do |t|
-      t.string :name
-      t.string :twitter_id
-
-      t.timestamps
-    end
-    
+  def self.up    
     create_table :tags do |t|
       t.integer :user_id
       t.string :name
@@ -32,7 +25,6 @@ class CreateDatabase < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :users
     drop_table :tags
     drop_table :tweets
     drop_table :tags_tweets
