@@ -8,6 +8,9 @@ class User < TwitterAuth::GenericUser
   has_many :tags
   has_many :tweets
 
+  def login
+  end
+  
   def update_favorites
   end
 
