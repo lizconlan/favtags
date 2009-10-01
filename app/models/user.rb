@@ -7,9 +7,6 @@ class User < TwitterAuth::GenericUser
   # parent TwitterAuth::GenericUser class.
   has_many :tags
   has_many :tweets
-
-  def login
-  end
   
   def update_favorites
   end
