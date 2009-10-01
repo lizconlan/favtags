@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20090930224101) do
+ActiveRecord::Schema.define(:version => 20091001212316) do
 
   create_table "tags", :force => true do |t|
     t.integer  "user_id"
@@ -32,6 +32,8 @@ ActiveRecord::Schema.define(:version => 20090930224101) do
     t.string   "reply_to_status"
     t.string   "reply_to_user"
     t.datetime "posted"
+    t.string   "geo"
+    t.string   "tweet_id"
   end
 
   create_table "users", :force => true do |t|
