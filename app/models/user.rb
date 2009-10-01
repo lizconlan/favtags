@@ -1,6 +1,3 @@
-require 'open-uri'
-require 'xmlsimple'
-
 class User < TwitterAuth::GenericUser
   # Extend and define your user model as you see fit.
   # All of the authentication logic is handled by the 
@@ -11,25 +8,24 @@ class User < TwitterAuth::GenericUser
   def update_favorites
   end
 
-  def load_favorites twitter_user, page_num
-    User.find_or_create_by_id 1
-    xml = get_favorites_xml(twitter_user, page_num)
-    xml["status"].each do |tweet|
-      Tweet.create( 
-        :user_id => 1, 
-        :text => tweet["text"].to_s, 
-        :twitterer_name => tweet["user"][0]["screen_name"].to_s.strip, 
-        :twitterer_id => tweet["user"][0]["id"].to_s,
-        :reply_to_status => tweet["user"][0]["in_reply_to_status_id"].to_s,
-        :reply_to_user => tweet["user"][0]["in_reply_to_screen_name"].to_s,
-        :posted => tweet["created_at"].to_s)
+  def load_favorites page_num=1
+    tweets = self.twitter.get('/favorites')
+    tweets.each do |tweet|
+      puts tweet.inspect
+      Tweet.create(
+        :user_id => self.id,
+        :text => tweet["text"],
+        :tweet_id => tweet["id"],
+        :twitterer_name => tweet["user"]["screen_name"],
+        :twitterer_id => tweet["user"]["id"],
+        :reply_to_status => tweet["in_reply_to_user_id"],
+        :reply_to_user => tweet["in_reply_to_screen_name"],
+        :posted => tweet["created_at"],
+        :geo => tweet["geo"]
+      )
     end
   end
 
   private
-    def get_favorites_xml user, page
-      twit_stream = open("http://twitter.com/favorites/#{user}.xml?page=#{page}")
-      xml_text = twit_stream.read
-      XmlSimple.xml_in(xml_text)
-    end
+
 end
