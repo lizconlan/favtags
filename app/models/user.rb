@@ -9,9 +9,10 @@ class User < TwitterAuth::GenericUser
   end
 
   def load_favorites page_num=1
+    test = self.twitter.get("/users/show/#{self.twitter_id}")
+    fav_count = test["favourites_count"]
     tweets = self.twitter.get('/favorites')
     tweets.each do |tweet|
-      puts tweet.inspect
       Tweet.create(
         :user_id => self.id,
         :text => tweet["text"],
