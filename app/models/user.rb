@@ -9,8 +9,8 @@ class User < TwitterAuth::GenericUser
   end
 
   def load_favorites page_num=1
-    test = self.twitter.get("/users/show/#{self.twitter_id}")
-    fav_count = test["favourites_count"]
+    user_data = self.twitter.get("/users/show/#{self.twitter_id}")
+    fav_count = user_data["favourites_count"]
     tweets = self.twitter.get('/favorites')
     tweets.each do |tweet|
       Tweet.create(
