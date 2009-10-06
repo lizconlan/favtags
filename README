@@ -1,1 +1,4 @@
-must add stuff here ...
+gem dependencies:
+
+oauth
+ezcrypto
