@@ -1,5 +1,2 @@
 %ul#tweets
-  -@tweets.each do |tweet|
-    %li
-      =tweet['user']['screen_name']
-      =tweet['text']
+  = render :partial => "tweet", :collection => @tweets
