@@ -7,6 +7,6 @@
   
 %p
   = current_user.favourites_count.to_s + " favourites"
-
+  
 %ul#tweets
-  = render :partial => "tweet", :collection => @tweets
+  = render :partial => "tweet", :collection => @favourites
