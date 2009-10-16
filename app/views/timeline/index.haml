@@ -1,2 +1,12 @@
+%p
+  %a{:href=>"http://twitter.com/"+current_user.login}
+    %img{:src=>current_user.profile_image_url}
+%p
+  = current_user.name + ", "
+  = current_user.location
+  
+%p
+  = current_user.favourites_count.to_s + " favourites"
+
 %ul#tweets
   = render :partial => "tweet", :collection => @tweets
