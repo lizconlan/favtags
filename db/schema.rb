@@ -9,7 +9,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091001212316) do
+ActiveRecord::Schema.define(:version => 20091021201612) do
+
+  create_table "favourites", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "text",            :limit => 140
+    t.string   "twitterer_name"
+    t.string   "twitterer_id"
+    t.string   "reply_to_status"
+    t.string   "reply_to_user"
+    t.datetime "posted"
+    t.string   "geo"
+    t.string   "tweet_id"
+  end
 
   create_table "tags", :force => true do |t|
     t.integer  "user_id"
@@ -22,18 +34,6 @@ ActiveRecord::Schema.define(:version => 20091001212316) do
   create_table "tags_tweets", :force => true do |t|
     t.integer "tag_id",   :null => false
     t.integer "tweet_id", :null => false
-  end
-
-  create_table "tweets", :force => true do |t|
-    t.integer  "user_id"
-    t.string   "text",            :limit => 140
-    t.string   "twitterer_name"
-    t.string   "twitterer_id"
-    t.string   "reply_to_status"
-    t.string   "reply_to_user"
-    t.datetime "posted"
-    t.string   "geo"
-    t.string   "tweet_id"
   end
 
   create_table "users", :force => true do |t|
