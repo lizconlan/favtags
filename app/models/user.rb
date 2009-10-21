@@ -3,14 +3,14 @@ class User < TwitterAuth::GenericUser
   # All of the authentication logic is handled by the 
   # parent TwitterAuth::GenericUser class.
   has_many :tags
-  has_many :tweets
+  has_many :favourites
   
   def delete_favorites
     self.tweets.destroy_all
   end
   
   def update_favorites
-    unless self.tweets
+    unless self.favourites
       load_favourites
     else
       #do something a bit cleverer
@@ -34,7 +34,7 @@ class User < TwitterAuth::GenericUser
     pages.downto(1) do |i|
       tweets = self.twitter.get("/favorites?page=#{i}").reverse!
       tweets.each do |tweet|
-        Tweet.create(
+        Favourite.create(
           :user_id => self.id,
           :text => tweet["text"],
           :tweet_id => tweet["id"],
