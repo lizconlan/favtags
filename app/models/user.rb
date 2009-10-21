@@ -24,6 +24,12 @@ class User < TwitterAuth::GenericUser
       update_favourites
     end  
   end
+  
+  def faved_tweeple
+    grouped_faves = self.favourites.group_by { |x| x.twitterer_name }
+    tweeple = grouped_faves.keys
+    tweeple.sort { |a,b| a.downcase <=> b.downcase }
+  end
 
   private
 
