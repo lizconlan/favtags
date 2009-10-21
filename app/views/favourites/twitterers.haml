@@ -1,0 +1,3 @@
+-@tweeps.each do |twitterer|
+  %p 
+    = link_to twitterer, :controller => 'favourites', :action => 'tweep', :twitterer => twitterer
