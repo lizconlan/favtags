@@ -1,6 +1,6 @@
 %li 
   %pre=tweet.to_yaml
   %hr
-  =tweet['text']
-  %a{:href=>"http://twitter.com/"+tweet['user']['screen_name']}
-    =tweet['user']['name']
+  =tweet.text
+  %a{:href=>"http://twitter.com/"+tweet.twitterer_name}
+    =tweet.twitterer_name
