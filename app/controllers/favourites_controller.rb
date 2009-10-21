@@ -1,4 +1,4 @@
-class Favourites < ApplicationController
+class FavouritesController < ApplicationController
   before_filter :login_required
   
   def index
