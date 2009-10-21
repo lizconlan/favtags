@@ -8,5 +8,9 @@
 %p
   = current_user.favourites_count.to_s + " favourites"
   
+%p
+  %a{:href=>"#"}
+    Load latest favourites
+  
 %ul#tweets
   = render :partial => "tweet", :collection => @favourites

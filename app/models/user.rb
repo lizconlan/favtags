@@ -10,6 +10,11 @@ class User < TwitterAuth::GenericUser
   end
   
   def update_favorites
+    unless self.tweets
+      load_favourites
+    else
+      #do something a bit cleverer
+    end
   end
   
   def update_favcount
