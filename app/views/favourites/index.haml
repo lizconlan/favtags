@@ -12,4 +12,5 @@
   = current_user.favourites.count.to_s + " favourites stored on Favtags"
   
 %div.timeline
+  -@show_tweep = true
   =render :partial => "tweet", :collection => @favourites

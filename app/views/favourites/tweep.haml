@@ -1,2 +1,8 @@
-%ul#tweets
+%p
+  %a{:href=>"http://twitter.com/"+@tweets.first.twitterer_name}
+    =@tweets.first.twitterer_name
+  - if @tweets.first.twitterer_real_name
+    ="(" + @tweets.first.twitterer_real_name + ")"
+
+%div.tweepline
   = render :partial => "tweet", :collection => @tweets
