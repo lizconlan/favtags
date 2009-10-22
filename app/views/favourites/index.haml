@@ -6,7 +6,10 @@
   = current_user.location
   
 %p
-  = current_user.favourites_count.to_s + " favourites"
+  = current_user.favourites_count.to_s + " favourites on Twitter"
+
+%p 
+  = current_user.favourites.count.to_s + " favourites stored on Favtags"
   
 %p
   =link_to "Load latest favourites", :controller => :favourites, :action => "load"
