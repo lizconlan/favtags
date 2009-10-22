@@ -15,7 +15,10 @@
           - unless current_user
             = link_to image_tag("twitter_button.gif", :border=>0), login_url
           - else
-            = link_to "logout", logout_url
+            %ul.menu
+              %li= link_to "View Favourites", "/favourites"
+              %li= link_to "Load Favourites", "/favourites/load"
+              %li= link_to "Logout", logout_url
       #bd{:role=>"main"}
         %div.yui-g= yield
       #ft{:role=>"contentinfo"}

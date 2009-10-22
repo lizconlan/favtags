@@ -1,6 +1,8 @@
-%li 
-  %pre= #tweet.to_yaml
-  %hr
-  =tweet.text
-  %a{:href=>"http://twitter.com/"+tweet.twitterer_name}
-    =tweet.twitterer_name
+%pre= #tweet.to_yaml
+%div.tweet
+  %div.tweep
+    %a{:href=>"http://twitter.com/"+tweet.twitterer_name}
+      =tweet.twitterer_name
+  %div.tweet_body
+    %span.tweet_text= tweet.text
+    %span.tweet_date= tweet.posted

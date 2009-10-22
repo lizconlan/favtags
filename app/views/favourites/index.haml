@@ -11,8 +11,5 @@
 %p 
   = current_user.favourites.count.to_s + " favourites stored on Favtags"
   
-%p
-  =link_to "Load latest favourites", :controller => :favourites, :action => "load"
-  
-%ul#tweets
-  = render :partial => "tweet", :collection => @favourites
+%div.timeline
+  =render :partial => "tweet", :collection => @favourites
