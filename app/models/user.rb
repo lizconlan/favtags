@@ -18,7 +18,7 @@ class User < TwitterAuth::GenericUser
 
   def load_favourites
     update_favcount
-    if self.favourites.empty?
+    if self.favourites.count == 0
       load_all_favourites
     else
       update_favourites
