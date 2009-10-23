@@ -9,18 +9,18 @@
   %body{:id=>"favtags-heroku-com"}
     #doc.yui-t7
       #hd{:role=>"banner"}
-        %h1 Favtags
-        %p
-          - unless current_user
-            = link_to image_tag("twitter_button.gif", :border=>0), login_url
-          - else
-            %ul.menu
-              %li= link_to "View Favourites", "/favourites"
-              %li= link_to "Load Favourites", "/favourites/load"
-              %li= link_to "Logout", logout_url
+        - if current_user
+          %ul.menu.logged-in
+            %li= link_to "<h1>Favtags</h1> / Log out", logout_url
+            %li= link_to "<strong>Favourites</strong> / View", "/favourites"
+            %li= link_to "/ Load", "/favourites/load"
+        - else
+          %ul.menu.logged-out
+            %li= link_to "<h1>Favtags</h1> / Log in", login_url
       #bd{:role=>"main"}
         %div.yui-g= yield
       #ft{:role=>"contentinfo"}
         %p
           %a{:href=>"http://github.com/lizconlan/favtags"}
-            Fork Favtags on github
+            Fork Favtags on github.
+          Favtags uses OAuth.
