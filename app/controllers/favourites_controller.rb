@@ -7,8 +7,19 @@ class FavouritesController < ApplicationController
   end
   
   def load
-    current_user.load_favourites
-    redirect_to :action => "index"
+    #current_user.load_favourites
+    unless session[:job_id]
+      session[:job_id] = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user.id).id
+    else
+      @job = Job.find(session[:job_id])
+      if @job.finished?
+        session[:job_id] = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user).id
+      end
+      @progress = @job.progress
+      puts @job.result
+      puts @progress
+    end
+    #redirect_to :action => "index"
   end
   
   def twitterers

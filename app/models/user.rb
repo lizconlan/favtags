@@ -54,7 +54,7 @@ class User < TwitterAuth::GenericUser
       pages.downto(1) do |i|
         tweets = self.twitter.get("/favorites?page=#{i}").reverse!
         tweets.each do |tweet|
-          if last_stored && tweet["id"].to_i > last_stored.to_i
+          if !last_stored || (last_stored && tweet["id"].to_i > last_stored.to_i)
             fave = Favourite.new(
               :user_id => self.id,
               :text => tweet["text"],
