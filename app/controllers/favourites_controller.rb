@@ -2,12 +2,10 @@ class FavouritesController < ApplicationController
   before_filter :login_required
   
   def index
-    # @favourites = current_user.twitter.get('/favorites')
     @favourites = current_user.favourites
   end
   
   def load
-    #current_user.load_favourites
     unless session[:job_id]
       session[:job_id] = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user.id).id
     else
@@ -15,11 +13,7 @@ class FavouritesController < ApplicationController
       if @job.finished?
         session[:job_id] = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user).id
       end
-      @progress = @job.progress
-      puts @job.result
-      puts @progress
     end
-    #redirect_to :action => "index"
   end
   
   def twitterers

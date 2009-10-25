@@ -1,2 +1,4 @@
-%p= @progress
-%p= current_user.favourites.count
+%p Loading...
+%p= "Current favourites count: #{current_user.favourites.count}"
+
+%p.debug= @job.state
