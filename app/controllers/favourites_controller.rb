@@ -2,7 +2,10 @@ class FavouritesController < ApplicationController
   before_filter :login_required
   
   def index
-    @favourites = current_user.favourites
+    @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
+    @max_page = (current_user.favourites.count.to_f / Favourite.per_page).ceil
+    @current_page = @max_page if @current_page > @max_page 
+    @favourites = current_user.favourites.paginate(:all, :page => @current_page)
   end
   
   def load
@@ -22,6 +25,9 @@ class FavouritesController < ApplicationController
   
   def tweep
     twitterer = params[:twitterer]
-    @tweets = current_user.favourites.find_all_by_twitterer_name(twitterer)
+    @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
+    @max_page = (current_user.favourites.find_all_by_twitterer_name(twitterer).count.to_f / Favourite.per_page).ceil
+    @current_page = @max_page if @current_page > @max_page
+    @tweets = current_user.favourites.paginate_by_twitterer_name(twitterer, :page => @current_page)
   end
 end
