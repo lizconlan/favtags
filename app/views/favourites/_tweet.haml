@@ -3,5 +3,5 @@
     %div.tweep
       =link_to tweet.twitterer_name, :controller => 'favourites', :action => :tweep, :twitterer => tweet.twitterer_name
   %div.tweet_body
-    %span.tweet_text= tweet.text
+    %span.tweet_text= tweet.html_text
     %span.tweet_date= tweet.posted
