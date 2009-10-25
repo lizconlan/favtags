@@ -2,5 +2,9 @@ gem dependencies:
 
 oauth
 ezcrypto
+will_paginate
 
+start the background tasks thing:
+
+ruby ./script/daemons start
 
