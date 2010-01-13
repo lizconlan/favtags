@@ -18,11 +18,11 @@ class User < TwitterAuth::GenericUser
 
   def load_favourites
     update_favcount
-    if self.favourites.count == 0
+ #   if self.favourites.count == 0
       load_all_favourites
-    else
-      update_favourites
-    end  
+#    else
+      #update_favourites
+#    end  
   end
   
   def faved_tweeple
@@ -42,33 +42,25 @@ class User < TwitterAuth::GenericUser
     end
 
     def load_all_favourites
-      fav_count = self.favourites_count
-      pages = fav_count.to_f / 20
-      load_from_twitter(pages)
-    end
-
-    def load_from_twitter pages, last_stored=nil
-      if pages.to_i < pages
-        pages = pages.to_i + 1
-      end
-      pages.downto(1) do |i|
-        tweets = self.twitter.get("/favorites?page=#{i}").reverse!
+      tweets = "starting"
+      i = 0
+      while !tweets.blank?
+        i += 1
+        tweets = self.twitter.get("/favorites?page=#{i}")
         tweets.each do |tweet|
-          if !last_stored || (last_stored && tweet["id"].to_i > last_stored.to_i)
-            fave = Favourite.new(
-              :user_id => self.id,
-              :text => tweet["text"],
-              :tweet_id => tweet["id"],
-              :twitterer_name => tweet["user"]["screen_name"],
-              :twitterer_real_name => tweet["user"]["name"],
-              :twitterer_id => tweet["user"]["id"],
-              :reply_to_status => tweet["in_reply_to_user_id"],
-              :reply_to_user => tweet["in_reply_to_screen_name"],
-              :posted => tweet["created_at"],
-              :geo => tweet["geo"]
-            )
-            self.favourites <<= fave
-          end
+          fave = Favourite.new(
+            :user_id => self.id,
+            :text => tweet["text"],
+            :tweet_id => tweet["id"],
+            :twitterer_name => tweet["user"]["screen_name"],
+            :twitterer_real_name => tweet["user"]["name"],
+            :twitterer_id => tweet["user"]["id"],
+            :reply_to_status => tweet["in_reply_to_user_id"],
+            :reply_to_user => tweet["in_reply_to_screen_name"],
+            :posted => tweet["created_at"],
+            :geo => tweet["geo"]
+          )
+          self.favourites <<= fave
         end
       end
     end
