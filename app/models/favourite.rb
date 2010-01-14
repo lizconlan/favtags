@@ -10,8 +10,8 @@ class Favourite < ActiveRecord::Base
     html.scan(/http:\/\/\S*/).each do |match|
       html.gsub!(match, "<a href='#{match}'>#{match}</a>")
     end
-    html.scan(/ @[a-zA-Z0-9_]+/).each do |match|
-      html.gsub!(match, " <a href='http://twitter.com/#{match.gsub(" @", "")}'>#{match.strip}</a>")
+    html.scan(/(?:\W|,)@[a-zA-Z0-9_]+/).each do |match|
+      html.gsub!(match, " <a href='http://twitter.com/#{match.gsub(" @", "").gsub(",@","")}'>#{match.strip}</a>")
     end
     html.scan(/^@[a-zA-Z0-9_]+/).each do |match|
       html.gsub!(match, " <a href='http://twitter.com/#{match.gsub("@", "")}'>#{match.strip}</a>")
