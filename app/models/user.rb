@@ -3,7 +3,7 @@ class User < TwitterAuth::GenericUser
   # All of the authentication logic is handled by the 
   # parent TwitterAuth::GenericUser class.
   has_many :tags
-  has_many :favourites
+  has_many :favourites, :order => 'posted DESC'
   
   def delete_favorites
     self.favourites.destroy_all
@@ -18,11 +18,7 @@ class User < TwitterAuth::GenericUser
 
   def load_favourites
     update_favcount
- #   if self.favourites.count == 0
-      load_all_favourites
-#    else
-      #update_favourites
-#    end  
+    load_all_favourites
   end
   
   def faved_tweeple
@@ -33,14 +29,6 @@ class User < TwitterAuth::GenericUser
 
   private
 
-    def update_favourites
-      last_stored = self.favourites.last.tweet_id
-      fav_count = self.favourites_count
-      fav_stored = self.favourites.count
-      pages = (fav_count.to_f - fav_stored.to_f) / 20
-      load_from_twitter(pages, last_stored)
-    end
-
     def load_all_favourites
       tweets = "starting"
       i = 0
@@ -48,19 +36,21 @@ class User < TwitterAuth::GenericUser
         i += 1
         tweets = self.twitter.get("/favorites?page=#{i}")
         tweets.each do |tweet|
-          fave = Favourite.new(
-            :user_id => self.id,
-            :text => tweet["text"],
-            :tweet_id => tweet["id"],
-            :twitterer_name => tweet["user"]["screen_name"],
-            :twitterer_real_name => tweet["user"]["name"],
-            :twitterer_id => tweet["user"]["id"],
-            :reply_to_status => tweet["in_reply_to_user_id"],
-            :reply_to_user => tweet["in_reply_to_screen_name"],
-            :posted => tweet["created_at"],
-            :geo => tweet["geo"]
-          )
-          self.favourites <<= fave
+          unless Favourite.find_by_tweet_id(tweet["id"])
+            fave = Favourite.new(
+              :user_id => self.id,
+              :text => tweet["text"],
+              :tweet_id => tweet["id"],
+              :twitterer_name => tweet["user"]["screen_name"],
+              :twitterer_real_name => tweet["user"]["name"],
+              :twitterer_id => tweet["user"]["id"],
+              :reply_to_status => tweet["in_reply_to_user_id"],
+              :reply_to_user => tweet["in_reply_to_screen_name"],
+              :posted => tweet["created_at"],
+              :geo => tweet["geo"]
+            )
+            self.favourites <<= fave
+          end
         end
       end
     end
