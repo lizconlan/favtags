@@ -44,7 +44,7 @@ class User < TwitterAuth::GenericUser
               :twitterer_name => tweet["user"]["screen_name"],
               :twitterer_real_name => tweet["user"]["name"],
               :twitterer_id => tweet["user"]["id"],
-              :reply_to_status => tweet["in_reply_to_user_id"],
+              :reply_to_status => tweet["in_reply_to_status_id"],
               :reply_to_user => tweet["in_reply_to_screen_name"],
               :posted => tweet["created_at"],
               :geo => tweet["geo"]
