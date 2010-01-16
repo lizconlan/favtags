@@ -14,6 +14,11 @@
             %li= link_to "<h1>Favtags</h1> / Log out", logout_url
             %li= link_to "<strong>Favourites</strong> / View", "/favourites"
             %li= link_to "/ Load", "/favourites/load"
+          -if current_user.job_id
+            -job = Job.find(current_user.job_id)
+            -if job && !job.finished?
+              .loading_message
+                Your favourites are currently loading, please be patient!
         - else
           %ul.menu.logged-out
             %li= link_to "<h1>Favtags</h1> / Log in", login_url

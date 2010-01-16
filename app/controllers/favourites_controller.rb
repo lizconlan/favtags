@@ -9,14 +9,17 @@ class FavouritesController < ApplicationController
   end
   
   def load
-    unless session[:job_id]
-      session[:job_id] = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user.id).id
-    else
-      @job = Job.find(session[:job_id])
-      if @job.finished?
-        session[:job_id] = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user).id
-      end
+    if current_user.job_id
+      @job = Job.find(current_user.job_id)
     end
+    
+    if !@job || @job.finished? || @job.failed?
+      current_user.job_id = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user).id
+      current_user.save
+      @job = Job.find(current_user.job_id)
+    end
+
+    redirect_to favourites_url
   end
   
   def twitterers

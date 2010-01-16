@@ -9,9 +9,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091023152639) do
+ActiveRecord::Schema.define(:version => 20100116204305) do
 
   create_table "favourites", :force => true do |t|
+    t.integer  "user_id"
+    t.string   "text",                :limit => 140
+    t.string   "twitterer_name"
+    t.string   "twitterer_id"
+    t.string   "reply_to_status"
+    t.string   "reply_to_user"
+    t.datetime "posted"
+    t.string   "geo"
+    t.string   "tweet_id"
+    t.string   "twitterer_real_name"
+  end
+
+  create_table "favourites_bak", :id => false, :force => true do |t|
+    t.integer  "id",                                 :default => 0, :null => false
     t.integer  "user_id"
     t.string   "text",                :limit => 140
     t.string   "twitterer_name"
@@ -84,6 +98,7 @@ ActiveRecord::Schema.define(:version => 20091023152639) do
     t.string   "time_zone"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "job_id"
   end
 
 end
