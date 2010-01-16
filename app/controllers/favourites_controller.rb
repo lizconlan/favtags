@@ -14,7 +14,7 @@ class FavouritesController < ApplicationController
     end
     
     if !@job || @job.finished? || @job.failed?
-      current_user.job_id = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user).id
+      current_user.job_id = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user.id).id
       current_user.save
       @job = Job.find(current_user.job_id)
     end
