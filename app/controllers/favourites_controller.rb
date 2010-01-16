@@ -4,8 +4,12 @@ class FavouritesController < ApplicationController
   def index
     @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
     @max_page = (current_user.favourites.count.to_f / Favourite.per_page).ceil
-    @current_page = @max_page if @current_page > @max_page 
-    @favourites = current_user.favourites.paginate(:all, :page => @current_page)
+    @current_page = @max_page if @current_page > @max_page
+    if current_user.favourites
+      @favourites = current_user.favourites.paginate(:all, :page => @current_page)
+    else
+      @favourites = nil
+    end
   end
   
   def load
