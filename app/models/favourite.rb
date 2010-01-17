@@ -22,8 +22,4 @@ class Favourite < ActiveRecord::Base
     html.gsub!("\n", "<br />")
     html.to_s
   end
-  
-  def in_conversation?
-    Conversation.find_by_favourite_id(self.id)
-  end
 end
