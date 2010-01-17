@@ -18,7 +18,7 @@
             -job = Job.find(current_user.job_id)
             -if job && !job.finished?
               .loading_message
-                -if !job.failed?
+                -if job.failed?
                   -if job.result =~ /Rate limit exceeded./
                     Rate limit exceeded, come back in an hour or so
                   -else
