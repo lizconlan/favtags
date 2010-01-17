@@ -16,6 +16,9 @@ class Favourite < ActiveRecord::Base
     html.scan(/^(@[a-zA-Z0-9_]+)/).each do |match|
       html.gsub!(match.to_s, " <a href='http://twitter.com/#{match.first.gsub("@", "")}'>#{match.to_s.strip}</a>")
     end
+    html.scan(/(?:\ |\()(#[a-zA-Z0-9_]+)/).each do |match|
+      html.gsub!(match.to_s, " <a href='http://search.twitter.com/search?q=#{match.first.to_s.gsub('#','%23')}'>#{match.first.to_s.strip}</a>")
+    end
     html.to_s
   end
 end
