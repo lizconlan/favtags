@@ -9,11 +9,18 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100116204305) do
+ActiveRecord::Schema.define(:version => 20100124170220) do
+
+  create_table "conversations", :force => true do |t|
+    t.integer "user_id"
+    t.integer "favourite_id"
+    t.integer "next_favourite_id"
+    t.integer "prev_favourite_id"
+  end
 
   create_table "favourites", :force => true do |t|
     t.integer  "user_id"
-    t.string   "text",                :limit => 140
+    t.string   "text",                                   :limit => 140
     t.string   "twitterer_name"
     t.string   "twitterer_id"
     t.string   "reply_to_status"
@@ -22,20 +29,39 @@ ActiveRecord::Schema.define(:version => 20100116204305) do
     t.string   "geo"
     t.string   "tweet_id"
     t.string   "twitterer_real_name"
+    t.string   "twitterer_location"
+    t.string   "twitterer_description"
+    t.string   "twitterer_profile_image_url"
+    t.string   "twitterer_url"
+    t.boolean  "twitterer_protected"
+    t.integer  "twitterer_followers_count"
+    t.string   "twitterer_profile_background_color"
+    t.string   "twitterer_profile_text_color"
+    t.string   "twitterer_profile_link_color"
+    t.string   "twitterer_profile_sidebar_fill_color"
+    t.string   "twitterer_profile_sidebar_border_color"
+    t.integer  "twitterer_friends_count"
+    t.datetime "twitterer_created_at"
+    t.integer  "twitterer_favourites_count"
+    t.integer  "twitterer_utc_offset"
+    t.string   "twitterer_time_zone"
+    t.string   "twitterer_profile_background_image_url"
+    t.boolean  "twitterer_profile_background_tile"
+    t.boolean  "twitterer_notifications"
+    t.boolean  "twitterer_geo_enabled"
+    t.boolean  "twitterer_verified"
+    t.boolean  "twitterer_following"
+    t.integer  "twitterer_statuses_count"
+    t.string   "twitterer_lang"
+    t.boolean  "twitterer_contributors_enabled"
+    t.boolean  "truncated"
+    t.boolean  "reply_to_user_id"
+    t.string   "source"
   end
 
-  create_table "favourites_bak", :id => false, :force => true do |t|
-    t.integer  "id",                                 :default => 0, :null => false
-    t.integer  "user_id"
-    t.string   "text",                :limit => 140
-    t.string   "twitterer_name"
-    t.string   "twitterer_id"
-    t.string   "reply_to_status"
-    t.string   "reply_to_user"
-    t.datetime "posted"
-    t.string   "geo"
-    t.string   "tweet_id"
-    t.string   "twitterer_real_name"
+  create_table "favourites_tags", :id => false, :force => true do |t|
+    t.integer "tag_id",       :null => false
+    t.integer "favourite_id", :null => false
   end
 
   create_table "jobs", :force => true do |t|
@@ -63,11 +89,6 @@ ActiveRecord::Schema.define(:version => 20100116204305) do
     t.boolean  "public",     :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "tags_tweets", :force => true do |t|
-    t.integer "tag_id",   :null => false
-    t.integer "tweet_id", :null => false
   end
 
   create_table "users", :force => true do |t|

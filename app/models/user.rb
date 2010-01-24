@@ -27,6 +27,15 @@ class User < TwitterAuth::GenericUser
     tweeple.sort { |a,b| a.downcase <=> b.downcase }
   end
 
+  def has_tag? tag_name
+    !tags.find_by_name(tag_name).nil
+  end
+
+  def tag_names
+    names = tags.collect { |x| x.name }
+    names
+  end
+
   private
 
     def load_all_favourites
