@@ -44,11 +44,37 @@ class User < TwitterAuth::GenericUser
               :twitterer_name => tweet["user"]["screen_name"],
               :twitterer_real_name => tweet["user"]["name"],
               :twitterer_id => tweet["user"]["id"],
+              :twitterer_location => tweet["user"]["location"],
+              :twitterer_description => tweet["user"]["description"],
+              :twitterer_profile_image_url => tweet["user"]["profile_image_url"],
+              :twitterer_url => tweet["user"]["url"],
+              :twitterer_protected => tweet["user"]["protected"],
+              :twitterer_followers_count => tweet["user"]["followers_count"],
+              :twitterer_profile_background_color => tweet["user"]["profile_background_color"],
+              :twitterer_profile_text_color => tweet["user"]["profile_text_color"],
+              :twitterer_profile_link_color => tweet["user"]["profile_link_color"],
+              :twitterer_profile_sidebar_fill_color => tweet["user"]["profile_sidebar_fill_color"],
+              :twitterer_profile_sidebar_border_color => tweet["user"]["profile_sidebar_border_color"],
+              :twitterer_friends_count => tweet["user"]["friends_count"],
+              :twitterer_created_at => tweet["user"]["created_at"],
+              :twitterer_favourites_count => tweet["user"]["utc_offset"],
+              :twitterer_time_zone => tweet["user"]["time_zone"],
+              :twitterer_profile_background_image_url => tweet["user"]["profile_background_image_url"],
+              :twitterer_profile_background_tile => tweet["user"]["profile_background_tile"],
+              :twitterer_notifications => tweet["user"]["notifications"],
+              :twitterer_geo_enabled => tweet["user"]["geo_enabled"],
+              :twitterer_verified => tweet["user"]["verified"],
+              :twitterer_following => tweet["user"]["following"],
+              :twitterer_statuses_count => tweet["user"]["statuses_count"],
+              :twitterer_lang => tweet["user"]["lang"],
+              :twitterer_contributors_enabled => tweet["user"]["contributors_enabled"],
               :reply_to_status => tweet["in_reply_to_status_id"],
               :reply_to_user => tweet["in_reply_to_screen_name"],
-              :posted => tweet["created_at"],
-              :geo => tweet["geo"]
+              :reply_to_user_id => tweet["in_reply_to_user_id"],
+              :source => tweet["source"],
+              :posted => tweet["created_at"]
             )
+            fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
             self.favourites <<= fave
           end
         end
