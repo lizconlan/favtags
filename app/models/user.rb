@@ -45,7 +45,7 @@ class User < TwitterAuth::GenericUser
         i += 1
         tweets = self.twitter.get("/favorites?page=#{i}")
         tweets.each do |tweet|
-          unless !(Favourite.find_by_tweet_id_and_user_id(tweet["id"], self.id)).nil?
+          unless Favourite.find_by_tweet_id_and_user_id(tweet["id"], self.id)
             fave = Favourite.new(
               :user_id => self.id,
               :text => tweet["text"],
