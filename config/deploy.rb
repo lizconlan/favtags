@@ -30,6 +30,11 @@ namespace :deploy do
     run "if [ -d #{log_dir} ]; then echo #{log_dir} exists ; else mkdir #{log_dir} ; fi"
   end
   
+  desc "Cleanup tasks"
+  task :do_cleanup do
+    run "cd #{current_path}; rake db:migrate RAILS_ENV='production'"
+  end
+  
   desc "Restarting apache and clearing the cache"
   task :restart, :roles => :app do
     sudo "/usr/sbin/apache2ctl restart"
@@ -37,3 +42,4 @@ namespace :deploy do
 end
 
 after 'deploy:update_code', 'deploy:upload_deployed_database_yml', 'deploy:setup_log_dir'
+after 'deploy:symlink', 'deploy:do_cleanup'
