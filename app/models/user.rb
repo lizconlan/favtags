@@ -84,7 +84,13 @@ class User < TwitterAuth::GenericUser
               :posted => tweet["created_at"]
             )
             fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
-            self.favourites <<= fave
+            begin
+              self.favourites <<= fave
+            rescue Exception => exc
+              unless exc.message == "already loaded"
+                raise exc.message
+              end
+            end
           end
         end
       end

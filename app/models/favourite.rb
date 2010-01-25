@@ -5,6 +5,9 @@ class Favourite < ActiveRecord::Base
   belongs_to :user
   has_and_belongs_to_many :tags
   
+  validates_uniqueness_of :tweet_id, :on	=> :create,
+    :message => "already loaded"
+  
   def html_text
     html = text
     html.scan(/https*:\/\/\S*/).each do |match|
