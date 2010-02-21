@@ -39,7 +39,13 @@ namespace :deploy do
   task :restart, :roles => :app do
     sudo "/usr/sbin/apache2ctl restart"
   end
+  
+  desc "Restart background fu"
+  task :restart_background_fu do
+    sudo "RAILS_ENV=production ruby #{current_path}/script/daemons stop"
+    sudo "RAILS_ENV=production ruby #{current_path}/script/daemons start"
+  end
 end
 
 after 'deploy:update_code', 'deploy:upload_deployed_database_yml', 'deploy:setup_log_dir'
-after 'deploy:symlink', 'deploy:do_cleanup'
+after 'deploy:symlink', 'deploy:do_cleanup', 'deploy:restart_background_fu'

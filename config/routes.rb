@@ -42,6 +42,7 @@ ActionController::Routing::Routes.draw do |map|
   # consider removing the them or commenting them out if you're using named routes and resources.
   map.connect '/favorites', :controller => 'favourites', :action => 'index'
   map.favourites '/favourites', :controller => 'favourites', :action => 'index'
+  map.connect '/favourites', :controller => 'favourites', :action => 'tag'
   map.connect '/favorites/tweeple', :controller => 'favourites', :action => 'twitterers'
   map.connect '/favourites/tweeple', :controller => 'favourites', :action => 'twitterers'
   map.connect '/favourites/tweeple/:twitterer', :controller => 'favourites', :action => 'tweep'

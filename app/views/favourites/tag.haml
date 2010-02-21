@@ -1,0 +1,9 @@
+- form_tag('/favourites/new_tag') do
+  %div.tags
+    =hidden_field_tag :faves, @tweets.join(",")
+    =text_field_tag :tag_name, "", :size => 10
+    =submit_tag :create
+    %ul
+    - current_user.tags.each do |tag|
+      %li= tag.name
+      

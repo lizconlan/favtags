@@ -1,10 +1,14 @@
-<%= will_paginate @posts %>
 %div.tweet
   -if @show_tweep
     %div.tweep
       =link_to tweet.twitterer_name, :controller => 'favourites', :action => :tweep, :twitterer => tweet.twitterer_name
+  %div.tweet_selection
+    %input{:type => :checkbox, :id => tweet.id, :name => "tweet_#{tweet.id}", :value=> tweet.id }
   %div.tweet_body
     -if tweet.twitterer_protected
       %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
     %span.tweet_text= tweet.html_text
     %span.tweet_date= tweet.posted
+    %ul.tags
+      -tweet.tags.each do |tag|
+        %li= tag.name
