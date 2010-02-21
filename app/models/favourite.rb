@@ -8,6 +8,13 @@ class Favourite < ActiveRecord::Base
   validates_uniqueness_of :tweet_id, :scope => :user_id, :on	=> :create,
     :message => "already loaded"
   
+  class << self
+    def find_all_by_tag_name_and_user_id tag_name, user_id
+      tag = Tag.find_by_name_and_user_id(tag_name, user_id)
+      tag.favourites
+    end
+  end
+  
   def html_text
     html = text
     html.scan(/https*:\/\/\S*/).each do |match|

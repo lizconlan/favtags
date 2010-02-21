@@ -54,6 +54,19 @@ class FavouritesController < ApplicationController
     end
   end
   
+  def tags
+    @tag = params[:tag]
+    if @tag
+      tagged_faves = Favourite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
+      @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
+      @max_page = (tagged_faves.count.to_f / Favourite.per_page).ceil
+      @current_page = @max_page if @current_page > @max_page
+      @tags = current_user.tags
+      @tweets = tagged_faves.paginate(:page => @current_page)
+      @show_tweep = true
+    end
+  end
+  
   def new_tag
     if request.post?
       affected_tweets = params[:faves]
