@@ -89,7 +89,7 @@ class FavouritesController < ApplicationController
         end 
       end
     end
-    redirect_to favourites_url
+    redirect_to :action => 'index', :page => params[:page]
   end
   
   def twitterers
