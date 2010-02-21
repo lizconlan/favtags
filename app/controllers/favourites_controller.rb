@@ -42,7 +42,7 @@ class FavouritesController < ApplicationController
             tweet.save
           end
         end
-        redirect_to favourites_url
+        redirect_to :action => 'index', :page => params[:page]
       elsif params[:tag_choices] == "new"
         @tweets = []
         params.each do |param|
