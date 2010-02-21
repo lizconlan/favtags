@@ -2,7 +2,7 @@ class User < TwitterAuth::GenericUser
   # Extend and define your user model as you see fit.
   # All of the authentication logic is handled by the 
   # parent TwitterAuth::GenericUser class.
-  has_many :tags
+  has_many :tags, :order => 'name'
   has_many :favourites, :order => 'posted DESC'
   
   def delete_favorites
