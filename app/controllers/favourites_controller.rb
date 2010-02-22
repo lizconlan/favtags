@@ -62,7 +62,7 @@ class FavouritesController < ApplicationController
       @max_page = (tagged_faves.count.to_f / Favourite.per_page).ceil
       @current_page = @max_page if @current_page > @max_page
       @tags = current_user.tags
-      @tweets = tagged_faves.paginate(:page => @current_page)
+      @tweets = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
       @show_tweep = true
     end
   end
