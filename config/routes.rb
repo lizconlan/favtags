@@ -49,6 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/favorites/tweeple/:twitterer', :controller => 'favourites', :action => 'tweep'
   map.connect '/favourites/tags', :controller => 'favourites', :action => 'tags'
   map.connect '/favourites/tags/:tag', :controller => 'favourites', :action => 'tags'
+  map.connect '/favourites/:id/detag/:tag', :controller => 'favourites', :action => 'remove_tag'
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

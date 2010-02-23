@@ -92,6 +92,17 @@ class FavouritesController < ApplicationController
     redirect_to :action => 'index', :page => params[:page]
   end
   
+  def remove_tag
+    tag_name = params[:tag]
+    tweet_id = params[:id]
+    
+    tweet = Favourite.find_by_id_and_user_id(tweet_id, current_user.id)
+    if tweet
+      tweet.detag(tag_name)
+    end
+    redirect_to :back
+  end
+  
   def twitterers
     @tweeps = current_user.faved_tweeple
   end

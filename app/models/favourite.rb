@@ -53,9 +53,6 @@ class Favourite < ActiveRecord::Base
     if has_tag?(tag_name)
       tag = tags.find_by_name(tag_name)
       self.tags.delete(tag)
-      if tag.favourites.count == 0
-        tag.delete
-      end
     end
   end
 end
