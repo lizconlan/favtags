@@ -12,5 +12,5 @@
     %ul.tags
       -tweet.tags.each do |tag|
         %li
-          %span.remove_tag= link_to "x", :action => 'remove_tag', :id => tweet.id, :tag => tag.name
+          %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favourite"}
           =tag.name
