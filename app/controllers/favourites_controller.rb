@@ -38,8 +38,7 @@ class FavouritesController < ApplicationController
         params.each do |param|
           if param[0].include?('tweet_')
             tweet = Favourite.find(param[1])
-            tweet.tags << tag
-            tweet.save
+            tweet.tag(tag.name, current_user.id)
           end
         end
         redirect_to :action => 'index', :page => params[:page]

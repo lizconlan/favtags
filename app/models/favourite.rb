@@ -43,9 +43,9 @@ class Favourite < ActiveRecord::Base
   end
   
   def tag tag_name, user_id
-    unless has_tag?(tag_name)
+    unless has_tag?(tag_name.strip)
       new_tag = Tag.find_or_create_by_name_and_user_id(tag_name, user_id)
-      self.tags<< new_tag
+      self.tags << new_tag
     end
   end
   
