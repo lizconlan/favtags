@@ -13,7 +13,7 @@
 
 %div.faves
   - form_tag('/favourites/tag') do
-    %div.test
+    %div.controls
       =hidden_field_tag :page, params[:page]
       = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
       %noscript
