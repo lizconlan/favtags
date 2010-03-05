@@ -37,6 +37,7 @@ namespace :deploy do
     run "if [ -d #{log_dir} ]; then echo #{log_dir} exists ; else mkdir #{log_dir} ; touch #{log_dir}/production.log ; chmod 0666 #{log_dir}/production.log; fi"
 
     run "if [ -d #{deploy_to}/shared/system ]; then echo exists ; else mkdir #{deploy_to}/shared/system ; fi"
+    sudo "chmod a+rw #{release_path}/public/stylesheets"
   end
   
   task :run_migrations, :roles => :app do
