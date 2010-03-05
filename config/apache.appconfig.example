@@ -1,0 +1,45 @@
+NameVirtualHost *
+<VirtualHost *>
+        ServerAdmin webmaster@localhost
+
+        DocumentRoot [RELEASE-PATH]/current/public
+        <Directory />
+                Options FollowSymLinks
+                AllowOverride None
+        </Directory>
+        <Directory [RELEASE-PATH]/current/public>
+                Options Indexes FollowSymLinks
+                AllowOverride None
+                Order allow,deny
+                allow from all
+                ErrorDocument 500 /500.html
+                FileETag none
+				ExpiresByType text/html "access plus 1 month"
+                ExpiresByType text/css "access plus 1 month"
+                ExpiresByType text/javascript "access plus 1 month"
+                ExpiresByType application/javascript "access plus 1 month"
+				ExpiresByType application/x-javascript "access plus 1 month"
+				ExpiresByType application/x-shockwave-flash "access plus 1 month"
+                ExpiresByType image/gif "access plus 1 month"
+                ExpiresByType image/jpg "access plus 1 month"
+                ExpiresByType image/png "access plus 1 month"
+                ExpiresByType image/x-icon "access plus 1 month"
+                AddOutputFilterByType DEFLATE application/javascript
+                AddOutputFilterByType DEFLATE text/css
+                AddOutputFilterByType DEFLATE text/html
+        </Directory>
+
+        ErrorLog /var/log/apache2/error.log
+
+        # Possible values include: debug, info, notice, warn, error, crit,
+        # alert, emerg.
+        LogLevel warn
+
+        CustomLog /var/log/apache2/access.log combined
+        ServerSignature On
+
+		RewriteEngine On
+		RewriteCond [RELEASE-PATH]/shared/system/maintenance.html -f
+		RewriteCond %{SCRIPT_FILENAME} !maintenance.html
+		RewriteRule ^.*$ /system/maintenance.html [L]
+</VirtualHost>
