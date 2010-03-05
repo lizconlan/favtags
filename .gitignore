@@ -2,8 +2,10 @@ log/*.log
 tmp/**/*
 test
 config/database.yml
+config/virtualserver/*
 .DS_Store
 doc
 db/*.sqlite3
+db/*.sql
 public/stylesheets/*.css
 app/stylesheets/.sass-cache/*
