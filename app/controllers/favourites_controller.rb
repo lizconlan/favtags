@@ -70,6 +70,11 @@ class FavouritesController < ApplicationController
       @tags = current_user.tags
       @tweets = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
       @show_tweep = true
+      @tag_options = [["Apply tags", ""]]
+      current_user.tags.each do |tag|
+        @tag_options << [tag.name, tag.id]
+      end
+      @tag_options << ["New tag...", "new"]
     end
   end
   
