@@ -15,8 +15,8 @@
           Hello
           %strong
             = current_user.name
+          ="(" + link_to("Log out", logout_url) + ")"
           %ul.menu.logged-in
-            %li= link_to "Log out", logout_url
             %li= link_to "View", "/favourites"
             %li= link_to "Load", "/favourites/load"
           -if current_user.job_id
