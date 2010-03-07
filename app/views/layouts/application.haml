@@ -9,11 +9,13 @@
   %body{:id=>"favtags-heroku-com"}
     #doc
       #hd{:role=>"banner"}
+        %h1
+          %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
         - if current_user
           %ul.menu.logged-in
-            %li= link_to "<h1>Favtags</h1> / Log out", logout_url
-            %li= link_to "<strong>Favourites</strong> / View", "/favourites"
-            %li= link_to "/ Load", "/favourites/load"
+            %li= link_to "Log out", logout_url
+            %li= link_to "View", "/favourites"
+            %li= link_to "Load", "/favourites/load"
           -if current_user.job_id
             -job = Job.find(current_user.job_id)
             -if job && !job.finished?
