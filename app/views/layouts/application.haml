@@ -12,6 +12,9 @@
         %h1
           %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
         - if current_user
+          Hello
+          %strong
+            = current_user.name
           %ul.menu.logged-in
             %li= link_to "Log out", logout_url
             %li= link_to "View", "/favourites"

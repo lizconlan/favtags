@@ -10,7 +10,7 @@ class FavouritesController < ApplicationController
     else
       @favourites = nil
     end
-    @tag_options = [["Tags", ""]]
+    @tag_options = [["Apply tags", ""]]
     current_user.tags.each do |tag|
       @tag_options << [tag.name, tag.id]
     end
@@ -41,7 +41,14 @@ class FavouritesController < ApplicationController
             tweet.tag(tag.name, current_user.id)
           end
         end
-        redirect_to :action => 'index', :page => params[:page]
+        action = params[:from]
+        page = params[:page]
+        page = 1 if page.to_i == 0
+        if action.nil? || action.blank?
+          redirect_to :action => 'index', :page => page
+        else
+          redirect_to :action => action, :page => page
+        end
       elsif params[:tag_choices] == "new"
         @tweets = []
         params.each do |param|
@@ -88,6 +95,7 @@ class FavouritesController < ApplicationController
         end 
       end
     end
+    
     redirect_to :action => 'index', :page => params[:page]
   end
   
@@ -110,8 +118,13 @@ class FavouritesController < ApplicationController
     twitterer = params[:twitterer]
     @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
     @max_page = (current_user.favourites.find_all_by_twitterer_name(twitterer).count.to_f / Favourite.per_page).ceil
-    @current_page = @max_page if @current_page > @max_page
+    @current_page = @max_page if @current_page > @max_page && @max_page > 1
     @tags = current_user.tags
     @tweets = current_user.favourites.paginate_by_twitterer_name(twitterer, :page => @current_page)
+    @tag_options = [["Apply tags", ""]]
+    current_user.tags.each do |tag|
+      @tag_options << [tag.name, tag.id]
+    end
+    @tag_options << ["New tag...", "new"]
   end
 end

@@ -10,6 +10,7 @@
     %span.tweet_text= tweet.html_text
     %span.tweet_date= tweet.posted
     %ul.tags
+      i = 0
       -tweet.tags.each do |tag|
         %li
           =tag.name

@@ -2,6 +2,7 @@
   %div.tags
     =hidden_field_tag :faves, @tweets.join(",")
     =hidden_field_tag :page, params[:page]
+    =hidden_field_tag :from, params[:from]
     =text_field_tag :tag_name, "", :size => 10
     =submit_tag :create
     %ul

@@ -1,15 +1,8 @@
 %h2
-  = current_user.name
-  
-%p
-  %a{:href=>"http://twitter.com/"+current_user.login}
-  %img{:src=>current_user.profile_image_url}
+  Stored Favourites
 
-%p  
-  = current_user.location
-  
-%p 
-  = current_user.favourites.count.to_s + " stored favourites (of an estimated #{current_user.favourites_count.to_s} on Twitter)"
+%p
+  = "Showing" + current_user.favourites.count.to_s + " stored favourites (of an estimated #{current_user.favourites_count.to_s} on Twitter)"
 
 %div.faves
   - form_tag('/favourites/tag') do

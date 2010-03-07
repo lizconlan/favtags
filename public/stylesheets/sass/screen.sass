@@ -18,9 +18,17 @@ a:hover
 strong
   font-weight: bold
 
+p
+  margin: 1em 0
+
 h1
   font-weight: bold
-  display: inline
+  text-align: center
+  width: 100%
+  
+h2
+  font-size: 1.1em
+  font-weight: bold
 
 ul.menu
   
@@ -69,13 +77,15 @@ div.tag_list
 
 div.timeline
   float: left
-  padding-top: 1em
+  
+  div.tweet:hover
+    background-color: #EEE
   
   div.tweet
     width: 570px
     float: left
     padding: 1em 0
-    border-top: 1px dotted silver
+    border-bottom: 1px dotted silver
     clear: both
   
     .tweep
@@ -125,16 +135,15 @@ div.tweet_selection
       
 div.tweepline
   float: left
-  padding-top: 1em
 
   div.tweet
     float: left
     padding: 1em 0
-    border-top: 1px dotted black
+    border-bottom: 1px dotted silver
     clear: both
 
     .tweet_body
-      width: 38em
+      width: 530px
       float: left
       padding-left: 1em
 
@@ -144,6 +153,7 @@ div.tweepline
         padding-right: 0.5em
         text-align: right
         float: right
+        font-size: 0.8em
 
 div.page_info
   float: left
