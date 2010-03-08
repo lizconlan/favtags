@@ -1,7 +1,7 @@
 %div.tweet
   -if @show_tweep
     %div.tweep
-      =link_to tweet.twitterer_name, :controller => 'favourites', :action => :tweep, :twitterer => tweet.twitterer_name
+      =link_to tweet.twitterer_name, {:controller => 'favourites', :action => :tweep, :twitterer => tweet.twitterer_name}, {:title => "view favourites posted by #{tweet.twitterer_name}"}
   %div.tweet_selection
     %input{:type => :checkbox, :id => tweet.id, :name => "tweet_#{tweet.id}", :value=> tweet.id }
   %div.tweet_body
