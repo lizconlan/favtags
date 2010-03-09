@@ -1,7 +1,7 @@
 %div.tweet
   -if @show_tweep
     %div.tweep
-      =link_to tweet.twitterer_name, {:controller => 'favourites', :action => :tweep, :twitterer => tweet.twitterer_name}, {:title => "view favourites posted by #{tweet.twitterer_name}"}
+      =link_to tweet.twitterer_name, {:controller => 'favorites', :action => :tweep, :twitterer => tweet.twitterer_name}, {:title => "view favorites posted by #{tweet.twitterer_name}"}
   %div.tweet_selection
     %input{:type => :checkbox, :id => tweet.id, :name => "tweet_#{tweet.id}", :value=> tweet.id }
   %div.tweet_body
@@ -13,4 +13,4 @@
       -tweet.tags.each do |tag|
         %li
           =tag.name
-          %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favourite"}
+          %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}

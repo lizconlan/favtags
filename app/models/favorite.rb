@@ -1,4 +1,4 @@
-class Favourite < ActiveRecord::Base
+class Favorite < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 20
     
@@ -11,7 +11,7 @@ class Favourite < ActiveRecord::Base
   class << self
     def find_all_by_tag_name_and_user_id tag_name, user_id
       tag = Tag.find_by_name_and_user_id(tag_name, user_id)
-      tag.favourites
+      tag.favorites
     end
   end
   

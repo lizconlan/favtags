@@ -9,16 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100124170220) do
+ActiveRecord::Schema.define(:version => 20100309015746) do
 
   create_table "conversations", :force => true do |t|
     t.integer "user_id"
-    t.integer "favourite_id"
-    t.integer "next_favourite_id"
-    t.integer "prev_favourite_id"
+    t.integer "favorite_id"
+    t.integer "next_favorite_id"
+    t.integer "prev_favorite_id"
   end
 
-  create_table "favourites", :force => true do |t|
+  create_table "favorites", :force => true do |t|
     t.integer  "user_id"
     t.string   "text",                                   :limit => 140
     t.string   "twitterer_name"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(:version => 20100124170220) do
     t.string   "twitterer_profile_sidebar_border_color"
     t.integer  "twitterer_friends_count"
     t.datetime "twitterer_created_at"
-    t.integer  "twitterer_favourites_count"
+    t.integer  "twitterer_favorites_count"
     t.integer  "twitterer_utc_offset"
     t.string   "twitterer_time_zone"
     t.string   "twitterer_profile_background_image_url"
@@ -59,9 +59,9 @@ ActiveRecord::Schema.define(:version => 20100124170220) do
     t.string   "source"
   end
 
-  create_table "favourites_tags", :id => false, :force => true do |t|
-    t.integer "tag_id",       :null => false
-    t.integer "favourite_id", :null => false
+  create_table "favorites_tags", :id => false, :force => true do |t|
+    t.integer "tag_id",      :null => false
+    t.integer "favorite_id", :null => false
   end
 
   create_table "jobs", :force => true do |t|
@@ -114,7 +114,7 @@ ActiveRecord::Schema.define(:version => 20100124170220) do
     t.integer  "friends_count"
     t.integer  "statuses_count"
     t.integer  "followers_count"
-    t.integer  "favourites_count"
+    t.integer  "favorites_count"
     t.integer  "utc_offset"
     t.string   "time_zone"
     t.datetime "created_at"

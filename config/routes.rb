@@ -40,16 +40,13 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
-  map.connect '/favorites', :controller => 'favourites', :action => 'index'
-  map.favourites '/favourites', :controller => 'favourites', :action => 'index'
-  map.connect '/favourites', :controller => 'favourites', :action => 'tag'
-  map.connect '/favorites/tweeple', :controller => 'favourites', :action => 'twitterers'
-  map.connect '/favourites/tweeple', :controller => 'favourites', :action => 'twitterers'
-  map.connect '/favourites/tweeple/:twitterer', :controller => 'favourites', :action => 'tweep'
-  map.connect '/favorites/tweeple/:twitterer', :controller => 'favourites', :action => 'tweep'
-  map.connect '/favourites/tags', :controller => 'favourites', :action => 'tags'
-  map.connect '/favourites/tags/:tag', :controller => 'favourites', :action => 'tags'
-  map.connect '/favourites/:id/detag/:tag', :controller => 'favourites', :action => 'remove_tag'
+  map.connect '/favorites', :controller => 'favorites', :action => 'index'
+  map.connect '/favorites', :controller => 'favorites', :action => 'tag'
+  map.connect '/favorites/tweeple', :controller => 'favorites', :action => 'twitterers'
+  map.connect '/favorites/tweeple/:twitterer', :controller => 'favorites', :action => 'tweep'
+  map.connect '/favorites/tags', :controller => 'favorites', :action => 'tags'
+  map.connect '/favorites/tags/:tag', :controller => 'favorites', :action => 'tags'
+  map.connect '/favorites/:id/detag/:tag', :controller => 'favorites', :action => 'remove_tag'
   
   map.connect ':controller/:action/:id'
   map.connect ':controller/:action/:id.:format'

@@ -1,19 +1,19 @@
 require 'active_record'
 require 'models/user.rb'
-require 'models/favourite.rb'
+require 'models/favorite.rb'
 
-class FavouritesLoader
+class FavoritesLoader
   
   #include BackgroundFu::WorkerMonitoring
     
-  def load_user_favourites user_id
+  def load_user_favorites user_id
     #my_progress = 0
 
     current_user = User.find_by_id(user_id.to_i)
     
     #record_progress(my_progress)
 
-    current_user.load_favourites
+    current_user.load_favorites
     #while(my_progress < 100)
     #  my_progress += 1
     #  record_progress(my_progress)

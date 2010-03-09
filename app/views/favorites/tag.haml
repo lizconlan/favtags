@@ -1,4 +1,4 @@
-- form_tag('/favourites/new_tag') do
+- form_tag('/favorites/new_tag') do
   %div.tags
     =hidden_field_tag :faves, @tweets.join(",")
     =hidden_field_tag :page, params[:page]

@@ -3,26 +3,26 @@ class User < TwitterAuth::GenericUser
   # All of the authentication logic is handled by the 
   # parent TwitterAuth::GenericUser class.
   has_many :tags, :order => 'name'
-  has_many :favourites, :order => 'posted DESC'
+  has_many :favorites, :order => 'posted DESC'
   
   def delete_favorites
-    self.favourites.destroy_all
+    self.favorites.destroy_all
   end
   
   def update_favcount
     user_data = self.twitter.get("/users/show/#{self.twitter_id}")
-    fav_count = user_data["favourites_count"]
-    favourites_count = fav_count
+    fav_count = user_data["favorites_count"]
+    favorites_count = fav_count
     save!
   end
 
-  def load_favourites
+  def load_favorites
     update_favcount
-    load_all_favourites
+    load_all_favorites
   end
   
   def faved_tweeple
-    grouped_faves = self.favourites.group_by { |x| x.twitterer_name }
+    grouped_faves = self.favorites.group_by { |x| x.twitterer_name }
     tweeple = grouped_faves.keys
     tweeple.sort { |a,b| a.downcase <=> b.downcase }
   end
@@ -38,15 +38,15 @@ class User < TwitterAuth::GenericUser
 
   private
 
-    def load_all_favourites
+    def load_all_favorites
       tweets = "starting"
       i = 0
       while !tweets.blank?
         i += 1
         tweets = self.twitter.get("/favorites?page=#{i}")
         tweets.each do |tweet|
-          unless Favourite.find_by_tweet_id_and_user_id(tweet["id"], self.id)
-            fave = Favourite.new(
+          unless Favorite.find_by_tweet_id_and_user_id(tweet["id"], self.id)
+            fave = Favorite.new(
               :user_id => self.id,
               :text => tweet["text"],
               :tweet_id => tweet["id"],
@@ -66,7 +66,7 @@ class User < TwitterAuth::GenericUser
               :twitterer_profile_sidebar_border_color => tweet["user"]["profile_sidebar_border_color"],
               :twitterer_friends_count => tweet["user"]["friends_count"],
               :twitterer_created_at => tweet["user"]["created_at"],
-              :twitterer_favourites_count => tweet["user"]["utc_offset"],
+              :twitterer_favorites_count => tweet["user"]["utc_offset"],
               :twitterer_time_zone => tweet["user"]["time_zone"],
               :twitterer_profile_background_image_url => tweet["user"]["profile_background_image_url"],
               :twitterer_profile_background_tile => tweet["user"]["profile_background_tile"],
@@ -85,7 +85,7 @@ class User < TwitterAuth::GenericUser
             )
             fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
             begin
-              self.favourites <<= fave
+              self.favorites <<= fave
             rescue Exception => exc
               unless exc.message == "already loaded"
                 raise exc.message

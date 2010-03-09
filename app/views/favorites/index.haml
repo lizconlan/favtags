@@ -1,11 +1,11 @@
 %h2
-  Stored Favourites
+  Stored Favorites
 
 %p
-  = "Showing " + current_user.favourites.count.to_s + " stored favourites (of an estimated #{current_user.favourites_count.to_s} on Twitter)"
+  = "Showing " + current_user.favorites.count.to_s + " stored favorites (of an estimated #{current_user.favorites_count.to_s} on Twitter)"
 
 %div.faves
-  - form_tag('/favourites/tag') do
+  - form_tag('/favorites/tag') do
     %div.controls
       =hidden_field_tag :page, params[:page]
       = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
@@ -14,21 +14,21 @@
 
     %div.page_info
       -if @current_page > 1
-        =link_to "&lt;&lt; Prev", :controller => :favourites, :action => :index, :page => @current_page - 1
+        =link_to "&lt;&lt; Prev", :controller => :favorites, :action => :index, :page => @current_page - 1
       = "  Page #{@current_page} of #{@max_page}  "
       -if @current_page < @max_page
-        =link_to "Next &gt;&gt;", :controller => :favourites, :action => :index, :page => @current_page + 1
+        =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1
 
     %div.timeline
       -@show_tweep = true
-      =render :partial => "tweet", :collection => @favourites
+      =render :partial => "tweet", :collection => @favorites
 
     %div.page_info
       -if @current_page > 1
-        =link_to "&lt;&lt; Prev", :controller => :favourites, :action => :index, :page => @current_page - 1
+        =link_to "&lt;&lt; Prev", :controller => :favorites, :action => :index, :page => @current_page - 1
       = "  Page #{@current_page} of #{@max_page}  "
       -if @current_page < @max_page
-        =link_to "Next &gt;&gt;", :controller => :favourites, :action => :index, :page => @current_page + 1
+        =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1
         
 %div.tag_list
   %h2 Tags

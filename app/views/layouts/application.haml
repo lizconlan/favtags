@@ -18,7 +18,7 @@
           %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
         - if current_user
           %ul.menu.logged-in
-            %li= link_to "Load", "/favourites/load"
+            %li= link_to "Load", "/favorites/load"
           -if current_user.job_id
             -job = Job.find(current_user.job_id)
             -if job && !job.finished?
@@ -33,7 +33,7 @@
                     %br
                     = "(error occured at: #{job.updated_at})"
                 -else
-                  Your favourites are currently loading, please be patient!
+                  Your favorites are currently loading, please be patient!
         - else
           %ul.menu.logged-out
             %li= link_to "<h1>Favtags</h1> / Log in", login_url

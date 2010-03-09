@@ -1,14 +1,14 @@
-class FavouritesController < ApplicationController
+class FavoritesController < ApplicationController
   before_filter :login_required
   
   def index
     @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
-    @max_page = (current_user.favourites.count.to_f / Favourite.per_page).ceil
+    @max_page = (current_user.favorites.count.to_f / Favorite.per_page).ceil
     @current_page = @max_page if @current_page > @max_page
-    if current_user.favourites.count > 0
-      @favourites = current_user.favourites.paginate(:all, :page => @current_page)
+    if current_user.favorites.count > 0
+      @favorites = current_user.favorites.paginate(:all, :page => @current_page)
     else
-      @favourites = nil
+      @favorites = nil
     end
     @tag_options = [["Apply tags", ""]]
     current_user.tags.each do |tag|
@@ -23,12 +23,12 @@ class FavouritesController < ApplicationController
     end
     
     if !@job || @job.finished? || @job.failed?
-      current_user.job_id = Job.enqueue!(FavouritesLoader, :load_user_favourites, current_user.id).id
+      current_user.job_id = Job.enqueue!(FavoritesLoader, :load_user_favorites, current_user.id).id
       current_user.save
       @job = Job.find(current_user.job_id)
     end
 
-    redirect_to favourites_url
+    redirect_to favorites_url
   end
   
   def tag
@@ -37,7 +37,7 @@ class FavouritesController < ApplicationController
         tag = Tag.find(params[:tag_choices])
         params.each do |param|
           if param[0].include?('tweet_')
-            tweet = Favourite.find(param[1])
+            tweet = Favorite.find(param[1])
             tweet.tag(tag.name, current_user.id)
           end
         end
@@ -63,9 +63,9 @@ class FavouritesController < ApplicationController
   def tags
     @tag = params[:tag]
     if @tag
-      tagged_faves = Favourite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
+      tagged_faves = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
       @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
-      @max_page = (tagged_faves.count.to_f / Favourite.per_page).ceil
+      @max_page = (tagged_faves.count.to_f / Favorite.per_page).ceil
       @current_page = @max_page if @current_page > @max_page
       @tags = current_user.tags
       @tweets = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
@@ -90,7 +90,7 @@ class FavouritesController < ApplicationController
           if affected_tweets
             tweets = affected_tweets.split(",")
             tweets.each do |tweet_id|
-              tweet = Favourite.find(tweet_id)
+              tweet = Favorite.find(tweet_id)
               if tweet
                 tweet.tags << tag
                 tweet.save
@@ -108,7 +108,7 @@ class FavouritesController < ApplicationController
     tag_name = params[:tag]
     tweet_id = params[:id]
     
-    tweet = Favourite.find_by_id_and_user_id(tweet_id, current_user.id)
+    tweet = Favorite.find_by_id_and_user_id(tweet_id, current_user.id)
     if tweet
       tweet.detag(tag_name)
     end
@@ -122,10 +122,10 @@ class FavouritesController < ApplicationController
   def tweep
     twitterer = params[:twitterer]
     @current_page  = params[:page].to_i.zero? ? 1 : params[:page].to_i
-    @max_page = (current_user.favourites.find_all_by_twitterer_name(twitterer).count.to_f / Favourite.per_page).ceil
+    @max_page = (current_user.favorites.find_all_by_twitterer_name(twitterer).count.to_f / Favorite.per_page).ceil
     @current_page = @max_page if @current_page > @max_page && @max_page > 1
     @tags = current_user.tags
-    @tweets = current_user.favourites.paginate_by_twitterer_name(twitterer, :page => @current_page)
+    @tweets = current_user.favorites.paginate_by_twitterer_name(twitterer, :page => @current_page)
     @tag_options = [["Apply tags", ""]]
     current_user.tags.each do |tag|
       @tag_options << [tag.name, tag.id]
