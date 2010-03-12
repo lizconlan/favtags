@@ -40,7 +40,7 @@ ActionController::Routing::Routes.draw do |map|
   # Install the default routes as the lowest priority.
   # Note: These default routes make all actions in every controller accessible via GET requests. You should
   # consider removing the them or commenting them out if you're using named routes and resources.
-  map.connect '/favorites', :controller => 'favorites', :action => 'index'
+  map.favorites '/favorites', :controller => 'favorites', :action => 'index'
   map.connect '/favorites', :controller => 'favorites', :action => 'tag'
   map.connect '/favorites/tweeple', :controller => 'favorites', :action => 'twitterers'
   map.connect '/favorites/tweeple/:twitterer', :controller => 'favorites', :action => 'tweep'
