@@ -1,0 +1,867 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<statuses type="array">
+<status>
+  <created_at>Fri Jan 22 22:35:40 +0000 2010</created_at>
+  <id>8087255620</id>
+  <text>geez, 1.4 million stackoverflow.com pageviews in a day. STOP PRESSING F5!</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5637652</id>
+    <name>Jeff Atwood</name>
+    <screen_name>codinghorror</screen_name>
+    <location>Bay Area, CA</location>
+    <description>Is it more interesting to talk about software than it is to develop software?</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/58911850/coding-horror-gravatar-128_normal.png</profile_image_url>
+    <url>http://www.codinghorror.com/blog</url>
+    <protected>false</protected>
+    <followers_count>26750</followers_count>
+    <profile_background_color>fff</profile_background_color>
+    <profile_text_color>383a48</profile_text_color>
+    <profile_link_color>282d58</profile_link_color>
+    <profile_sidebar_fill_color>e0e1f5</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>e0e1f5</profile_sidebar_border_color>
+    <friends_count>58</friends_count>
+    <created_at>Sun Apr 29 20:50:37 +0000 2007</created_at>
+    <favourites_count>131</favourites_count>
+    <utc_offset>-25200</utc_offset>
+    <time_zone>Arizona</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/623412/hunt-wumpus-bg.png</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15320</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Jan 21 17:23:36 +0000 2010</created_at>
+  <id>8034567120</id>
+  <text>Been sitting here, watching @rooreynolds flitting around cyberspace like Case in Neuromancer. His fingers are a blur #datagovuk</text>
+  <source>&lt;a href=&quot;http://www.seesmic.com/&quot; rel=&quot;nofollow&quot;&gt;Seesmic&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>762397</id>
+    <name>Steve Bowbrick</name>
+    <screen_name>bowbrick</screen_name>
+    <location>London</location>
+    <description>I'm Chair of Governors at a lovely school called Fair Field Juniors in Radlett, Hertfordshire. This is my personal account.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/68826968/Steve_and_Rosa_normal.jpg</profile_image_url>
+    <url>http://www.fairfield.herts.sch.uk</url>
+    <protected>false</protected>
+    <followers_count>1393</followers_count>
+    <profile_background_color>0000FF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000FF</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>745</friends_count>
+    <created_at>Sat Feb 10 10:25:36 +0000 2007</created_at>
+    <favourites_count>34</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/52252/shop.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>4120</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Jan 21 15:18:18 +0000 2010</created_at>
+  <id>8030374345</id>
+  <text>&quot;Building iPhone Apps with HTML, CSS, and JavaScript&quot; http://building-iphone-apps.labs.oreilly.com/</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5567</id>
+    <name>Robert Brook</name>
+    <screen_name>robertbrook</screen_name>
+    <location>London</location>
+    <description>I work at the UK Parliament, but this is my personal account.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/416159787/twitter-avatar_normal.png</profile_image_url>
+    <url>http://robertbrook.com/</url>
+    <protected>false</protected>
+    <followers_count>2252</followers_count>
+    <profile_background_color>FFFFFF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>FFFFFF</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>236</friends_count>
+    <created_at>Fri Sep 08 11:17:21 +0000 2006</created_at>
+    <favourites_count>536</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1264119427/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>60990</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Jan 21 14:14:56 +0000 2010</created_at>
+  <id>8028292171</id>
+  <text>&quot;This object perpetually attempts to sell itself on eBay.&quot; http://is.gd/6JNLr (via @loydcase)</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5637652</id>
+    <name>Jeff Atwood</name>
+    <screen_name>codinghorror</screen_name>
+    <location>Bay Area, CA</location>
+    <description>Is it more interesting to talk about software than it is to develop software?</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/58911850/coding-horror-gravatar-128_normal.png</profile_image_url>
+    <url>http://www.codinghorror.com/blog</url>
+    <protected>false</protected>
+    <followers_count>26740</followers_count>
+    <profile_background_color>fff</profile_background_color>
+    <profile_text_color>383a48</profile_text_color>
+    <profile_link_color>282d58</profile_link_color>
+    <profile_sidebar_fill_color>e0e1f5</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>e0e1f5</profile_sidebar_border_color>
+    <friends_count>58</friends_count>
+    <created_at>Sun Apr 29 20:50:37 +0000 2007</created_at>
+    <favourites_count>131</favourites_count>
+    <utc_offset>-25200</utc_offset>
+    <time_zone>Arizona</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/623412/hunt-wumpus-bg.png</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15317</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Jan 21 13:23:38 +0000 2010</created_at>
+  <id>8026741286</id>
+  <text>10 days left to file your Self Harassment Tax Return.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>22611591</id>
+    <name>Tax Office Tweets </name>
+    <screen_name>HMRevenue</screen_name>
+    <location>Twitterland </location>
+    <description>Tax Tweeting since 1794</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/87060991/_312300_hector150_normal.jpg</profile_image_url>
+    <url>http://www.twitter.com/hmrevenue</url>
+    <protected>false</protected>
+    <followers_count>434</followers_count>
+    <profile_background_color>9AE4E8</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDFFCC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>BDDCAD</profile_sidebar_border_color>
+    <friends_count>134</friends_count>
+    <created_at>Tue Mar 03 11:20:49 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1263516095/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>61</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Jan 21 10:51:47 +0000 2010</created_at>
+  <id>8023093238</id>
+  <text>r @jongalloway if one can never say &quot;no&quot; to unrealistic demands on one's time, choice of &quot;productivity system&quot; is irrelevant</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5637652</id>
+    <name>Jeff Atwood</name>
+    <screen_name>codinghorror</screen_name>
+    <location>Bay Area, CA</location>
+    <description>Is it more interesting to talk about software than it is to develop software?</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/58911850/coding-horror-gravatar-128_normal.png</profile_image_url>
+    <url>http://www.codinghorror.com/blog</url>
+    <protected>false</protected>
+    <followers_count>26727</followers_count>
+    <profile_background_color>fff</profile_background_color>
+    <profile_text_color>383a48</profile_text_color>
+    <profile_link_color>282d58</profile_link_color>
+    <profile_sidebar_fill_color>e0e1f5</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>e0e1f5</profile_sidebar_border_color>
+    <friends_count>58</friends_count>
+    <created_at>Sun Apr 29 20:50:37 +0000 2007</created_at>
+    <favourites_count>131</favourites_count>
+    <utc_offset>-25200</utc_offset>
+    <time_zone>Arizona</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/623412/hunt-wumpus-bg.png</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15311</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Thu Jan 21 10:51:39 +0000 2010</created_at>
+  <id>8023090604</id>
+  <text>When I've been speaking French for a bit, my English goes all odd. I just told someone &quot;I feel very comfortable in weather which is rainy.&quot;</text>
+  <source>&lt;a href=&quot;/devices&quot; rel=&quot;nofollow&quot;&gt;txt&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>29739553</id>
+    <name>Victoria Coren</name>
+    <screen_name>VictoriaCoren</screen_name>
+    <location>London</location>
+    <description>writer / Team PokerStars Pro</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/129207327/Stoddart_pic_lo_res_normal.jpg</profile_image_url>
+    <url>http://www.victoriacoren.com</url>
+    <protected>false</protected>
+    <followers_count>11646</followers_count>
+    <profile_background_color>EDECE9</profile_background_color>
+    <profile_text_color>634047</profile_text_color>
+    <profile_link_color>088253</profile_link_color>
+    <profile_sidebar_fill_color>E3E2DE</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>D3D2CF</profile_sidebar_border_color>
+    <friends_count>47</friends_count>
+    <created_at>Wed Apr 08 15:27:25 +0000 2009</created_at>
+    <favourites_count>2</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1264119427/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>true</verified>
+    <following>true</following>
+    <statuses_count>1871</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Wed Jan 20 10:42:28 +0000 2010</created_at>
+  <id>7982700455</id>
+  <text>Mr Watts of Henley, although we call you a customer, you cannot cancel your subscription to our Self Assessment Tax Return service</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>22611591</id>
+    <name>Tax Office Tweets </name>
+    <screen_name>HMRevenue</screen_name>
+    <location>Twitterland </location>
+    <description>Tax Tweeting since 1794</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/87060991/_312300_hector150_normal.jpg</profile_image_url>
+    <url>http://www.twitter.com/hmrevenue</url>
+    <protected>false</protected>
+    <followers_count>434</followers_count>
+    <profile_background_color>9AE4E8</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDFFCC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>BDDCAD</profile_sidebar_border_color>
+    <friends_count>134</friends_count>
+    <created_at>Tue Mar 03 11:20:49 +0000 2009</created_at>
+    <favourites_count>0</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1263516095/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>61</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Tue Jan 19 21:02:53 +0000 2010</created_at>
+  <id>7959418944</id>
+  <text>IE's market share on Basecamp free accounts is down to 15%. Firefox has 50%, Safari 18%, Chrome 14%.</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>14561327</id>
+    <name>DHH</name>
+    <screen_name>dhh</screen_name>
+    <location>Chicago, USA</location>
+    <description>Creator of Ruby on Rails, Partner at 37signals</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/67881828/headshot64_normal.jpg</profile_image_url>
+    <url>http://www.loudthinking.com</url>
+    <protected>false</protected>
+    <followers_count>16715</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>50</friends_count>
+    <created_at>Sun Apr 27 20:19:25 +0000 2008</created_at>
+    <favourites_count>1</favourites_count>
+    <utc_offset>-21600</utc_offset>
+    <time_zone>Central Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1263255322/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>895</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Tue Jan 19 13:15:42 +0000 2010</created_at>
+  <id>7944776491</id>
+  <text>Using my Hackintosh at the Genius bar in an Apple Store and feeling a schoolboy buzz of NAUGHTINESS</text>
+  <source>&lt;a href=&quot;http://www.seesmic.com/&quot; rel=&quot;nofollow&quot;&gt;Seesmic&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>762397</id>
+    <name>Steve Bowbrick</name>
+    <screen_name>bowbrick</screen_name>
+    <location>London</location>
+    <description>I'm Chair of Governors at a lovely school called Fair Field Juniors in Radlett, Hertfordshire. This is my personal account.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/68826968/Steve_and_Rosa_normal.jpg</profile_image_url>
+    <url>http://www.fairfield.herts.sch.uk</url>
+    <protected>false</protected>
+    <followers_count>1393</followers_count>
+    <profile_background_color>0000FF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000FF</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>745</friends_count>
+    <created_at>Sat Feb 10 10:25:36 +0000 2007</created_at>
+    <favourites_count>34</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/52252/shop.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>4120</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon Jan 18 22:26:50 +0000 2010</created_at>
+  <id>7920895607</id>
+  <text>lady gargle more like</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5567</id>
+    <name>Robert Brook</name>
+    <screen_name>robertbrook</screen_name>
+    <location>London</location>
+    <description>I work at the UK Parliament, but this is my personal account.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/416159787/twitter-avatar_normal.png</profile_image_url>
+    <url>http://robertbrook.com/</url>
+    <protected>false</protected>
+    <followers_count>2252</followers_count>
+    <profile_background_color>FFFFFF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>FFFFFF</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>236</friends_count>
+    <created_at>Fri Sep 08 11:17:21 +0000 2006</created_at>
+    <favourites_count>536</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1264119427/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>60990</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon Jan 18 14:21:33 +0000 2010</created_at>
+  <id>7905318217</id>
+  <text>'They call the standard model &quot;best practice.&quot; &#8230; they also call desktop lockdown a best practice' http://bit.ly/8XaXLK</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5567</id>
+    <name>Robert Brook</name>
+    <screen_name>robertbrook</screen_name>
+    <location>London</location>
+    <description>I work at the UK Parliament, but this is my personal account.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/416159787/twitter-avatar_normal.png</profile_image_url>
+    <url>http://robertbrook.com/</url>
+    <protected>false</protected>
+    <followers_count>2252</followers_count>
+    <profile_background_color>FFFFFF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>FFFFFF</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>236</friends_count>
+    <created_at>Fri Sep 08 11:17:21 +0000 2006</created_at>
+    <favourites_count>536</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1264119427/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>60990</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Mon Jan 18 13:02:14 +0000 2010</created_at>
+  <id>7903094758</id>
+  <text>If Gatwick Airport are so worried about people committing acts of violence they really shouldn't be playing Jamie Cullum over the speakers.</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>20291015</id>
+    <name>Mitch Benn</name>
+    <screen_name>MitchBenn</screen_name>
+    <location>Ham. It's a place. Really.</location>
+    <description>Trust me, if I were lying to impress you, I wouldn't be pretending to be Mitch Benn.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/614975907/Photo_298_normal.jpg</profile_image_url>
+    <url>http://www.mitchbenn.com</url>
+    <protected>false</protected>
+    <followers_count>13649</followers_count>
+    <profile_background_color>1A1B1F</profile_background_color>
+    <profile_text_color>666666</profile_text_color>
+    <profile_link_color>2FC2EF</profile_link_color>
+    <profile_sidebar_fill_color>252429</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>181A1E</profile_sidebar_border_color>
+    <friends_count>207</friends_count>
+    <created_at>Sat Feb 07 02:59:24 +0000 2009</created_at>
+    <favourites_count>7</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1263516095/images/themes/theme9/bg.gif</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>4365</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun Jan 17 20:45:32 +0000 2010</created_at>
+  <id>7876040735</id>
+  <text>@TiernanDouieb you can't set fire to @jameswalkerman, HE'S MAKING ME A FUCKING SANDWICH YOU BASTARD!!#twitterbrawl</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id>7875833926</in_reply_to_status_id>
+  <in_reply_to_user_id>19333349</in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name>TiernanDouieb</in_reply_to_screen_name>
+  <user>
+    <id>61547913</id>
+    <name>clare fletcher</name>
+    <screen_name>feltrec</screen_name>
+    <location>west sussex, england</location>
+    <description>bleach blonde guitar whore florist and famous chocolate monster</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/574880115/SDC10163_1__normal.JPG</profile_image_url>
+    <url></url>
+    <protected>false</protected>
+    <followers_count>48</followers_count>
+    <profile_background_color>9597ba</profile_background_color>
+    <profile_text_color>171147</profile_text_color>
+    <profile_link_color>544b9c</profile_link_color>
+    <profile_sidebar_fill_color>aa70b5</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>343d57</profile_sidebar_border_color>
+    <friends_count>87</friends_count>
+    <created_at>Thu Jul 30 17:40:02 +0000 2009</created_at>
+    <favourites_count>32</favourites_count>
+    <utc_offset></utc_offset>
+    <time_zone></time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/68917322/jamesmcavoy02_1_.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>2048</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun Jan 17 19:40:07 +0000 2010</created_at>
+  <id>7873984720</id>
+  <text>RT @dividepictures: new link for #ultradome http://bit.ly/8Eqrk1 (via @bonniegrrl)</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>15652377</id>
+    <name>Rileah Vanderbilt</name>
+    <screen_name>Rileah</screen_name>
+    <location>West Hollywood, CA.</location>
+    <description>Superhero, Jedi, ninja, and gamer with a sprinkle of cute thrown in for taste:)</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/254952791/n511454417_2458100_719013_normal.jpg</profile_image_url>
+    <url></url>
+    <protected>false</protected>
+    <followers_count>1562</followers_count>
+    <profile_background_color>0099B9</profile_background_color>
+    <profile_text_color>3C3940</profile_text_color>
+    <profile_link_color>0099B9</profile_link_color>
+    <profile_sidebar_fill_color>95E8EC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>5ED4DC</profile_sidebar_border_color>
+    <friends_count>108</friends_count>
+    <created_at>Tue Jul 29 22:13:56 +0000 2008</created_at>
+    <favourites_count>12</favourites_count>
+    <utc_offset>-28800</utc_offset>
+    <time_zone>Pacific Time (US &amp; Canada)</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/49578053/sabercrawl.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>1991</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sun Jan 17 13:00:50 +0000 2010</created_at>
+  <id>7863179747</id>
+  <text>Hmm. Spending more time with the issues list that the code. Is that a bad thing?
+
+(Also formatting tweets oddly to provide test data. Sorry)</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>776350</id>
+    <name>webgnu</name>
+    <screen_name>webgnu</screen_name>
+    <location>London (or thereabouts)</location>
+    <description>Coding geek, hoarder of tat and self-proclaimed eejit. Proudly described as 'a member of our team' since 2008 (GMT)</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/277020550/Wooden-Twitter_normal.jpg</profile_image_url>
+    <url></url>
+    <protected>true</protected>
+    <followers_count>22</followers_count>
+    <profile_background_color>9ae4e8</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>e0ff92</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>87bc44</profile_sidebar_border_color>
+    <friends_count>72</friends_count>
+    <created_at>Fri Feb 16 21:50:56 +0000 2007</created_at>
+    <favourites_count>986</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1264119427/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>5485</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Sat Jan 16 21:52:13 +0000 2010</created_at>
+  <id>7840461634</id>
+  <text>&quot;216 No longer used -- formerly Evil&quot; http://en.wikipedia.org/wiki/Outline_of_Dewey_Decimal_classes</text>
+  <source>&lt;a href=&quot;http://www.atebits.com/&quot; rel=&quot;nofollow&quot;&gt;Tweetie&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5567</id>
+    <name>Robert Brook</name>
+    <screen_name>robertbrook</screen_name>
+    <location>London</location>
+    <description>I work at the UK Parliament, but this is my personal account.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/416159787/twitter-avatar_normal.png</profile_image_url>
+    <url>http://robertbrook.com/</url>
+    <protected>false</protected>
+    <followers_count>2252</followers_count>
+    <profile_background_color>FFFFFF</profile_background_color>
+    <profile_text_color>000000</profile_text_color>
+    <profile_link_color>0000ff</profile_link_color>
+    <profile_sidebar_fill_color>FFFFFF</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>FFFFFF</profile_sidebar_border_color>
+    <friends_count>236</friends_count>
+    <created_at>Fri Sep 08 11:17:21 +0000 2006</created_at>
+    <favourites_count>536</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1264119427/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>60990</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Jan 15 19:38:21 +0000 2010</created_at>
+  <id>7799120765</id>
+  <text>Assembling a unicycle  #notaeuphemism</text>
+  <source>&lt;a href=&quot;http://www.tweetdeck.com/&quot; rel=&quot;nofollow&quot;&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>15619185</id>
+    <name>jrwi</name>
+    <screen_name>jrwi</screen_name>
+    <location>Morecambe</location>
+    <description>An IT Development Manager in Lancaster. But I'm not as interesting as that job title implies.</description>
+    <profile_image_url>http://a3.twimg.com/profile_images/271811049/P4265353_normal.JPG</profile_image_url>
+    <url>http://jrwi.posterous.com</url>
+    <protected>false</protected>
+    <followers_count>179</followers_count>
+    <profile_background_color>435a5b</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>0084B4</profile_link_color>
+    <profile_sidebar_fill_color>DDFFCC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>BDDCAD</profile_sidebar_border_color>
+    <friends_count>256</friends_count>
+    <created_at>Sun Jul 27 10:55:10 +0000 2008</created_at>
+    <favourites_count>89</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>Edinburgh</time_zone>
+    <profile_background_image_url>http://s.twimg.com/a/1263516095/images/themes/theme1/bg.png</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>false</following>
+    <statuses_count>2143</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Jan 15 15:31:18 +0000 2010</created_at>
+  <id>7791133799</id>
+  <text>RT @gauchogroup: Gaucho January Newsletter - http://www.gauchorestaurants.co.uk/whats_happening/newsletters</text>
+  <source>&lt;a href=&quot;http://www.tweetdeck.com/&quot; rel=&quot;nofollow&quot;&gt;TweetDeck&lt;/a&gt;</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>5549492</id>
+    <name>redvers76</name>
+    <screen_name>redvers76</screen_name>
+    <location>Biggleswade</location>
+    <description>Despite initial appearances, I am not Toadfish from Neighbours!</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/578935772/profilepic_normal.jpg</profile_image_url>
+    <url></url>
+    <protected>false</protected>
+    <followers_count>54</followers_count>
+    <profile_background_color>BADFCD</profile_background_color>
+    <profile_text_color>0C3E53</profile_text_color>
+    <profile_link_color>FF0000</profile_link_color>
+    <profile_sidebar_fill_color>FFF7CC</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>F2E195</profile_sidebar_border_color>
+    <friends_count>131</friends_count>
+    <created_at>Fri Apr 27 09:49:47 +0000 2007</created_at>
+    <favourites_count>6</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://a1.twimg.com/profile_background_images/17053330/tattoo4.jpg</profile_background_image_url>
+    <profile_background_tile>false</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>true</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>15369</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo xmlns:georss="http://www.georss.org/georss">
+    <georss:point>51.411920 -0.282023</georss:point>
+  </geo>
+  <contributors/>
+</status>
+<status>
+  <created_at>Fri Jan 15 14:43:02 +0000 2010</created_at>
+  <id>7789547009</id>
+  <text>LATEST: Ricky Gervais quits Twitter after discovering that Stephen Merchant wouldn't be writing his tweets for him.</text>
+  <source>web</source>
+  <truncated>false</truncated>
+  <in_reply_to_status_id></in_reply_to_status_id>
+  <in_reply_to_user_id></in_reply_to_user_id>
+  <favorited>true</favorited>
+  <in_reply_to_screen_name></in_reply_to_screen_name>
+  <user>
+    <id>43115008</id>
+    <name>Mrs Stephen Fry</name>
+    <screen_name>MrsStephenFry</screen_name>
+    <location>London</location>
+    <description>Stephen's poor, down-trodden wife and mother of his six kids.</description>
+    <profile_image_url>http://a1.twimg.com/profile_images/298631266/fry15823363_normal.jpg</profile_image_url>
+    <url>http://mrsfrysdiary.blogspot.com/</url>
+    <protected>false</protected>
+    <followers_count>31983</followers_count>
+    <profile_background_color>8B542B</profile_background_color>
+    <profile_text_color>333333</profile_text_color>
+    <profile_link_color>9D582E</profile_link_color>
+    <profile_sidebar_fill_color>EADEAA</profile_sidebar_fill_color>
+    <profile_sidebar_border_color>D9B17E</profile_sidebar_border_color>
+    <friends_count>2358</friends_count>
+    <created_at>Thu May 28 14:05:55 +0000 2009</created_at>
+    <favourites_count>518</favourites_count>
+    <utc_offset>0</utc_offset>
+    <time_zone>London</time_zone>
+    <profile_background_image_url>http://a3.twimg.com/profile_background_images/40202787/frybackgroundnew2.jpg</profile_background_image_url>
+    <profile_background_tile>true</profile_background_tile>
+    <notifications>false</notifications>
+    <geo_enabled>false</geo_enabled>
+    <verified>false</verified>
+    <following>true</following>
+    <statuses_count>6141</statuses_count>
+    <lang>en</lang>
+    <contributors_enabled>false</contributors_enabled>
+  </user>
+  <geo/>
+  <contributors/>
+</status>
+</statuses>
