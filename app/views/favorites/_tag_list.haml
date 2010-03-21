@@ -1,0 +1,8 @@
+%div.tag_list
+  %h2 Tags
+  %ul.listed_tags
+    -if current_user.tags.empty?
+      %li= 'No tags in use :('
+    -else
+      -current_user.tags.each do |tag|
+        %li= link_to tag.name, {:action => :tags, :tag => tag.name}, {:title => "view all tweets tagged '#{tag.name}'"}

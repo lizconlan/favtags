@@ -49,6 +49,22 @@ class Favorite < ActiveRecord::Base
     end
   end
   
+  def utc_offset
+    unless twitterer_utc_offset
+      "+0000"
+    else
+      offset = twitterer_utc_offset / 36
+      if offset < 0
+        offset = offset * -1
+        offset = offset.to_s.rjust(4, "0")
+        "-#{offset}"
+      else
+        offset = offset.to_s.rjust(4, "0")
+        "+#{offset}"
+      end
+    end
+  end
+  
   def detag tag_name
     if has_tag?(tag_name)
       tag = tags.find_by_name(tag_name)

@@ -20,8 +20,11 @@
         =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1
 
     %div.timeline
-      -@show_tweep = true
-      =render :partial => "tweet", :collection => @favorites
+      -if @favorites.nil?
+        ="No favorites loaded"
+      -else
+        -@show_tweep = true
+        =render :partial => "tweet", :collection => @favorites
 
     %div.page_info
       -if @current_page > 1
@@ -30,9 +33,4 @@
       -if @current_page < @max_page
         =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1
         
-%div.tag_list
-  %h2 Tags
-  %ul.listed_tags
-    -current_user.tags.each do |tag|
-      %li= link_to tag.name, {:action => :tags, :tag => tag.name}, {:title => "view all tweets tagged '#{tag.name}'"}
-      
+=render :partial => "tag_list"
