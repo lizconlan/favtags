@@ -3,17 +3,16 @@
   %head
     %title Favtags
     %meta{"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
-    = stylesheet_link_tag "http://yui.yahooapis.com/2.7.0/build/reset-fonts-grids/reset-fonts-grids.css"
     = stylesheet_link_tag "screen", :media => "screen"
     = stylesheet_link_tag "print", :media => "print"
-  %body{:id=>"favtags-heroku-com"}
+  %body
     #doc
-      #hd{:role=>"banner"}
+      #header
         - if current_user
-          Hello
+          Logged in as
           %strong
             = current_user.name
-          ="(" + link_to("Log out", logout_url) + ")"
+          ="/ " + link_to("Log out", logout_url)
         %h1
           %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
         - if current_user
@@ -39,8 +38,10 @@
             %li= link_to "<h1>Favtags</h1> / Log in", login_url
       #bd{:role=>"main"}
         %div= yield
-      #ft{:role=>"contentinfo"}
+      #footer
         %p
           %a{:href=>"http://github.com/lizconlan/favtags"}
             Fork Favtags on github.
           Favtags uses OAuth.
+          %a{:href=>"http://twitter.com/account/connections"}
+            Edit Twitter account connections
