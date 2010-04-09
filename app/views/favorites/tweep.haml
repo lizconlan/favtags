@@ -21,7 +21,7 @@
       -if @current_page < @max_page
         =link_to "Next &gt;&gt;", :controller => :favorites, :action => :tweep, :page => @current_page + 1
 
-    .tweepline
+    .timeline
       = render :partial => "tweet", :collection => @tweets
   
     .page_info
