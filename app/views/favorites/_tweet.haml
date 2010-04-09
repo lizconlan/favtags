@@ -15,3 +15,4 @@
           =tag.name
           %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
     .twitter_link= link_to "link to this on twitter", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
+    .delete= link_to "unfave", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}

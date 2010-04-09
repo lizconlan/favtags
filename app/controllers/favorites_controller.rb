@@ -124,4 +124,14 @@ class FavoritesController < ApplicationController
     end
     redirect_to :back
   end
+  
+  def delete
+    tweet_id = params[:id]
+    
+    tweet = Favorite.find_by_tweet_id_and_user_id(tweet_id, current_user.id)
+    if tweet
+      tweet.delete
+    end
+    redirect_to favorites_url
+  end
 end

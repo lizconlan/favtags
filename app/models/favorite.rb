@@ -75,4 +75,12 @@ class Favorite < ActiveRecord::Base
       self.tags.delete(tag)
     end
   end
+  
+  def delete
+    self.tags.each do |tag|
+      self.tags.delete(tag)
+    end
+    self.user.twitter.post("/favorites/destroy/#{self.tweet_id}")
+    self.destroy
+  end
 end
