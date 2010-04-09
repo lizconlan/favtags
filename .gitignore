@@ -4,6 +4,7 @@ test
 coverage
 config/database.yml
 config/virtualserver/*
+config/twitter_auth.yml
 .DS_Store
 doc
 db/*.sqlite3
