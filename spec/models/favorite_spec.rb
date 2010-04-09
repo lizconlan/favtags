@@ -13,6 +13,11 @@ describe Favorite do
       
       Favorite.find_all_by_tag_name_and_user_id('test', 1).should == [@fave1, @fave2]
     end
+    
+    it 'should return an empty array if the user has no tags' do
+      Tag.should_receive(:find_by_name_and_user_id).with('test', 1).and_return(nil)
+      Favorite.find_all_by_tag_name_and_user_id('test', 1).should == []
+    end
   end
   
   describe 'when asked for html_text' do
@@ -102,5 +107,22 @@ describe Favorite do
       
       @fave.detag('test')
     end
+  end
+  
+  describe 'when asked for the utc_offset' do
+    it 'should return "+0000" if no offset is found' do
+      fave = Favorite.new
+      fave.utc_offset.should == "+0000"
+    end
+  end
+  
+  it 'should return "-0700" if the tweet was posted from a time zone 7 hours behind GMT' do
+    fave = Favorite.new(:twitterer_utc_offset => -25200)
+    fave.utc_offset.should == "-0700"
+  end
+  
+  it 'should return "+0700" if the tweet was posted from a time zone 7 hours ahead of GMT' do
+    fave = Favorite.new(:twitterer_utc_offset => 25200)
+    fave.utc_offset.should == "+0700"
   end
 end

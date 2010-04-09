@@ -44,7 +44,7 @@ describe User do
       fave1 = Favorite.new(:twitterer_name => 'xtest')
       fave2 = Favorite.new(:twitterer_name => 'atest')
       user = User.new(:favorites => [fave1, fave2])
-      user.faved_tweeple.should == ['atest', 'xtest']
+      user.faved_accounts.should == ['atest', 'xtest']
     end
   end
   
