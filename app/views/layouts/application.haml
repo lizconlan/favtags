@@ -5,13 +5,12 @@
     %meta{"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
     = stylesheet_link_tag "screen", :media => "screen"
     = stylesheet_link_tag "print", :media => "print"
-  %body
+  %body#doc
     #header
       %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
     #nav
       %ul
       - if current_user
-        %li= link_to current_user.name, "SETTINGS-URL-TODO"
         %li= link_to "Log out", logout_url
         %li= link_to "Load", "/favorites/load"
 
