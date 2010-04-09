@@ -3,7 +3,7 @@
   = "/"
   =link_to "favorites", :controller => :favorites
   = "/"
-  %h2= @tag
+  %h2= "tagged: #{@tag}"
 
 .faves
   - form_tag('/favorites/tag') do
