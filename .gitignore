@@ -10,3 +10,4 @@ db/*.sqlite3
 db/*.sql
 public/stylesheets/*.css
 app/stylesheets/.sass-cache/*
+*~

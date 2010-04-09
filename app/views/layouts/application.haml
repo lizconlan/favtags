@@ -8,40 +8,39 @@
   %body
     #doc
       #header
+        %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
+      #nav
+        %ul
         - if current_user
-          Logged in as
-          %strong
-            = current_user.name
-          ="/ " + link_to("Log out", logout_url)
-        %h1
-          %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
-        - if current_user
-          %ul.menu.logged-in
-            %li= link_to "Load", "/favorites/load"
-          -if current_user.job_id
-            -job = Job.find(current_user.job_id)
-            -if job && !job.finished?
-              .loading_message
-                -if job.failed?
-                  -if job.result =~ /Rate limit exceeded./
-                    Rate limit exceeded, come back in an hour or so
-                    %br
-                    = "(error occured at: #{job.updated_at})"
-                  -else
-                    Problem connecting to Twitter, please try again later
-                    %br
-                    = "(error occured at: #{job.updated_at})"
-                -else
-                  Your favorites are currently loading, please be patient!
+          %li= "Logged in as" + link_to(current_user.name, "SETTINGS-URL-TODO")
+          %li= link_to("Log out", logout_url)
+          %li= link_to "Load", "/favorites/load"
+
+        - if current_user.job_id
+          - job = Job.find(current_user.job_id)
+          - if job && !job.finished?
+            .loading_message
+              - if job.failed?
+                - if job.result =~ /Rate limit exceeded./
+                  Rate limit exceeded, come back in an hour or so
+                  %br
+                  = "(error occured at: #{job.updated_at})"
+                - else
+                  Problem connecting to Twitter, please try again later
+                  %br
+                  = "(error occured at: #{job.updated_at})"
+              - else
+                Your favorites are currently loading, please be patient!
         - else
-          %ul.menu.logged-out
-            %li= link_to "<h1>Favtags</h1> / Log in", login_url
-      #bd{:role=>"main"}
-        %div= yield
-      #footer
-        %p
-          %a{:href=>"http://github.com/lizconlan/favtags"}
-            Fork Favtags on github.
-          Favtags uses OAuth.
-          %a{:href=>"http://twitter.com/account/connections"}
-            Edit Twitter account connections
+          %li= link_to "Log in", login_url
+
+    #section
+      = yield
+
+    #footer
+      %p
+        %a{:href=>"http://github.com/lizconlan/favtags"}
+          Fork Favtags on github.
+        Favtags uses OAuth.
+        %a{:href=>"http://twitter.com/account/connections"}
+          Edit Twitter account connections
