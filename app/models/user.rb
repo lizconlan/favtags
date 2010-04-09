@@ -21,10 +21,10 @@ class User < TwitterAuth::GenericUser
     load_all_favorites
   end
   
-  def faved_tweeple
+  def faved_accounts
     grouped_faves = self.favorites.group_by { |x| x.twitterer_name }
-    tweeple = grouped_faves.keys
-    tweeple.sort { |a,b| a.downcase <=> b.downcase }
+    accounts = grouped_faves.keys
+    accounts.sort { |a,b| a.downcase <=> b.downcase }
   end
 
   def has_tag? tag_name

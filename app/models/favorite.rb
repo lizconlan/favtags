@@ -11,7 +11,11 @@ class Favorite < ActiveRecord::Base
   class << self
     def find_all_by_tag_name_and_user_id tag_name, user_id
       tag = Tag.find_by_name_and_user_id(tag_name, user_id)
-      tag.favorites
+      if tag
+        tag.favorites
+      else
+        []
+      end
     end
   end
   

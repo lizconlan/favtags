@@ -5,4 +5,4 @@
       %li= 'No tags in use :('
     -else
       -current_user.tags.each do |tag|
-        %li= link_to tag.name, {:action => :tags, :tag => tag.name}, {:title => "view all tweets tagged '#{tag.name}'"}
+        %li= link_to tag.name, {:action => :index, :tag => tag.name}, {:title => "view all tweets tagged '#{tag.name}'"}

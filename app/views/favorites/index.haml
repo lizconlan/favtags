@@ -1,16 +1,25 @@
 #navbar
   =link_to current_user.name, "SETTINGS-URL-TODO"
   = "/"
-  %h2 favorites
+  -if @tag
+    =link_to "favorites", :controller => :favorites
+    = "/"
+    %h2= "tagged: #{@tag}"
+  -elsif @account
+    =link_to "favorites", :controller => :favorites
+    = "/"
+    %h2= "posted by: #{@favorites.first.twitterer_name}"
+  -else
+    %h2 favorites
 
 .faves
   - form_tag('/favorites/tag') do
     .page_info
       -if @current_page > 1
-        =link_to "&lt;&lt; Prev", :controller => :favorites, :action => :index, :page => @current_page - 1
+        =link_to "&lt;&lt; Prev", :controller => :favorites, :action => :index, :page => @current_page - 1, :tag => @tag, :twitterer => @twitterer
       = "  Page #{@current_page} of #{@max_page}  "
       -if @current_page < @max_page
-        =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1
+        =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1, :tag => @tag, :twitterer => @twitterer
         
     .controls
       .control_text
@@ -30,9 +39,9 @@
 
     .page_info
       -if @current_page > 1
-        =link_to "&lt;&lt; Prev", :controller => :favorites, :action => :index, :page => @current_page - 1
+        =link_to "&lt;&lt; Prev", :controller => :favorites, :action => :index, :page => @current_page - 1, :tag => @tag, :twitterer => @twitterer
       = "  Page #{@current_page} of #{@max_page}  "
       -if @current_page < @max_page
-        =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1
+        =link_to "Next &gt;&gt;", :controller => :favorites, :action => :index, :page => @current_page + 1, :tag => @tag, :twitterer => @twitterer
         
 =render :partial => "tag_list"

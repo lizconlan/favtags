@@ -1,0 +1,3 @@
+-@accounts.each do |account|
+  %p 
+    = link_to account, :controller => 'favorites', :action => 'index', :account => account
