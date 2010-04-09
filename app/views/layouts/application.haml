@@ -6,33 +6,32 @@
     = stylesheet_link_tag "screen", :media => "screen"
     = stylesheet_link_tag "print", :media => "print"
   %body
-    #doc
-      #header
-        %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
-      #nav
-        %ul
-        - if current_user
-          %li= "Logged in as" + link_to(current_user.name, "SETTINGS-URL-TODO")
-          %li= link_to("Log out", logout_url)
-          %li= link_to "Load", "/favorites/load"
+    #header
+      %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
+    #nav
+      %ul
+      - if current_user
+        %li= link_to current_user.name, "SETTINGS-URL-TODO"
+        %li= link_to "Log out", logout_url
+        %li= link_to "Load", "/favorites/load"
 
-        - if current_user.job_id
-          - job = Job.find(current_user.job_id)
-          - if job && !job.finished?
-            .loading_message
-              - if job.failed?
-                - if job.result =~ /Rate limit exceeded./
-                  Rate limit exceeded, come back in an hour or so
-                  %br
-                  = "(error occured at: #{job.updated_at})"
-                - else
-                  Problem connecting to Twitter, please try again later
-                  %br
-                  = "(error occured at: #{job.updated_at})"
+      - if current_user.job_id
+        - job = Job.find(current_user.job_id)
+        - if job && !job.finished?
+          .loading_message
+            - if job.failed?
+              - if job.result =~ /Rate limit exceeded./
+                Rate limit exceeded, come back in an hour or so
+                %br
+                = "(error occured at: #{job.updated_at})"
               - else
-                Your favorites are currently loading, please be patient!
-        - else
-          %li= link_to "Log in", login_url
+                Problem connecting to Twitter, please try again later
+                %br
+                = "(error occured at: #{job.updated_at})"
+            - else
+              Refreshing favourites
+      - else
+        %li= link_to "Log in with Twitter", login_url
 
     #section
       = yield
