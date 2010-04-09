@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
   
   
   def index
-    render :template => 'index.haml'
+    if current_user
+      redirect_to :controller => 'favorites'
+    else
+      render :template => 'index.haml'
+    end
   end
 end

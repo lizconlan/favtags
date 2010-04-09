@@ -40,5 +40,6 @@
         %a{:href=>"http://github.com/lizconlan/favtags"}
           Fork Favtags on github.
         Favtags uses OAuth.
-        %a{:href=>"http://twitter.com/account/connections"}
-          Edit Twitter account connections
+        -if current_user
+          %a{:href=>"http://twitter.com/account/connections"}
+            Edit Twitter account connections
