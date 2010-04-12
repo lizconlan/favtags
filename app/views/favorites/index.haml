@@ -1,15 +1,14 @@
-#navbar
-  =link_to current_user.name, "SETTINGS-URL-TODO"
-  = "/"
-  -if @tag
-    =link_to "favorites", :controller => :favorites
+%ul
+  %li=link_to current_user.name, "settings_url"
+  - if @tag
+    %li=link_to "favorites", :controller => :favorites
     = "/"
     %h2= "tagged: #{@tag}"
-  -elsif @account
+  - elsif @account
     =link_to "favorites", :controller => :favorites
     = "/"
     %h2= "posted by: #{@favorites.first.twitterer_name}"
-  -else
+  - else
     %h2 favorites
 
 .faves
@@ -27,9 +26,9 @@
           =submit_tag :submit
               
     .timeline
-      -if @favorites.nil?
+      - if @favorites.nil?
         ="No favorites loaded"
-      -else
+      - else
         -@show_tweep = true
         =render :partial => "tweet", :collection => @favorites
 

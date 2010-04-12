@@ -1,18 +1,19 @@
-%div.tweet
-  %div.tweet_selection
+#tweet
+  .selection
     %input{:type => :checkbox, :id => tweet.id, :name => "tweet_#{tweet.id}", :value=> tweet.id }
-  %div.tweet_body
+  .body
     -if @show_twitterer
-      %span.twitterer
+      %strong
         =link_to tweet.twitterer_name, {:controller => 'favorites', :action => :index, :account => tweet.twitterer_name}, {:title => "view favorites posted by #{tweet.twitterer_name}"}
     -if tweet.twitterer_protected
       %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
-    %span.tweet_text= tweet.html_text
-    %span.tweet_date= "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}"
-    %ul.tags
+    %span= tweet.html_text
+    %br    
+    %span
+      =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
+    = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}
+    %ul
       -tweet.tags.each do |tag|
         %li
           =tag.name
-          %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
-    .twitter_link= link_to "link to this on twitter", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
-    .delete= link_to "unfave", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}
+          %span= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
