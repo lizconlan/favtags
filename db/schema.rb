@@ -9,13 +9,26 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100309015746) do
+ActiveRecord::Schema.define(:version => 20100425100426) do
 
   create_table "conversations", :force => true do |t|
     t.integer "user_id"
     t.integer "favorite_id"
     t.integer "next_favorite_id"
     t.integer "prev_favorite_id"
+  end
+
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.text     "locked_by"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "favorites", :force => true do |t|
@@ -63,25 +76,6 @@ ActiveRecord::Schema.define(:version => 20100309015746) do
     t.integer "tag_id",      :null => false
     t.integer "favorite_id", :null => false
   end
-
-  create_table "jobs", :force => true do |t|
-    t.string   "worker_class"
-    t.string   "worker_method"
-    t.text     "args"
-    t.text     "result"
-    t.integer  "priority"
-    t.integer  "progress"
-    t.string   "state"
-    t.integer  "lock_version",  :default => 0
-    t.datetime "start_at"
-    t.datetime "started_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "jobs", ["priority"], :name => "index_jobs_on_priority"
-  add_index "jobs", ["start_at"], :name => "index_jobs_on_start_at"
-  add_index "jobs", ["state"], :name => "index_jobs_on_state"
 
   create_table "tags", :force => true do |t|
     t.integer  "user_id"

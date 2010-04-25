@@ -27,11 +27,11 @@
             %li= link_to "Load", "/favorites/load"
 
             - if current_user.job_id
-              - job = Job.find(current_user.job_id)
-              - if job && !job.finished?
+              - job = Delayed::Job.find(current_user.job_id)
+              - if job
                 .loading_message
                   - if job.failed?
-                    - if job.result =~ /Rate limit exceeded./
+                    - if job.last_error =~ /Rate limit exceeded./
                       Rate limit exceeded, come back in an hour or so
                       %br
                       = "(error occured at: #{job.updated_at})"

@@ -28,6 +28,8 @@ class FavoritesController < ApplicationController
       @favorites = current_user.favorites.paginate(:all, :page => @current_page)
     else
       @favorites = nil
+      @current_page = 1
+      @max_page = 1
     end
     
     @tag_options = [["Apply tags", ""]]
@@ -39,15 +41,15 @@ class FavoritesController < ApplicationController
   
   def load
     if current_user.job_id
-      @job = Job.find(current_user.job_id)
+      @job = Delayed::Job.find(current_user.job_id)
     end
     
-    if !@job || @job.finished? || @job.failed?
-      current_user.job_id = Job.enqueue!(FavoritesLoader, :load_user_favorites, current_user.id).id
+    if !@job || @job.failed?
+      @job = Delayed::Job.enqueue(LoadingJob.new(current_user.id))
+      current_user.job.id = @job.id
       current_user.save
-      @job = Job.find(current_user.job_id)
     end
-
+    
     redirect_to favorites_url
   end
   
