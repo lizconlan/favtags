@@ -6,5 +6,5 @@ will_paginate
 
 start the background tasks thing:
 
-ruby ./script/daemons start
+rake jobs:work
 
