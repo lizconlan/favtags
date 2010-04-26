@@ -46,8 +46,8 @@ class FavoritesController < ApplicationController
     
     if !@job || @job.failed?
       @job = Delayed::Job.enqueue(LoadingJob.new(current_user.id))
-      current_user.job.id = @job.id
-      current_user.save
+      current_user.job_id = @job.id
+      current_user.save!
     end
     
     redirect_to favorites_url
