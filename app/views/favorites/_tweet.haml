@@ -12,8 +12,8 @@
     %span
       =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
     = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}
-    %ul
+    %ul.tags
       -tweet.tags.each do |tag|
         %li
           =tag.name
-          %span= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
+          %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
