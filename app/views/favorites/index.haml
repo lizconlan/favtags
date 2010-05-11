@@ -3,13 +3,16 @@
   - if @tag
     %li=link_to "favorites", :controller => :favorites
     = "/"
-    %h2= "tagged: #{@tag}"
+    %li
+      %h2= "tagged: #{@tag}"
   - elsif @account
     =link_to "favorites", :controller => :favorites
     = "/"
-    %h2= "posted by: #{@favorites.first.twitterer_name}"
+    %li
+      %h2= "posted by: #{@favorites.first.twitterer_name}"
   - else
-    %h2 favorites
+    %li
+      %h2 favorites
 
 .faves
   - form_tag('/favorites/tag') do
