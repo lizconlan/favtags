@@ -7,9 +7,10 @@
       %h2= "tagged: #{@tag}"
   - elsif @account
     =link_to "favorites", :controller => :favorites
-    = "/"
-    %li
-      %h2= "posted by: #{@favorites.first.twitterer_name}"
+    -if @favorites.first
+      = "/"
+      %li
+        %h2= "posted by: #{@favorites.first.twitterer_name}"
   - else
     %li
       %h2 favorites
@@ -23,7 +24,8 @@
       .control_text
         Actions: 
         =hidden_field_tag :page, params[:page]
-        =hidden_field_tag :from, "tweep"
+        =hidden_field_tag :account, @account
+        =hidden_field_tag :tag, @tag
         = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
         %noscript
           =submit_tag :submit

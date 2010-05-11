@@ -41,7 +41,11 @@ class FavoritesController < ApplicationController
   
   def load
     if current_user.job_id
-      @job = Delayed::Job.find(current_user.job_id)
+      begin
+        @job = Delayed::Job.find(current_user.job_id)
+      rescue
+        @job = nil
+      end
     end
     
     if !@job || @job.failed?
@@ -66,10 +70,12 @@ class FavoritesController < ApplicationController
         action = params[:from]
         page = params[:page]
         page = 1 if page.to_i == 0
-        if action.nil? || action.blank?
-          redirect_to :action => 'index', :page => page
+        if params[:account] != ""
+          redirect_to :action => 'index', :page => page, :account => params[:account]
+        elsif params[:tag] != ""
+          redirect_to :action => 'index', :page => page, :tag => params[:tag]
         else
-          redirect_to :action => action, :page => page
+          redirect_to :action => 'index', :page => page
         end
       elsif params[:tag_choices] == "new"
         @tweets = []
@@ -124,7 +130,13 @@ class FavoritesController < ApplicationController
     if tweet
       tweet.detag(tag_name)
     end
-    redirect_to :back
+    if params[:account]
+      redirect_to :action => 'index', :page => params[:page], :account => params[:account]
+    elsif params[:tags]
+      redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
+    else
+      redirect_to :action => 'index', :page => params[:page]
+    end
   end
   
   def delete
@@ -134,6 +146,12 @@ class FavoritesController < ApplicationController
     if tweet
       tweet.delete
     end
-    redirect_to favorites_url
+    if params[:account]
+      redirect_to :action => 'index', :page => params[:page], :account => params[:account]
+    elsif params[:tags]
+      redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
+    else
+      redirect_to :action => 'index', :page => params[:page]
+    end
   end
 end

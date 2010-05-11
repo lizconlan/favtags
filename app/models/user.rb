@@ -4,6 +4,11 @@ class User < TwitterAuth::GenericUser
   # parent TwitterAuth::GenericUser class.
   has_many :tags, :order => 'name'
   has_many :favorites, :order => 'posted DESC'
+
+  def api_calls
+    response = self.twitter.get("/account/rate_limit_status.json")
+    [response["remaining_hits"], response["reset_time"]]
+  end
   
   def delete_favorites
     self.favorites.destroy_all
