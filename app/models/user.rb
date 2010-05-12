@@ -23,7 +23,11 @@ class User < TwitterAuth::GenericUser
 
   def load_favorites
     update_favcount
-    load_all_favorites
+    if self.favorites.count == 0
+      load_all_favorites
+    else
+      load_some_favorites
+    end
   end
   
   def faved_accounts
@@ -43,6 +47,23 @@ class User < TwitterAuth::GenericUser
 
   private
 
+    def load_some_favorites(pages=4)
+      tweets = "starting"
+      i = 0
+      while i < pages
+        i += 1
+        tweets = self.twitter.get("/favorites.json?page=#{i}")
+        
+        if tweets.blank?
+          return ""
+        end
+                
+        tweets.each do |tweet|
+          load_tweet(tweet)
+        end
+      end
+    end
+
     def load_all_favorites
       tweets = "starting"
       i = 0
@@ -51,40 +72,44 @@ class User < TwitterAuth::GenericUser
         tweets = self.twitter.get("/favorites.json?page=#{i}")
                 
         tweets.each do |tweet|
-          unless Favorite.find_by_tweet_id_and_user_id(tweet["id"], self.id)
-            fave = Favorite.new(
-              :user_id => self.id,
-              :text => tweet["text"],
-              :tweet_id => tweet["id"],
-              :twitterer_name => tweet["user"]["screen_name"],
-              :twitterer_real_name => tweet["user"]["name"],
-              :twitterer_id => tweet["user"]["id"],
-              :twitterer_location => tweet["user"]["location"],
-              :twitterer_description => tweet["user"]["description"],
-              :twitterer_profile_image_url => tweet["user"]["profile_image_url"],
-              :twitterer_url => tweet["user"]["url"],
-              :twitterer_protected => tweet["user"]["protected"],
-              :twitterer_created_at => tweet["user"]["created_at"],
-              :twitterer_utc_offset => tweet["user"]["utc_offset"],
-              :twitterer_time_zone => tweet["user"]["time_zone"],
-              :twitterer_geo_enabled => tweet["user"]["geo_enabled"],
-              :twitterer_verified => tweet["user"]["verified"],
-              :twitterer_statuses_count => tweet["user"]["statuses_count"],
-              :twitterer_lang => tweet["user"]["lang"],
-              :reply_to_status => tweet["in_reply_to_status_id"],
-              :reply_to_user => tweet["in_reply_to_screen_name"],
-              :reply_to_user_id => tweet["in_reply_to_user_id"],
-              :source => tweet["source"],
-              :posted => tweet["created_at"]
-            )
-            fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
-            begin
-              self.favorites <<= fave
-            rescue Exception => exc
-              unless exc.message == "already loaded"
-                raise exc.message
-              end
-            end
+          load_tweet(tweet)
+        end
+      end
+    end
+    
+    def load_tweet tweet
+      unless Favorite.find_by_tweet_id_and_user_id(tweet["id"], self.id)
+        fave = Favorite.new(
+          :user_id => self.id,
+          :text => tweet["text"],
+          :tweet_id => tweet["id"],
+          :twitterer_name => tweet["user"]["screen_name"],
+          :twitterer_real_name => tweet["user"]["name"],
+          :twitterer_id => tweet["user"]["id"],
+          :twitterer_location => tweet["user"]["location"],
+          :twitterer_description => tweet["user"]["description"],
+          :twitterer_profile_image_url => tweet["user"]["profile_image_url"],
+          :twitterer_url => tweet["user"]["url"],
+          :twitterer_protected => tweet["user"]["protected"],
+          :twitterer_created_at => tweet["user"]["created_at"],
+          :twitterer_utc_offset => tweet["user"]["utc_offset"],
+          :twitterer_time_zone => tweet["user"]["time_zone"],
+          :twitterer_geo_enabled => tweet["user"]["geo_enabled"],
+          :twitterer_verified => tweet["user"]["verified"],
+          :twitterer_statuses_count => tweet["user"]["statuses_count"],
+          :twitterer_lang => tweet["user"]["lang"],
+          :reply_to_status => tweet["in_reply_to_status_id"],
+          :reply_to_user => tweet["in_reply_to_screen_name"],
+          :reply_to_user_id => tweet["in_reply_to_user_id"],
+          :source => tweet["source"],
+          :posted => tweet["created_at"]
+        )
+        fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
+        begin
+          self.favorites <<= fave
+        rescue Exception => exc
+          unless exc.message == "already loaded"
+            raise exc.message
           end
         end
       end
