@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100425100426) do
+ActiveRecord::Schema.define(:version => 20100615232204) do
 
   create_table "conversations", :force => true do |t|
     t.integer "user_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(:version => 20100425100426) do
 
   create_table "favorites", :force => true do |t|
     t.integer  "user_id"
-    t.string   "text",                                   :limit => 140
+    t.string   "text",                           :limit => 140
     t.string   "twitterer_name"
     t.string   "twitterer_id"
     t.string   "reply_to_status"
@@ -47,24 +47,12 @@ ActiveRecord::Schema.define(:version => 20100425100426) do
     t.string   "twitterer_profile_image_url"
     t.string   "twitterer_url"
     t.boolean  "twitterer_protected"
-    t.integer  "twitterer_followers_count"
-    t.string   "twitterer_profile_background_color"
-    t.string   "twitterer_profile_text_color"
-    t.string   "twitterer_profile_link_color"
-    t.string   "twitterer_profile_sidebar_fill_color"
-    t.string   "twitterer_profile_sidebar_border_color"
-    t.integer  "twitterer_friends_count"
     t.datetime "twitterer_created_at"
-    t.integer  "twitterer_favorites_count"
     t.integer  "twitterer_utc_offset"
     t.string   "twitterer_time_zone"
-    t.string   "twitterer_profile_background_image_url"
-    t.boolean  "twitterer_profile_background_tile"
-    t.boolean  "twitterer_notifications"
     t.boolean  "twitterer_geo_enabled"
     t.boolean  "twitterer_verified"
     t.boolean  "twitterer_following"
-    t.integer  "twitterer_statuses_count"
     t.string   "twitterer_lang"
     t.boolean  "twitterer_contributors_enabled"
     t.boolean  "truncated"

@@ -96,7 +96,6 @@ class User < TwitterAuth::GenericUser
           :twitterer_time_zone => tweet["user"]["time_zone"],
           :twitterer_geo_enabled => tweet["user"]["geo_enabled"],
           :twitterer_verified => tweet["user"]["verified"],
-          :twitterer_statuses_count => tweet["user"]["statuses_count"],
           :twitterer_lang => tweet["user"]["lang"],
           :reply_to_status => tweet["in_reply_to_status_id"],
           :reply_to_user => tweet["in_reply_to_screen_name"],
