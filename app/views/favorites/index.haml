@@ -1,19 +1,20 @@
-%ul
-  %li=link_to current_user.name, "settings_url"
-  - if @tag
-    %li=link_to "favorites", :controller => :favorites
-    = "/"
-    %li
-      %h2= "tagged: #{@tag}"
-  - elsif @account
-    =link_to "favorites", :controller => :favorites
-    -if @favorites.first
+#nav
+  %ul
+    %li= link_to current_user.name, "settings_url"
+    - if @tag
+      %li=link_to "favorites", :controller => :favorites
       = "/"
       %li
-        %h2= "posted by: #{@favorites.first.twitterer_name}"
-  - else
-    %li
-      %h2 favorites
+        %h2= "tagged: #{@tag}"
+    - elsif @account
+      =link_to "favorites", :controller => :favorites
+      -if @favorites.first
+        = "/"
+        %li
+          %h2= "posted by: #{@favorites.first.twitterer_name}"
+    - else
+      %li
+        %h2 favorites
 
 .faves
   - form_tag('/favorites/tag') do
