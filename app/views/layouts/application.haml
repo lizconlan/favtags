@@ -6,44 +6,47 @@
     = stylesheet_link_tag "screen", :media => "screen"
     = stylesheet_link_tag "print", :media => "print"
   %body
-    #header
-      %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
+    #outer_container
+      #inner_container
+        #header
+          %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
     
-      %ul
-        - if current_user
-          %li= link_to "Log out", logout_url
-          %li= link_to "Load", "/favorites/load"
+          %ul
+            - if current_user
+              %li= link_to "Settings", "settings_url"
+              %li= link_to "Load", "/favorites/load"
+              %li= link_to "Log out", logout_url
+              
 
-          - if current_user.job_id
-            - begin
-              - job = Delayed::Job.find(current_user.job_id)
-            - rescue
-              - job = nil
-            - if job
-              .loading_message
-                - if job.failed?
-                  - if job.last_error =~ /Rate limit exceeded./
-                    Rate limit exceeded, come back in an hour or so
-                    %br
-                    = "(error occured at: #{job.updated_at})"
-                  - else
-                    Problem connecting to Twitter, please try again later
-                    %br
-                    = "(error occured at: #{job.updated_at})"
-                - else
-                  Refreshing favorites
-        - else
-          %li= link_to "Log in", login_url      
+              - if current_user.job_id
+                - begin
+                  - job = Delayed::Job.find(current_user.job_id)
+                - rescue
+                  - job = nil
+                - if job
+                  .loading_message
+                    - if job.failed?
+                      - if job.last_error =~ /Rate limit exceeded./
+                        Rate limit exceeded, come back in an hour or so
+                        %br
+                        = "(error occured at: #{job.updated_at})"
+                      - else
+                        Problem connecting to Twitter, please try again later
+                        %br
+                        = "(error occured at: #{job.updated_at})"
+                    - else
+                      Refreshing favorites
+            - else
+              %li= link_to "Log in", login_url      
 
-    #section
-      = yield
+        = yield
 
-    #footer
-      %ul
-        %li
-          %a{:href=>"http://github.com/lizconlan/favtags"}
-            Source code
-        - if current_user
-          %li
-            %a{:href=>"http://twitter.com/account/connections"}
-              Edit Twitter account connections
+        #footer
+          %ul
+            %li
+              %a{:href=>"http://github.com/lizconlan/favtags"}
+                Source code
+            - if current_user
+              %li
+                %a{:href=>"http://twitter.com/account/connections"}
+                  Edit Twitter account connections

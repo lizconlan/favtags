@@ -1,10 +1,27 @@
 body
   font-family: Helvetica, Verdana, Arial, sans-serif
   font-size: 14pt
-  width: 750px
+  background-color: #c0deed
+  
+#outer_container
+  text-align: center
+  margin: 1.5em 0
+  
+  #inner_container
+    width: 750px
+    background-color: white
+    padding-top: 1em
+    margin: 0 auto
+    text-align: left
+    border-radius: 8px
+    -moz-border-radius: 8px
+    -webkit-border-radius: 8px
 
 =spacing
   padding: 1em 0
+
+#section
+  position: relative
 
 a
   text-decoration: none
@@ -29,27 +46,25 @@ h2
 
 ul.tweets 
   list-style:none
-  float: left
-  
-  li
-    float: left
 
-div#navbar
-  width: 100%
-  float: left
+div#nav
+  width: 710px
+  margin: 0 20px
 
 div.faves
+  margin-left: 15px
   font-size: 0.85em
-  width: 570px
+  width: 555px
   margin-right: 15px
-  float: left
   padding: 1em 0
   
 div.tag_list
   width: 140px
   border: 6px solid silver
   border-bottom: 10px solid silver
-  float: right
+  position: absolute
+  top: 1em
+  left: 585px
   
   h2
     display: block
@@ -79,8 +94,7 @@ div.tag_list
 div.controls
   text-align: left
   font-size: 0.9em
-  float: left
-  width: 540px
+  width: 525px
   margin: 0 15px
   padding: 0.4em 0
   background-color: #D0D0D0
@@ -89,13 +103,11 @@ div.controls
     padding: 0 1em
 
 div.timeline
-  float: left
   
   div.tweet
-    width: 539px
+    width: 509px
     margin: 0 15px
-    float: left
-    padding: 1em 0
+    padding: 1em 0.5em
     border-top: 1px dotted silver
     clear: both
     border-left: 1px solid #F6F9FF
@@ -107,10 +119,12 @@ div.timeline
       
     .tweet_selection
       width: 20px
+      display: inline
       
     .tweet_body
-      width: 500px
-      float: left
+      top: 1em
+      margin: -1.2em 0.4em 0 30px
+      width: 465px
     
       .tweet_text
         width: 100%
@@ -122,24 +136,22 @@ div.timeline
         color: gray
         margin-top: 0.3em
         text-align: left
-        float: left
         font-size: 0.9em
         
       .twitter_link
         width: 100%
         display: block
-        float: left
         text-align: right
         
       ul.tags
         width: 100%
         list-style: none
-        margin: 0
+        margin: 0.5em
         padding: 0
 
         li
+          display: inline
           font-size: 0.8em
-          float: left
           padding: 0.2em 0 0.2em 0.5em
           margin-right: 0.5em
           margin-top: 0.4em
@@ -166,11 +178,9 @@ div.timeline
               text-decoration: none
       
     div.tweet_selection
-      float: left
-      padding: 0 0.4em
+      padding: 0 0.4em 0 0
       
 div.page_info
-  float: left
   width: 100%
   clear: both
   padding: 0.5em 0
@@ -193,7 +203,6 @@ div.page_info
   
 .loading_message
   clear: both
-  float: left
   border: 1px solid black
   background-color: #FFFCEB
   margin-top: 1em
@@ -202,11 +211,21 @@ div.page_info
 #header
   +spacing
   width: 100%
-  float: left
   text-align: center
   padding: 0
   margin: 0
+  
+  ul
+    background-color: #EAF3F9
+    list-style: none
+    padding: 0.3em 0
+    text-align: right
+    
+    li
+      display: inline
+      
+      a
+        padding: 0 0.5em
 
 #footer
   +spacing
-  float: left
