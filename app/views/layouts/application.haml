@@ -42,12 +42,15 @@
 
         = yield
 
-        #footer
-          %ul
+      #footer
+        %ul
+          %li
+            %a{:href=>"http://github.com/lizconlan/favtags"}
+              Source code
             %li
               %a{:href=>"http://github.com/lizconlan/favtags"}
-                Source code
-            - if current_user
-              %li
-                %a{:href=>"http://twitter.com/account/connections"}
-                  Edit Twitter account connections
+                Credits
+          - if current_user
+            %li
+              %a{:href=>"http://twitter.com/account/connections"}
+                Edit Twitter account connections
