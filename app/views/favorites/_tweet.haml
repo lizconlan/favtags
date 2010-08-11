@@ -1,29 +1,30 @@
-.tweet
-  .tweet_selection
-    %input{:type => :checkbox, :id => tweet.id, :name => "tweet_#{tweet.id}", :value=> tweet.id }
-  .tweet_body
-    -if @show_twitterer
-      %strong
-        =link_to tweet.twitterer_name, {:controller => 'favorites', :action => :index, :account => tweet.twitterer_name}, {:title => "view favorites posted by #{tweet.twitterer_name}"}
-    -if tweet.twitterer_protected
-      %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
-    %span= tweet.html_text
-    %br    
-    %span
-      =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
-    - if @account
-      = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account}
-    - elsif @tag
-      = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag}
-    - else
-      = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}
-    %ul.tags
-      -tweet.tags.each do |tag|
-        %li
-          =tag.name
-          - if @account
-            %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account}, {:title => "remove '#{tag.name}' tag from this favorite"}
-          - elsif @tag
-            %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag}, {:title => "remove '#{tag.name}' tag from this favorite"}
-          - else
-            %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
+%article
+  .tweet
+    .tweet_selection
+      %input{:type => :checkbox, :id => tweet.id, :name => "tweet_#{tweet.id}", :value=> tweet.id }
+    .tweet_body
+      -if @show_twitterer
+        %strong
+          =link_to tweet.twitterer_name, {:controller => 'favorites', :action => :index, :account => tweet.twitterer_name}, {:title => "view favorites posted by #{tweet.twitterer_name}"}
+      -if tweet.twitterer_protected
+        %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
+      %span= tweet.html_text
+      %br    
+      %span
+        =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
+      - if @account
+        = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account}
+      - elsif @tag
+        = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag}
+      - else
+        = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}
+      %ul.tags
+        -tweet.tags.each do |tag|
+          %li
+            =tag.name
+            - if @account
+              %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account}, {:title => "remove '#{tag.name}' tag from this favorite"}
+            - elsif @tag
+              %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag}, {:title => "remove '#{tag.name}' tag from this favorite"}
+            - else
+              %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
