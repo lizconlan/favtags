@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 %html{:lang=>"en-GB"}
   %head
-    %title Favtags
+    %title Favtagger
     %meta{"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
     = stylesheet_link_tag "screen", :media => "screen"
     = stylesheet_link_tag "print", :media => "print"
@@ -9,17 +9,17 @@
     #outer_container
       #inner_container
         %header
-          %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
-          
-          #usernav
-            #nav_options
-              %nav
-                - if current_user
+          - if current_user
+            #usernav
+              %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
+              #nav_options
+                %nav
                   =link_to "Settings", "settings_url"
                   =link_to "Load", "/favorites/load"
                   =link_to "Log out", logout_url
-                - else
-                  =link_to "Log in", login_url
+          - else
+            %a{:href => "/"}
+              %img{:src => "/images/favtagger.gif", :width => "376", :height => "100", :alt => "Favtagger", :border => "0"}
               
           
           - if current_user && current_user.job_id
@@ -50,7 +50,7 @@
               %a{:href=>"http://github.com/lizconlan/favtags"}
                 Source code
               %li
-                %a{:href=>"http://github.com/lizconlan/favtags"}
+                %a{:href=>"/credits"}
                   Credits
             - if current_user
               %li

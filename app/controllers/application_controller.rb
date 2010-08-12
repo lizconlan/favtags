@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
       render :template => 'index.haml'
     end
   end
+  
+  def credits
+    render :template => 'credits.haml'
+  end
 end
