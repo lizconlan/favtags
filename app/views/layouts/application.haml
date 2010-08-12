@@ -9,17 +9,16 @@
     #outer_container
       #inner_container
         %header
-          %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
-          
-          #usernav
-            #nav_options
-              %nav
-                - if current_user
-                  =link_to "Settings", "settings_url"
-                  =link_to "Load", "/favorites/load"
-                  =link_to "Log out", logout_url
-                - else
-                  =link_to "Log in", login_url
+          - if current_user
+            %img{:src=>"/images/favtags.gif", :width=> 388, :height=> 145, :alt=>"Favtags"}
+              #usernav
+                #nav_options
+                  %nav
+                    =link_to "Settings", "settings_url"
+                    =link_to "Load", "/favorites/load"
+                    =link_to "Log out", logout_url
+          - else
+            %img{:src => "/images/favtagger.gif", :width => "376", :height => "100"}
               
           
           - if current_user && current_user.job_id
