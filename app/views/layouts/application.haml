@@ -11,7 +11,8 @@
         %header
           - if current_user
             #usernav
-              %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
+              %a{:href => "/favorites"}
+                %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
               #nav_options
                 %nav
                   =link_to "Settings", "settings_url"
@@ -47,12 +48,9 @@
         %nav
           %ul
             %li
-              %a{:href=>"http://github.com/lizconlan/favtags"}
-                Source code
+              %a{:href=>"http://github.com/lizconlan/favtags"} Source code
               %li
-                %a{:href=>"/credits"}
-                  Credits
+                %a{:href=>"/credits"} Credits
             - if current_user
               %li
-                %a{:href=>"http://twitter.com/account/connections"}
-                  Edit Twitter account connections
+                %a{:href=>"http://twitter.com/account/connections"} Edit Twitter account connections
