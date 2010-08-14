@@ -1,4 +1,4 @@
-#nav
+#page_head
   - if @tag
     =link_to "favorites", :controller => :favorites
     &nbsp;&gt;&nbsp;
@@ -11,30 +11,29 @@
   - else
     %h2 favorites
 
-#section
-  .faves
-    - form_tag('/favorites/tag') do
-      .page_info
-        =render :partial => "navigation"
-        
-      .controls
-        .control_text
-          Actions: 
-          =hidden_field_tag :page, params[:page]
-          =hidden_field_tag :account, @account
-          =hidden_field_tag :tag, @tag
-          = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
-          %noscript
-            =submit_tag :submit
-              
-      .timeline
-        - if @favorites.nil?
-          ="No favorites loaded"
-        - else
-          -@show_tweep = true
-          =render :partial => "tweet", :collection => @favorites
+#faves
+  - form_tag('/favorites/tag') do
+    .page_info
+      =render :partial => "navigation"
+      
+    .controls
+      .control_text
+        Actions: 
+        =hidden_field_tag :page, params[:page]
+        =hidden_field_tag :account, @account
+        =hidden_field_tag :tag, @tag
+        = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
+        %noscript
+          =submit_tag :submit
+            
+    .timeline
+      - if @favorites.nil?
+        ="No favorites loaded"
+      - else
+        -@show_tweep = true
+        =render :partial => "tweet", :collection => @favorites
 
-      .page_info
-        =render :partial => "navigation"
-        
-  =render :partial => "tag_list"
+    .page_info
+      =render :partial => "navigation"
+      
+=render :partial => "tag_list"
