@@ -44,7 +44,15 @@ describe User do
       fave1 = Favorite.new(:twitterer_name => 'xtest')
       fave2 = Favorite.new(:twitterer_name => 'atest')
       user = User.new(:favorites => [fave1, fave2])
-      user.faved_accounts.should == ['atest', 'xtest']
+      user.faved_accounts.should == [{:count => 1, :name => "atest"}, {:count => 1, :name => "xtest"}]
+    end
+    
+    it 'should correctly report the tally of tweets per account' do
+      fave1 = Favorite.new(:twitterer_name => 'xtest')
+      fave2 = Favorite.new(:twitterer_name => 'atest')
+      fave3 = Favorite.new(:twitterer_name => 'xtest')
+      user = User.new(:favorites => [fave1, fave2, fave3])
+      user.faved_accounts.should == [{:count => 1, :name => "atest"}, {:count => 2, :name => "xtest"}]
     end
   end
   
