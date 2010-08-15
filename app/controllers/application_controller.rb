@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   
-  
   def index
     if current_user
       redirect_to :controller => 'favorites'

@@ -49,6 +49,5 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/favorites/:id/detag/:tag', :controller => 'favorites', :action => 'remove_tag'
   map.connect '/credits', :controller => 'application', :action => 'credits'
   
-  map.connect ':controller/:action/:id'
-  map.connect ':controller/:action/:id.:format'
+  map.connect '*bad_route', :controller => 'application', :action => 'render_not_found'
 end
