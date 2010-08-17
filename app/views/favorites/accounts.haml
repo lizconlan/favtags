@@ -1,3 +1,9 @@
+#page_head
+  =link_to "favorites", :controller => :favorites
+  &nbsp;&gt;&nbsp;
+  %h2= "Accounts you have faved"
+
 -@accounts.each do |account|
   %p 
-    = link_to account, :controller => 'favorites', :action => 'index', :account => account
+    = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
+    = "(#{account[:count]})"

@@ -8,7 +8,6 @@ class ApplicationController < ActionController::Base
   # Scrub sensitive parameters from your log
   # filter_parameter_logging :password
   
-  
   def index
     if current_user
       redirect_to :controller => 'favorites'
@@ -19,5 +18,9 @@ class ApplicationController < ActionController::Base
   
   def credits
     render :template => 'credits.haml'
+  end
+  
+  def render_not_found
+    render :template => 'public/404.html', :status => 404
   end
 end

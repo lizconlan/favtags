@@ -2,7 +2,7 @@
 %html{:lang=>"en-GB"}
   %head
     %title Favtagger
-    %meta{"http-equiv"=>"content-type", :content=>"text/html;charset=UTF-8"}
+    %meta{:charset => "utf-8"}
     = stylesheet_link_tag "screen", :media => "screen"
     = stylesheet_link_tag "print", :media => "print"
   %body
@@ -11,7 +11,8 @@
         %header
           - if current_user
             #usernav
-              %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
+              %a{:href => "/favorites"}
+                %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
               #nav_options
                 %nav
                   =link_to "Settings", "settings_url"
@@ -21,7 +22,7 @@
             %a{:href => "/"}
               %img{:src => "/images/favtagger.gif", :width => "376", :height => "100", :alt => "Favtagger", :border => "0"}
               
-          
+        #content          
           - if current_user && current_user.job_id
             - begin
               - job = Delayed::Job.find(current_user.job_id)
@@ -41,18 +42,15 @@
                 - else
                   Refreshing favorites  
 
-        = yield
+          = yield
 
       %footer
         %nav
           %ul
             %li
-              %a{:href=>"http://github.com/lizconlan/favtags"}
-                Source code
+              %a{:href=>"http://github.com/lizconlan/favtags"} Source code
               %li
-                %a{:href=>"/credits"}
-                  Credits
+                %a{:href=>"/credits"} Credits
             - if current_user
               %li
-                %a{:href=>"http://twitter.com/account/connections"}
-                  Edit Twitter account connections
+                %a{:href=>"http://twitter.com/account/connections"} Edit Twitter account connections

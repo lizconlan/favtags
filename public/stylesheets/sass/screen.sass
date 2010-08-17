@@ -3,45 +3,9 @@ body
   font-size: 14pt
   background-color: #c0deed
 
-a.twitter_button
-  display: block
-  width: 150px
-  height: 23px
-  background-image: url(/images/twitter_signin.png)
-  text-indent: -9999px
-
-a.twitter_button:hover
-  background-position: center
-
-a.twitter_button:active
-  background-position: bottom
-
-#outer_container
-  text-align: center
-  margin: 1.5em 0
-  
-  #inner_container
-    width: 750px
-    background-color: white
-    padding: 0 0 1em 0
-    margin: 0 auto
-    text-align: left
-    border-radius: 8px
-    -moz-border-radius: 8px
-    -webkit-border-radius: 8px
-
-=spacing
-  padding: 1em 0
-
-#section
-  position: relative
-  
-  .text_panel
-    padding: 0 1em
-
 a
   text-decoration: none
-  
+
 a:hover
   text-decoration: underline
 
@@ -55,199 +19,25 @@ h1
   font-weight: bold
   text-align: center
   width: 100%
-  
+
 h2
   font-size: 1em
   display: inline
 
-ul.tweets 
-  list-style:none
 
-div#usernav
-  width: 766px
-  margin-left: -8px
-  text-align: left
-  border-radius: 8px
-  -moz-border-radius: 8px
-  -webkit-border-radius: 8px
-  background-color: black
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666666), to(#666666), color-stop(.6,#333))
-  background: -moz-linear-gradient(0% 84% 90deg,#333333, #333333, #545454 40%)
-  position: relative
-  
-  img
-    margin: 4px 15px 0 15px
-  
-  div#nav_options
-    position: absolute
-    top: 8px
-    right: 0px
-    width: 500px
-    text-align: right
-    padding: 0.3em 0
-    margin: 0 15px 1em 0
-    font-size: 0.95em
-    
-    a
-      color: silver
-      padding: 0 0.5em
+a.twitter_button
+  display: block
+  width: 150px
+  height: 23px
+  background-image: url(/images/twitter_signin.png)
+  text-indent: -9999px
 
-div#nav
-  width: 710px
-  margin: 1em 0 0 20px
+a.twitter_button:hover
+  background-position: center
 
-div.faves
-  font-size: 0.85em
-  width: 555px
-  margin-right: 15px
-  padding: 1em 0
-  
-div.tag_list
-  width: 140px
-  border: 6px solid silver
-  border-bottom: 10px solid silver
-  border-radius: 6px
-  -moz-border-radius: 6px
-  -webkit-border-radius: 6px
-  position: absolute
-  top: 0.9em
-  left: 585px
-  
-  h2
-    display: block
-    margin: 0
-    background-color: silver
-    text-align: center
-    font-size: 0.8em
-    padding: 0.5em
-  
-  ul
-    list-style: none
-    padding: 0
-    margin: 0
-    border-left: 1px solid darkgrey
-    border-right: 1px solid white
-    border-bottom: 1px solid white
-  
-  li
-    font-size: 0.8em
-    padding: 0.4em
-    border-top: 1px solid darkgrey
-    background-color: #ebf0f2
-    
-    a
-      color: black
+a.twitter_button:active
+  background-position: bottom
 
-div.controls
-  text-align: left
-  font-size: 0.9em
-  width: 525px
-  margin: 0 15px
-  padding: 0.4em 0
-  background-color: #D0D0D0
-  
-  .control_text
-    padding: 0 1em
-
-div.timeline
-  
-  div.tweet
-    width: 509px
-    margin: 0 15px
-    padding: 1em 0.5em
-    border-top: 1px dotted silver
-    clear: both
-    background-color: #FCFCFC
-  
-    .twitterer
-      font-weight: bold
-      padding-right: 0.25em
-      
-    .tweet_selection
-      width: 20px
-      display: inline
-      
-    .tweet_body
-      top: 1em
-      margin: -1.2em 0.4em 0 30px
-      width: 465px
-    
-      .tweet_text
-        width: 100%
-        clear: both
-    
-      .tweet_date
-        width: 100%
-        display: block
-        color: gray
-        margin-top: 0.3em
-        text-align: left
-        font-size: 0.9em
-        
-      .twitter_link
-        width: 100%
-        display: block
-        text-align: right
-        
-      ul.tags
-        width: 100%
-        list-style: none
-        margin: 0.5em
-        padding: 0
-
-        li
-          display: inline
-          font-size: 0.8em
-          padding: 0.2em 0 0.2em 0.5em
-          margin-right: 0.5em
-          margin-top: 0.4em
-          border-radius: 6px
-          -moz-border-radius: 6px
-          -webkit-border-radius: 6px
-          background-color: silver
-  
-          .remove_tag
-            border-left: white 2px solid
-    
-            a
-              padding: 0.2em 0.5em
-              color: black
-      
-            a:hover
-              border-top-right-radius: 6px
-              border-bottom-right-radius: 6px
-              -moz-border-radius-topright: 6px
-              -moz-border-radius-bottomright: 6px
-              -webkit-border-top-right-radius: 6px
-              -webkit-border-bottom-right-radius: 6px
-              background-color: black
-              color: silver
-              text-decoration: none
-      
-    div.tweet_selection
-      padding: 0 0.4em 0 0
-      
-div.page_info
-  width: 100%
-  clear: both
-  padding: 0.5em 0
-  text-align: center
-  background-color: silver
-  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E0E0E0), to(#E3E3E3), color-stop(.6,#C0C0C0))
-  background: -moz-linear-gradient(19% 75% 90deg,#C0C0C0, #E3E3E3, #E0E0E0 100%)
-  border-radius: 8px
-  -moz-border-radius: 8px
-  -webkit-border-radius: 8px
-
-  a
-    color: black
-    padding: 4px
-    text-shadow: 1px 2px 2px white
-    
-  a:hover
-    color: #0000DD
-    text-decoration: none
-  
 .loading_message
   margin: 1em auto 0 auto
   width: 85%
@@ -256,18 +46,221 @@ div.page_info
   background-color: #FFFCEB
   padding: 0.5em
 
-header
-  display: block
-  width: 100%
-  text-align: center
-  padding: 0
-  margin: 0
+#outer_container
+  width: 734px
+  margin: 1.5em 0
+  padding: 1em 0
+  margin: 0 auto
+  
+  #inner_container
+    width: 734px
+    background-color: white
+    border-radius: 8px
+    -moz-border-radius: 8px
+    -webkit-border-radius: 8px
+    display: inline
+    float: left
+
+    #content
+      font-size: 0.9em
+      width: 708px
+      margin: 0 13px 1em 13px
+      display: inline
+      float: left
+      background-color: white
+
+      #page_head
+        width: 708px
+        margin: 1em 0
+        padding: 0
+        display: inline
+        float: left
+      
+      #faves
+        width: 543px
+        display: inline
+        float: left
+        
+        .page_info
+          width: 543px
+          clear: both
+          padding: 0.5em 0
+          text-align: center
+          background-color: silver
+          background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E0E0E0), to(#E3E3E3), color-stop(.6,#C0C0C0))
+          background: -moz-linear-gradient(19% 75% 90deg,#C0C0C0, #E3E3E3, #E0E0E0 100%)
+          border-radius: 8px
+          -moz-border-radius: 8px
+          -webkit-border-radius: 8px
+
+          a
+            color: black
+            padding: 4px
+            text-shadow: 1px 2px 2px white
+
+          a:hover
+            color: #0000DD
+            text-decoration: none
+            
+        .controls
+          text-align: left
+          font-size: 0.9em
+          width: 513px
+          margin: 0 15px
+          padding: 0.4em 0
+          background-color: #D0D0D0
+
+          .control_text
+            padding: 0 1em
+        
+        .timeline  
+          .tweet
+            width: 494px
+            margin: 0 15px
+            padding: 1em 0.5em
+            border-top: 1px dotted silver
+            clear: both
+            background-color: #FCFCFC
+
+            .twitterer
+              font-weight: bold
+              padding-right: 0.25em
+
+            .tweet_selection
+              width: 20px
+              display: inline
+
+            .tweet_body
+              top: 1em
+              margin: -1.2em 0.4em 0 30px
+              width: 453px
+
+              .tweet_text
+                width: 100%
+                clear: both
+
+              .tweet_date
+                width: 100%
+                display: block
+                color: gray
+                margin-top: 0.3em
+                text-align: left
+                font-size: 0.9em
+
+              .twitter_link
+                width: 100%
+                display: block
+                text-align: right
+
+              ul.tags
+                width: 100%
+                list-style: none
+                margin: 0.5em
+                padding: 0
+
+                li
+                  font-size: 0.8em
+                  display: inline
+                  padding: 0.2em 0 0.2em 0.5em
+                  margin-right: 0.5em
+                  margin-top: 0.4em
+                  border-radius: 6px
+                  -moz-border-radius: 6px
+                  -webkit-border-radius: 6px
+                  background-color: silver
+
+                  .remove_tag
+                    border-left: white 2px solid
+
+                    a
+                      padding: 0.2em 0.5em
+                      color: black
+
+                    a:hover
+                      border-top-right-radius: 6px
+                      border-bottom-right-radius: 6px
+                      -moz-border-radius-topright: 6px
+                      -moz-border-radius-bottomright: 6px
+                      -webkit-border-top-right-radius: 6px
+                      -webkit-border-bottom-right-radius: 6px
+                      background-color: black
+                      color: silver
+                      text-decoration: none
+
+            div.tweet_selection
+              padding: 0 0.4em 0 0
+        
+        
+      #tag_list
+        width: 140px
+        margin-left: 13px
+        display: inline
+        float: left
+        border: 6px solid silver
+        border-bottom: 10px solid silver
+        border-radius: 6px
+        -moz-border-radius: 6px
+        -webkit-border-radius: 6px
+        
+        h2
+          display: block
+          margin: 0
+          background-color: silver
+          text-align: center
+          font-size: 0.9em
+          padding: 0.5em
+
+        ul
+          list-style: none
+          padding: 0
+          margin: 0
+          border-left: 1px solid darkgrey
+          border-right: 1px solid white
+          border-bottom: 1px solid white
+
+          li
+            font-size: 0.9em
+            padding: 0.4em
+            border-top: 1px solid darkgrey
+            background-color: #ebf0f2
+
+            a
+              color: black
+
+#usernav
+  float: left
+  width: 751px
+  min-height: 46px
+  margin-left: -8px
+  text-align: left
+  border-radius: 8px
+  -moz-border-radius: 8px
+  -webkit-border-radius: 8px
+  background-color: black
+  background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666666), to(#666666), color-stop(.6,#333))
+  background: -moz-linear-gradient(0% 84% 90deg,#333333, #333333, #545454 40%)
+  
+  img
+    float: left
+    margin: 4px 15px 0 15px
+  
+  #nav_options
+    float: right
+    width: 535px
+    text-align: right
+    padding: 0.8em 13px 0 0
+    
+    a
+      color: silver
+      padding: 0 0.5em
 
 footer
-  margin: 0.5em
-
   ul
-    margin: 0
+    width: 734px
+    float: left
+    margin: 1em 0
+    padding: 0
+    text-align: center
     list-style: none
     
     li

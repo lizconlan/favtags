@@ -1,3 +1,9 @@
+#page_head
+  =link_to "favorites", :controller => :favorites
+  &nbsp;&gt;&nbsp;
+  %h2= "Your tags"
+
 -@tags.each do |tag|
   %p 
     = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name
+    = "(#{tag.favorites.count})"

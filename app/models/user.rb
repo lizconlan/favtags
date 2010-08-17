@@ -32,8 +32,11 @@ class User < TwitterAuth::GenericUser
   
   def faved_accounts
     grouped_faves = self.favorites.group_by { |x| x.twitterer_name }
-    accounts = grouped_faves.keys
-    accounts.sort { |a,b| a.downcase <=> b.downcase }
+    accounts = []
+    grouped_faves.keys.each do |account|
+      accounts << {:name => account, :count => grouped_faves[account].count }
+    end
+    accounts.sort { |a,b| a[:name].downcase <=> b[:name].downcase }
   end
 
   def has_tag? tag_name

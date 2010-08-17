@@ -21,10 +21,10 @@
       %ul.tags
         -tweet.tags.each do |tag|
           %li
-            =tag.name
+            ="#{tag.name}&nbsp;"
             - if @account
-              %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account}, {:title => "remove '#{tag.name}' tag from this favorite"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - elsif @tag
-              %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag}, {:title => "remove '#{tag.name}' tag from this favorite"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - else
-              %span.remove_tag= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this favorite"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this tweet"}
