@@ -40,19 +40,28 @@ describe User do
   end
   
   describe 'when asked for a list of faved twitterers' do
-    it 'should return an array of twitter names sorted in alphabetical order' do
+    it 'should sort by count' do
+      fave1 = Favorite.new(:twitterer_name => 'xtest')
+      fave2 = Favorite.new(:twitterer_name => 'atest')
+      fave3 = Favorite.new(:twitterer_name => 'xtest')
+      user = User.new(:favorites => [fave1, fave2, fave3])
+      user.faved_accounts.should == [{:count => 2, :name => "xtest"}, {:count => 1, :name => "atest"}]
+    end
+    
+    it 'should sort by alphabetical order where no count differences are found' do
       fave1 = Favorite.new(:twitterer_name => 'xtest')
       fave2 = Favorite.new(:twitterer_name => 'atest')
       user = User.new(:favorites => [fave1, fave2])
       user.faved_accounts.should == [{:count => 1, :name => "atest"}, {:count => 1, :name => "xtest"}]
     end
     
-    it 'should correctly report the tally of tweets per account' do
+    it 'should sort by count then alphabetical order where appropriate' do
       fave1 = Favorite.new(:twitterer_name => 'xtest')
-      fave2 = Favorite.new(:twitterer_name => 'atest')
-      fave3 = Favorite.new(:twitterer_name => 'xtest')
-      user = User.new(:favorites => [fave1, fave2, fave3])
-      user.faved_accounts.should == [{:count => 1, :name => "atest"}, {:count => 2, :name => "xtest"}]
+      fave2 = Favorite.new(:twitterer_name => 'btest')
+      fave3 = Favorite.new(:twitterer_name => 'atest')
+      fave4 = Favorite.new(:twitterer_name => 'xtest')
+      user = User.new(:favorites => [fave1, fave2, fave3, fave4])
+      user.faved_accounts.should == [{:count => 2, :name => "xtest"}, {:count => 1, :name => "atest"}, {:count => 1, :name => "btest"}]
     end
   end
   
