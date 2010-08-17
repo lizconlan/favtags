@@ -1,15 +1,15 @@
 #page_head
   - if @tag
-    =link_to "favorites", :controller => :favorites
+    =link_to "#{current_user.name}'s favorites", :controller => :favorites
     &nbsp;&gt;&nbsp;
     %h2= "tag: #{@tag}"
   - elsif @account
-    =link_to "favorites", :controller => :favorites
+    =link_to "#{current_user.name}'s favorites", :controller => :favorites
     -if @favorites.first
       &nbsp;&gt;&nbsp;
       %h2= "#{@favorites.first.twitterer_name}"
   - else
-    %h2 favorites
+    %h2 #{current_user.name}'s favorites
 
 #faves
   - form_tag('/favorites/tag') do

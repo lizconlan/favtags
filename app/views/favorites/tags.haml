@@ -1,5 +1,5 @@
 #page_head
-  =link_to "favorites", :controller => :favorites
+  =link_to "#{current_user.name}'s favorites", :controller => :favorites
   &nbsp;&gt;&nbsp;
   %h2= "Your tags"
 
