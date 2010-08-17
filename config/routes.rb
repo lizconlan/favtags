@@ -7,6 +7,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/favorites', :controller => 'favorites', :action => 'tag'
   map.connect '/favorites', :controller => 'favorites', :action => 'delete'
   map.connect '/favorites/tag', :controller => 'favorites', :action => 'tag'
+  map.connect '/favorites/new_tag', :controller => 'favorites', :action => 'new_tag'
   map.connect '/favorites/accounts', :controller => 'favorites', :action => 'accounts'
   map.connect '/favorites/accounts/:account', :controller => 'favorites', :action => 'index'
   map.connect '/favorites/tags', :controller => 'favorites', :action => 'tags'
