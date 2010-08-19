@@ -73,7 +73,7 @@ describe FavoritesController do
       dj.stub!(:failed?).and_return(false)
       Delayed::Job.should_receive(:find).and_return(dj)
       
-      get :load
+      post :load
     end
     
     it 'should start a new DelayedJob if the previous one has failed' do
@@ -87,7 +87,7 @@ describe FavoritesController do
       Delayed::Job.should_receive(:enqueue).with(job).and_return(new_dj)
       @current_user.should_receive(:job_id=).with(new_dj.id)
       
-      get :load
+      post :load
     end
     
     it 'should recover elegantly if retrieving a Delayed Job fails' do
@@ -98,7 +98,7 @@ describe FavoritesController do
       @current_user.should_receive(:job_id=).with(new_dj.id)
       Delayed::Job.should_receive(:find).and_raise("error")
       
-      get :load
+      post :load
     end
     
     it 'should redirect to the favorites page' do
@@ -106,7 +106,7 @@ describe FavoritesController do
       dj.stub!(:failed?).and_return(false)
       Delayed::Job.should_receive(:find).and_return(dj)
       
-      get :load
+      post :load
       response.should redirect_to(:controller => 'favorites', :action => 'index')
     end
   end

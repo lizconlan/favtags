@@ -40,21 +40,25 @@ class FavoritesController < ApplicationController
   end
   
   def load
-    if current_user.job_id
-      begin
-        @job = Delayed::Job.find(current_user.job_id)
-      rescue
-        @job = nil
+    unless request.post?
+
+    else
+      if current_user.job_id
+        begin
+          @job = Delayed::Job.find(current_user.job_id)
+        rescue
+          @job = nil
+        end
       end
-    end
     
-    if !@job || @job.failed?
-      @job = Delayed::Job.enqueue(LoadingJob.new(current_user.id))
-      current_user.job_id = @job.id
-      current_user.save!
-    end
+      if !@job || @job.failed?
+        @job = Delayed::Job.enqueue(LoadingJob.new(current_user.id))
+        current_user.job_id = @job.id
+        current_user.save!
+      end
     
-    redirect_to favorites_url
+      redirect_to favorites_url
+    end
   end
   
   def tag
