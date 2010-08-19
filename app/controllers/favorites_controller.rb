@@ -40,9 +40,7 @@ class FavoritesController < ApplicationController
   end
   
   def load
-    unless request.post?
-
-    else
+    if request.post?
       if current_user.job_id
         begin
           @job = Delayed::Job.find(current_user.job_id)
