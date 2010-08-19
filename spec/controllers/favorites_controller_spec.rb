@@ -61,4 +61,53 @@ describe FavoritesController do
       end
     end
   end
+
+  describe "when asked to load favorites" do
+    before do
+      @current_user.stub!(:save!)
+      @current_user.should_receive(:job_id).at_least(1).times.and_return(42)
+    end
+    
+    it 'should attempt to load the last job if the user has a stored job id' do
+      dj = mock_model(Delayed::Job)
+      dj.stub!(:failed?).and_return(false)
+      Delayed::Job.should_receive(:find).and_return(dj)
+      
+      get :load
+    end
+    
+    it 'should start a new DelayedJob if the previous one has failed' do
+      dj = mock_model(Delayed::Job)
+      dj.stub!(:failed?).and_return(true)
+      Delayed::Job.should_receive(:find).and_return(dj)
+      
+      job = mock_model(LoadingJob)
+      LoadingJob.should_receive(:new).with(@current_user.id).and_return(job)
+      new_dj = mock_model(Delayed::Job)
+      Delayed::Job.should_receive(:enqueue).with(job).and_return(new_dj)
+      @current_user.should_receive(:job_id=).with(new_dj.id)
+      
+      get :load
+    end
+    
+    it 'should recover elegantly if retrieving a Delayed Job fails' do
+      job = mock_model(LoadingJob)
+      LoadingJob.should_receive(:new).with(@current_user.id).and_return(job)
+      new_dj = mock_model(Delayed::Job)
+      Delayed::Job.should_receive(:enqueue).with(job).and_return(new_dj)
+      @current_user.should_receive(:job_id=).with(new_dj.id)
+      Delayed::Job.should_receive(:find).and_raise("error")
+      
+      get :load
+    end
+    
+    it 'should redirect to the favorites page' do
+      dj = mock_model(Delayed::Job)
+      dj.stub!(:failed?).and_return(false)
+      Delayed::Job.should_receive(:find).and_return(dj)
+      
+      get :load
+      response.should redirect_to(:controller => 'favorites', :action => 'index')
+    end
+  end
 end
