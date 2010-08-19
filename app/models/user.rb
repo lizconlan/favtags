@@ -108,6 +108,11 @@ class User < TwitterAuth::GenericUser
         )
         fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
         begin
+          fave.hashtags.each do |hashtag|
+            unless self.has_tag?(hashtag)
+              fave.tag(hashtag, self.id)
+            end
+          end
           self.favorites <<= fave
         rescue Exception => exc
           unless exc.message == "already loaded"
