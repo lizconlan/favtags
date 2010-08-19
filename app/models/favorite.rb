@@ -21,20 +21,25 @@ class Favorite < ActiveRecord::Base
   
   def html_text
     html = text
-    html.scan(/https*:\/\/\S*/).each do |match|
+    urls.each do |match|
       html.gsub!(match, "<a href=\"#{match}\">#{match}</a>")
     end
-    html.scan(/(?:\W|,)(@[a-zA-Z0-9_]+)/).each do |match|
+    html.scan(/(?:\W|,|^)(@[a-zA-Z0-9_]+)/).each do |match|
       html.gsub!(match.to_s, %Q|<a href="http://twitter.com/#{match.first.gsub("@", "")}">#{match.to_s.strip}</a>|)
     end
-    html.scan(/^(@[a-zA-Z0-9_]+)/).each do |match|
-      html.gsub!(match.to_s, "<a href=\"http://twitter.com/#{match.first.gsub("@", "")}\">#{match.to_s.strip}</a>")
-    end
-    html.scan(/(?:\ |!|\(|^)(#[a-zA-Z0-9_]+)/).each do |match|
-      html.gsub!(match.to_s, "<a href=\"http://search.twitter.com/search?q=#{match.first.to_s.gsub('#','%23')}\">#{match.first.to_s.strip}</a>")
+    hashtags.each do |match|
+      html.gsub!("\##{match}".to_s, "<a href=\"http://search.twitter.com/search?q=%23#{match.to_s}\">\##{match.to_s.strip}</a>")
     end
     html.gsub!("\n", "<br />")
     html.to_s
+  end
+  
+  def hashtags
+    text.scan(/(?:\s|^)#([a-zA-Z0-9]*)/).flatten
+  end
+  
+  def urls
+    text.scan(/(?:\s|^)(https?:\/\/[a-zA-Z0-9\.\/\&\#\?\=\-\_]*)/).flatten
   end
   
   def has_tag? tag_name

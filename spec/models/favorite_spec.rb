@@ -19,6 +19,28 @@ describe Favorite do
       Favorite.find_all_by_tag_name_and_user_id('test', 1).should == []
     end
   end
+
+  describe 'when asked for hashtags' do
+    it 'should return an array of hashtags found in the text' do
+      fave = Favorite.new()
+      fave.text = "I can haz #hashtags and #morehashtags"
+      fave.hashtags.should == ["hashtags", "morehashtags"]
+    end
+  end
+  
+  describe 'when asked for urls' do
+    it 'should return an array of urls found in the text' do
+      fave = Favorite.new()
+      fave.text = "Links to http://favtagger.com and http://github.com/"
+      fave.urls.should == ["http://favtagger.com", "http://github.com/"]
+    end
+    
+    it 'should handle links that use the https protocol' do
+      fave = Favorite.new()
+      fave.text = "Links to https://example.com"
+      fave.urls.should == ["https://example.com"]
+    end
+  end
   
   describe 'when asked for html_text' do
     it 'should make urls in the text into links' do
