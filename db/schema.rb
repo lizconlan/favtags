@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100615232204) do
+ActiveRecord::Schema.define(:version => 20100821170816) do
 
   create_table "conversations", :force => true do |t|
     t.integer "user_id"
@@ -102,6 +102,8 @@ ActiveRecord::Schema.define(:version => 20100615232204) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "job_id"
+    t.integer  "pages_to_load",                :default => 4
+    t.boolean  "autocreate_tags",              :default => true
   end
 
 end

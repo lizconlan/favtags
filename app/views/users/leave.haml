@@ -1,0 +1,24 @@
+#page_head
+  %h2
+    Wait! Come back!
+    
+#section
+  %article
+    %p
+      It's not too late, you can still stay!
+      
+    %p
+      Or can we at least offer you your favorites to keep before you go?
+      Available in 
+      %a{:href => "/favorites.xml"}
+        XML
+      and
+      %a{:href => "/favorites.json"}
+        JSON
+      flavours
+    
+    %p
+      - form_tag('/close_account', :method => "post") do
+        Oh, alright then. If you're sure, press this button and your data will be erased from our servers. Your Twitter account will not be affected
+        %br
+        %input{:type => 'submit', :value => 'Yes, close my account'}

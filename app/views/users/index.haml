@@ -1,0 +1,66 @@
+#page_head
+  %h2
+    Account
+    
+#section
+  %article
+    .group_box
+      %h3
+        Download your favorites
+      %p
+        It's your data, you should be able to keep it :)
+        %ul
+          %li
+            %a{:href => "/favorites.xml"} Download your favorites as XML
+          %li
+            %a{:href => "/favorites.json"} Download your favorites as JSON
+    
+    .group_box
+      %h3
+        API calls
+      %p
+        You currently have 
+        
+        %strong #{@current_user.api_calls[0]}
+        
+        Twitter API calls left for this hour.
+        
+        - if @current_user.api_calls[0].to_i < @current_user.api_calls[2]
+          Your API calls will be reset at #{@current_user.api_calls[1]}.
+    
+    .group_box
+      %h3
+        Settings
+      - form_tag('/account') do
+        %table
+          %tr
+            %td
+              Pages of tweets to load
+            %td
+              %input{:id => "tweets", :name => "tweets", :type => 'text', :size => 2, :maxlen => '2', :value => current_user.pages_to_load}
+          %tr
+            %td
+              Autocreate tags from hashtags
+            %td
+              =check_box_tag("autocreate", "1", checked = current_user.autocreate_tags, options = {})
+          %tr
+            %td{:colspan => "2"}
+              %input{:type => "submit", :value => 'Save settings'}
+    
+    .group_box
+      %h3
+        Control your Twitter account
+      %p
+        %a{:href => "http://twitter.com/account/connections"}
+          Edit your Twitter account connections
+          
+    .group_box
+      %h3
+        Leave Favtagger
+      %p
+        Was it something we said? Sorry about that.
+        %br
+        %br
+        %a{:href => "close_account"}
+          You can go if you really want to though
+        (we'll erase any data we hold about you)

@@ -7,7 +7,7 @@ class User < TwitterAuth::GenericUser
 
   def api_calls
     response = self.twitter.get("/account/rate_limit_status.json")
-    [response["remaining_hits"], response["reset_time"]]
+    [response["remaining_hits"], response["reset_time"], response["hourly_limit"]]
   end
   
   def delete_favorites
@@ -50,10 +50,10 @@ class User < TwitterAuth::GenericUser
 
   private
 
-    def load_some_favorites(pages=4)
+    def load_some_favorites
       tweets = "starting"
       i = 0
-      while i < pages
+      while i < self.pages_to_load
         i += 1
         tweets = self.twitter.get("/favorites.json?page=#{i}")
         

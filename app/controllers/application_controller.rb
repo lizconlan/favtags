@@ -23,4 +23,8 @@ class ApplicationController < ActionController::Base
   def render_not_found
     render :template => 'public/404.html', :status => 404
   end
+  
+  def exit
+    render :template => "exit.haml"
+  end
 end

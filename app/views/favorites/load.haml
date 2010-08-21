@@ -7,20 +7,27 @@
   %article
     .text_panel
       %p
-        You are about to load your favorites from Twitter
+        You are about to load your favorites from Twitter.
         
       %p
         Twitter allows you a limited number of API calls per hour. You currently have 
         
         %strong #{@current_user.api_calls[0]}
         
-        such calls remaining, which will be reset at #{@current_user.api_calls[1]}
+        left.
+        
+        - if @current_user.api_calls[0].to_i < @current_user.api_calls[2]
+          %br
+          Your API calls will be reset at #{@current_user.api_calls[1]}.
         
       %p
-        Each set of 20 favorites that you load will cost you 1 API call
-        
-      %p
-        Press OK to continue...
+        - if current_user.favorites.count == 0
+          You are about to load all your favorites :)
+        - else
+          Each set of 20 favorites that you load will cost you 1 API call. You are currently set to load #{@current_user.pages_to_load} sets of 20 at a time (but you can 
+          %a{:href => "/account"}
+            change this
+          if you want)
         
       - form_tag('/favorites/load') do
         %input{:type => 'submit', :value => 'OK, load my favorites'}

@@ -28,7 +28,10 @@
             
     .timeline
       - if @favorites.nil?
-        ="No favorites loaded"
+        .tweet
+          Looks like you have no favorites stored. Maybe you should
+          %a{:href => "/favorites/load"}
+            load some
       - else
         -@show_tweep = true
         =render :partial => "tweet", :collection => @favorites
