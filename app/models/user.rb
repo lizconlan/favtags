@@ -107,12 +107,14 @@ class User < TwitterAuth::GenericUser
           :posted => tweet["created_at"]
         )
         fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
-        begin
+        if self.autocreate_tags
           fave.hashtags.each do |hashtag|
             unless self.has_tag?(hashtag)
               fave.tag(hashtag, self.id)
             end
           end
+        end
+        begin
           self.favorites <<= fave
         rescue Exception => exc
           unless exc.message == "already loaded"
