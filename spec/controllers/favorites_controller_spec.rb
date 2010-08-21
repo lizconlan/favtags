@@ -110,4 +110,20 @@ describe FavoritesController do
       response.should redirect_to(:controller => 'favorites', :action => 'index')
     end
   end
+  
+  describe "when asked for accounts" do
+    it "should assign the user's faved accounts to the view" do
+      @current_user.should_receive(:faved_accounts).at_least(1).times.and_return[]
+      get :accounts
+      assigns[:accounts].should == @current_user.faved_accounts
+    end
+  end
+  
+  describe "when asked for tags" do
+    it "should assign the user's tags to the view" do
+      @current_user.should_receive(:tags).at_least(1).times.and_return[mock_model(Tag)]
+      get :tags
+      assigns[:tags].should == @current_user.tags
+    end
+  end
 end
