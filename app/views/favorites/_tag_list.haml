@@ -6,4 +6,4 @@
         Why not add some tags?
     -else
       -current_user.tags.each do |tag|
-        %li= link_to tag.name, {:action => :index, :tag => tag.name}, {:title => "view all tweets tagged '#{tag.name}'"}
+        %li= link_to tag.name, {:action => :index, :tag => tag.url}, {:title => "view all tweets tagged '#{tag.name}'"}

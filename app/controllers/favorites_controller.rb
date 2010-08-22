@@ -3,7 +3,10 @@ class FavoritesController < ApplicationController
   
   def index
     @account = params[:account]
-    @tag = params[:tag]
+    tag_name = params[:tag]
+    unless tag_name.nil?
+      @tag = tag_name.gsub("-", " ").gsub("  ", "-")
+    end
     
     @current_page = params[:page].to_i.zero? ? 1 : params[:page].to_i
     @current_page = 1 if @current_page.nil?
@@ -123,22 +126,31 @@ class FavoritesController < ApplicationController
       unless tag_name.nil?
         tag = Tag.find_by_name_and_user_id(tag_name, current_user.id)
         unless tag
-          tag = Tag.create(:name => tag_name, :user_id => current_user.id)
-          if affected_tweets
-            tweets = affected_tweets.split(",")
-            tweets.each do |tweet_id|
-              tweet = Favorite.find(tweet_id)
-              if tweet
-                tweet.tags << tag
-                tweet.save
+          if tag_name =~ /^[a-zA-Z0-9-\ ]+$/
+            tag_name = tag_name.squeeze(" ")
+            tag = Tag.create(:name => tag_name, :user_id => current_user.id)
+            if affected_tweets
+              tweets = affected_tweets.split(",")
+              tweets.each do |tweet_id|
+                tweet = Favorite.find(tweet_id)
+                if tweet
+                  tweet.tags << tag
+                  tweet.save
+                end
               end
             end
+          else
+            @fail_tag = tag_name
+            @tweets = affected_tweets.split(",")
+            render :template => 'favorites/tag.haml'
           end
         end 
       end
     end
     
-    redirect_to :action => 'index', :page => params[:page]
+    unless @fail_tag
+      redirect_to :action => 'index', :page => params[:page]
+    end
   end
   
   def remove_tag
