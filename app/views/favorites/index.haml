@@ -34,7 +34,14 @@
             load some
       - else
         -@show_tweep = true
-        =render :partial => "tweet", :collection => @favorites
+        - if @favorites.count < 1
+          .tweet
+            - if params[:tag]
+              You have no favorites tagged #{params[:tag]}
+            - if params[:account]
+              You have no favorites from #{params[:account]}
+        - else
+          =render :partial => "tweet", :collection => @favorites
 
     .page_info
       =render :partial => "navigation"
