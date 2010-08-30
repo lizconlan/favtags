@@ -54,7 +54,7 @@ class Favorite < ActiveRecord::Base
   end
   
   def hashtags
-    text.scan(/(?:\s|^)#([a-zA-Z0-9]*)/).flatten
+    text.scan(/(?:\s|^)#([a-zA-Z0-9\-]{3,})/).flatten
   end
   
   def urls
@@ -72,7 +72,7 @@ class Favorite < ActiveRecord::Base
         data = RestClient.get api_url
         result = JSON.parse(data.body)
         if result["status_code"] == 200
-          short_url = result["data"]["url"]
+          short_url = "http://fvt.gr/#{result["data"]["hash"]}"
           shortened << short_url
         else
           shortened << ""
