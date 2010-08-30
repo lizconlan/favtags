@@ -126,7 +126,7 @@ class FavoritesController < ApplicationController
       unless tag_name.nil?
         tag = Tag.find_by_name_and_user_id(tag_name, current_user.id)
         unless tag
-          if tag_name =~ /^[a-zA-Z0-9-\ ]+$/
+          if tag_name =~ /^[a-zA-Z0-9\-\ ]+$/
             tag_name = tag_name.squeeze(" ")
             tag = Tag.create(:name => tag_name, :user_id => current_user.id)
             if affected_tweets
