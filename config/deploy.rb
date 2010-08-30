@@ -29,6 +29,18 @@ namespace :deploy do
     put data, "#{release_path}/config/database.yml", :mode => 0664
   end
   
+  desc "Upload bitly.yml"
+  task :upload_bitly_yml, :roles => :app do
+    data = File.read("config/virtualserver/bitly.yml")
+    put data, "#{release_path}/config/bitly.yml", :mode => 0664
+  end
+  
+  desc "Upload twitter_auth.yml"
+  task :upload_twitter_auth_yml, :roles => :app do
+    data = File.read("config/twitter_auth.yml")
+    put data, "#{release_path}/config/twitter_auth.yml", :mode => 0664
+  end
+  
   task :link_to_data, :roles => :app do
     data_dir = "#{deploy_to}/shared/cached-copy/data"
     run "if [ -d #{data_dir} ]; then ln -s #{data_dir} #{release_path}/data ; else echo cap deploy put_data first ; fi"
@@ -51,6 +63,7 @@ namespace :deploy do
     sudo "gem install ezcrypto"
     sudo "gem install will_paginate"
     sudo "gem install haml"
+    sudo "gem install rest-client"
   end
   
   desc "Restarting apache and clearing the cache"
@@ -60,8 +73,11 @@ namespace :deploy do
 end
 
 after 'deploy:setup', 'serverbuild:user_setup', 'serverbuild:setup_apache', 'deploy:install_gems'
-after 'deploy:update_code', 'deploy:upload_deployed_database_yml', 'deploy:link_to_data'
+after 'deploy:update_code', 'deploy:upload_deployed_database_yml', 'deploy:upload_bitly_yml', 'deploy:upload_twitter_auth_yml', 'deploy:link_to_data'
 after 'deploy:symlink', 'deploy:run_migrations'
+after "deploy:stop",    "delayed_job:stop"
+after "deploy:start",   "delayed_job:start"
+after "deploy:restart", "delayed_job:restart"
 
 def create_deploy_user
   create_user deployuser, deploygroup, deploypassword
@@ -112,5 +128,23 @@ def put_data data_dir, file
     else
       puts "#{file} #{message}"
     end
+  end
+end
+
+
+namespace :delayed_job do  
+  desc "Stop the delayed_job process"
+  task :stop, :roles => :app do
+    run "cd #{current_path};#{rails_env} script/delayed_job stop"
+  end
+
+  desc "Start the delayed_job process"
+  task :start, :roles => :app do
+    run "cd #{current_path};#{rails_env} script/delayed_job start"
+  end
+
+  desc "Restart the delayed_job process"
+  task :restart, :roles => :app do
+    run "cd #{current_path};#{rails_env} script/delayed_job restart"
   end
 end
