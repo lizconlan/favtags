@@ -31,10 +31,6 @@ class Favorite < ActiveRecord::Base
     html = text
     counter = 0
     urls.each do |match|
-      puts "****"
-      puts match
-      puts shortened_urls[counter]
-      puts "****"
       if shortened_urls[counter].nil? or shortened_urls[counter] == ""
         short_url = match
       else
