@@ -1,3 +1,6 @@
+require 'json'
+require 'rest_client'
+
 class Favorite < ActiveRecord::Base
   cattr_reader :per_page
   @@per_page = 10
@@ -19,10 +22,26 @@ class Favorite < ActiveRecord::Base
     end
   end
   
+  def shortened_urls
+    create_short_urls if short_urls.nil? or short_urls.strip == ""
+    short_urls.split(",")
+  end
+  
   def html_text
     html = text
+    counter = 0
     urls.each do |match|
-      html.gsub!(match, "<a href=\"#{match}\">#{match}</a>")
+      puts "****"
+      puts match
+      puts shortened_urls[counter]
+      puts "****"
+      if shortened_urls[counter].nil? or shortened_urls[counter] == ""
+        short_url = match
+      else
+        short_url = shortened_urls[counter]
+      end
+      counter += 1
+      html.gsub!(match, "<a href=\"#{short_url}\">#{short_url}</a>")
     end
     html.scan(/(?:\W|,|^)(@[a-zA-Z0-9_]+)/).each do |match|
       html.gsub!(match.to_s, %Q|<a href="http://twitter.com/#{match.first.gsub("@", "")}">#{match.to_s.strip}</a>|)
@@ -40,6 +59,30 @@ class Favorite < ActiveRecord::Base
   
   def urls
     text.scan(/(?:\s|^)(https?:\/\/[a-zA-Z0-9\.\/\&\#\?\=\-\_]*)/).flatten
+  end
+  
+  def create_short_urls
+    conf = YAML.load(File.read('config/virtualserver/bitly.yml'))
+    api_key = conf[:api_key]
+    
+    shortened = []
+    urls.each do |url|
+      if url.length > 30
+        api_url = "http://api.bit.ly/v3/shorten?login=favtagger&apiKey=#{api_key}&longUrl=#{url}&format=json"
+        data = RestClient.get api_url
+        result = JSON.parse(data.body)
+        if result["status_code"] == 200
+          short_url = result["data"]["url"]
+          shortened << short_url
+        else
+          shortened << ""
+        end
+      else
+        shortened << ""
+      end
+    end
+    self.short_urls = shortened.join(",")
+    self.save
   end
   
   def has_tag? tag_name
