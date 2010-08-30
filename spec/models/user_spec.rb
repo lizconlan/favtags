@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+
 describe User do
   describe 'when asked to delete favorites' do
     it 'should delete all stored favorites for current user' do
