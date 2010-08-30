@@ -3,6 +3,6 @@ class Tag < ActiveRecord::Base
   has_and_belongs_to_many :favorites
   
   def url
-    name.gsub("-", "--").gsub(" ", "-")
+    name.squeeze(" ").gsub("-", "--").gsub(" ", "-")
   end
 end
