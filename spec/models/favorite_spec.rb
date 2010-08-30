@@ -1,4 +1,5 @@
 require File.dirname(__FILE__) + '/../spec_helper'
+
 describe Favorite do
   
   describe 'when asked for all favorites by tag_name and user_id' do
@@ -45,6 +46,9 @@ describe Favorite do
   describe 'when asked for html_text' do
     it 'should make urls in the text into links' do
       fave = Favorite.new(:text => "I like http://twitter.com")
+      fave.should_receive(:short_urls).at_least(1).times.and_return("")
+      fave.should_receive(:short_urls=).at_least(1).times.with("")
+      fave.stub!(:save)
       fave.html_text.should == 'I like <a href="http://twitter.com">http://twitter.com</a>'
     end
     
