@@ -64,6 +64,7 @@ namespace :deploy do
     sudo "gem install will_paginate"
     sudo "gem install haml"
     sudo "gem install rest-client"
+    sudo "gem install daemons"
   end
   
   desc "Restarting apache and clearing the cache"
@@ -133,7 +134,10 @@ end
 
 
 namespace :delayed_job do  
-  desc "Stop the delayed_job process"
+  def rails_env
+    fetch(:rails_env, false) ? "RAILS_ENV=#{fetch(:rails_env)}" : ''
+  end
+  
   task :stop, :roles => :app do
     run "cd #{current_path};#{rails_env} script/delayed_job stop"
   end
