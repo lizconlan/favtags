@@ -4,8 +4,7 @@ A web app for organising and saving your Twitter favorites
 
 h2. Deploying
 
-<pre><code>
-  sprinkle -s ./config/install.rb
+<pre><code>  sprinkle -s ./config/install.rb
   cap deploy:setup
   cap deploy
 </code></pre>
