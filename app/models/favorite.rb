@@ -62,7 +62,7 @@ class Favorite < ActiveRecord::Base
   end
   
   def create_short_urls
-    conf = YAML.load(File.read('config/virtualserver/bitly.yml'))
+    conf = YAML.load(File.read('config/bitly.yml'))
     api_key = conf[:api_key]
     
     shortened = []
