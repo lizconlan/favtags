@@ -14,11 +14,11 @@
       %span
         =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
       - if @account
-        = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account}
+        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account}, {:class => :delete_link, :title => "delete this from your favorites"}
       - elsif @tag
-        = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag}
+        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag}, {:class => :delete_link, :title => "delete this from your favorites"}
       - else
-        = link_to "&#9734;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}
+        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}, {:class => :delete_link, :title => "delete this from your favorites"}
       %ul.tags
         -tweet.tags.each do |tag|
           %li
