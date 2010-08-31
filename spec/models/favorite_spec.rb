@@ -27,6 +27,18 @@ describe Favorite do
       fave.text = "I can haz #hashtags and #morehashtags"
       fave.hashtags.should == ["hashtags", "morehashtags"]
     end
+    
+    it 'should not return hashtags of less than 2 characters' do
+      fave = Favorite.new()
+      fave.text = "this shouldn't work #a"
+      fave.hashtags.should == []
+    end
+    
+    it 'should not return numbers preceded by the hash symbol as hashtags' do
+      fave = Favorite.new()
+      fave.text = "this is tweet number #1000"
+      fave.hashtags.should == []
+    end
   end
   
   describe 'when asked for urls' do
