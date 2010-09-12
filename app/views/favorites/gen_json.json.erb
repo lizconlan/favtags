@@ -1,0 +1,27 @@
+"favorites":{<%@favorites.each do |fave|%>
+  "favorite":{
+    "id":"<%=fave.tweet_id%>",
+    "text":"<%=fave.text%>",
+    "in_reply_to_status_id":"<%=fave.reply_to_status%>",
+    "in_reply_to_screen_name":"<%=fave.reply_to_user%>",
+    "in_reply_to_user_id":"<%=fave.reply_to_user_id%>"
+    "source":"<%=fave.source%>",
+    "created_at":"<%=fave.posted%>",
+    "user":{
+      "screen_name":"<%=fave.twitterer_name%>",
+      "name":"<%=fave.twitterer_real_name%>",
+      "id":"<%=fave.twitterer_id%>",
+      "location":"<%=fave.twitterer_location%>",
+      "description":"<%=fave.twitterer_description%>",
+      "profile_image_url":"<%=fave.twitterer_profile_image_url%>",
+      "url":"<%=fave.twitterer_url%>",
+      "protected":"<%=fave.twitterer_protected%>",
+      "created_at":"<%=fave.twitterer_created_at%>",
+      "utc_offset":"<%=fave.twitterer_utc_offset%>",
+      "time_zone":"<%=fave.twitterer_time_zone%>",
+      "geo_enabled":"<%=fave.twitterer_geo_enabled%>",
+      "verified":"<%=fave.twitterer_verified%>",
+      "lang":"<%=fave.twitterer_lang%>"
+    }
+  }<%end%>
+}

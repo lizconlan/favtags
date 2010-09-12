@@ -30,8 +30,8 @@ class FavoritesController < ApplicationController
           end
           @favorites = tagged_faves
           format.xml { render :action => "gen_xml.rxml", :layout => false }
-          format.json { render :json => tagged_faves }
-          format.js { render :json => tagged_faves }
+          format.json { render :action => "gen_json.json.erb", :layout => false }
+          format.js { render :action => "gen_json.json.erb", :layout => false }
         end
     elsif current_user.favorites.count > 0
       @show_twitterer = true
@@ -45,8 +45,8 @@ class FavoritesController < ApplicationController
         end
         @favorites = current_user.favorites
         format.xml { render :action => "gen_xml.rxml", :layout => false }
-        format.json { render :json => current_user.favorites.to_json }
-        format.js { render :json => current_user.favorites.to_json }
+        format.json { render :action => "gen_json.json.erb", :layout => false }
+        format.js { render :action => "gen_json.json.erb", :layout => false }
       end
     else
       @favorites = nil
