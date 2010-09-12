@@ -28,7 +28,8 @@ class FavoritesController < ApplicationController
             @current_page = @max_page if @current_page > @max_page
             @favorites = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
           end
-          format.xml { render :xml => @favorites = tagged_faves }
+          @favorites = tagged_faves
+          format.xml { render :action => "gen_xml.rxml", :layout => false }
           format.json { render :json => tagged_faves }
           format.js { render :json => tagged_faves }
         end
@@ -42,7 +43,8 @@ class FavoritesController < ApplicationController
           @current_page = @max_page if @current_page > @max_page
           @favorites = current_user.favorites.paginate(:all, :page => @current_page)
         end
-        format.xml { render :xml => @favorites = current_user.favorites }
+        @favorites = current_user.favorites
+        format.xml { render :action => "gen_xml.rxml", :layout => false }
         format.json { render :json => current_user.favorites.to_json }
         format.js { render :json => current_user.favorites.to_json }
       end
