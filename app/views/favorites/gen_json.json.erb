@@ -5,7 +5,11 @@
     "in_reply_to_status_id":"<%=fave.reply_to_status%>",
     "in_reply_to_screen_name":"<%=fave.reply_to_user%>",
     "in_reply_to_user_id":"<%=fave.reply_to_user_id%>"
-    "source":"<%=fave.source%>",
+    "source":"<%=fave.source%>", <%unless fave.geo.blank?%>
+    "geo":{
+      "coordinates":"<%=fave.geo%>",
+      "type":"<%=fave.geo_type%>",
+    }<%end%>
     "created_at":"<%=fave.posted%>",
     "user":{
       "screen_name":"<%=fave.twitterer_name%>",

@@ -1,6 +1,6 @@
 xml.instruct! :xml, :version=>"1.0" 
  
-xml.favorites{
+xml.favorites do
   for fave in @favorites
     xml.favorite do
       xml.id(fave.tweet_id)
@@ -9,6 +9,12 @@ xml.favorites{
       xml.in_reply_to_screen_name(fave.reply_to_user)
       xml.in_reply_to_user_id(fave.reply_to_user_id)
       xml.source(fave.source)
+      unless fave.geo.blank?
+        xml.geo do
+          xml.coordinates(fave.geo)
+          xml.type(fave.geo_type)
+        end
+      end
       xml.created_at(fave.posted)
       xml.user do
         xml.screen_name(fave.twitterer_name)
@@ -28,4 +34,4 @@ xml.favorites{
       end
     end
   end
-}
+end
