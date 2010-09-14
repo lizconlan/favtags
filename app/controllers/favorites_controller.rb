@@ -187,4 +187,27 @@ class FavoritesController < ApplicationController
       redirect_to :action => 'index', :page => params[:page]
     end
   end
+  
+  def retweet
+    tweet_id = params[:id]
+    
+    tweet = Favorite.find_by_tweet_id_and_user_id(tweet_id, current_user.id)
+    begin
+      response = current_user.twitter.post("/statuses/update.json", {:status => "RT @#{tweet.twitterer_name}: #{tweet.text}"})
+    rescue Exception => exc
+      #do nothing
+    end
+    if session[:retweeted].nil?
+      retweets = []
+    else
+      retweets = session[:retweeted].split(",")
+    end
+    retweets << tweet_id
+    session[:retweeted] = retweets.join(",")
+    if params[:page] && params[:page] != "1"
+      redirect_to :action => 'index', :page => params[:page]
+    else
+      redirect_to :action => 'index'
+    end
+  end
 end

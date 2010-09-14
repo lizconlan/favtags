@@ -19,6 +19,10 @@
         = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag}, {:class => :delete_link, :title => "delete this from your favorites"}
       - else
         = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}, {:class => :delete_link, :title => "delete this from your favorites"}
+      - unless tweet.twitterer_protected
+        - if session[:retweeted] and !session[:retweeted].split(",").include?(tweet.tweet_id)
+          %br
+          = link_to "Retweet this", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :page => params[:page]}, {:class => :retweet_link}
       %ul.tags
         -tweet.tags.each do |tag|
           %li
