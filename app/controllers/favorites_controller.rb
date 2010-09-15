@@ -193,7 +193,7 @@ class FavoritesController < ApplicationController
     
     tweet = Favorite.find_by_tweet_id_and_user_id(tweet_id, current_user.id)
     begin
-      response = current_user.twitter.post("/statuses/update.json", {:status => "RT @#{tweet.twitterer_name}: #{tweet.text}"})
+      response = current_user.twitter.post("/statuses/retweet/#{tweet_id}.json")
     rescue Exception => exc
       #do nothing
     end
