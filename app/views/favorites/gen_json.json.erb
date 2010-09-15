@@ -10,7 +10,10 @@
       "coordinates":"<%=fave.geo%>",
       "type":"<%=fave.geo_type%>",
     }<%end%>
-    "created_at":"<%=fave.posted%>",
+    "created_at":"<%=fave.posted%>", <%if fave.tags.count > 0%>
+    "faves:"{
+      <%fave.tags.each do |tag|%>"tag":"<%=tag.name%>"<%unless tag == fave.tags.last%>, <%end; end%>
+    },<%end%>
     "user":{
       "screen_name":"<%=fave.twitterer_name%>",
       "name":"<%=fave.twitterer_real_name%>",

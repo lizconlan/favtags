@@ -16,6 +16,13 @@ xml.favorites do
         end
       end
       xml.created_at(fave.posted)
+      if fave.tags.count > 0
+        xml.tags do
+          fave.tags.each do |tag|
+            xml.tag(tag.name)
+          end
+        end
+      end
       xml.user do
         xml.screen_name(fave.twitterer_name)
         xml.name(fave.twitterer_real_name)
