@@ -5,4 +5,11 @@ class Tag < ActiveRecord::Base
   def url
     name.squeeze(" ").gsub("-", "--").gsub(" ", "-")
   end
+  
+  def delete
+    self.favorites.each do |fave|
+      fave.detag(self)
+    end
+    self.destroy
+  end
 end
