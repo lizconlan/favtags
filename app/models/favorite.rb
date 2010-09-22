@@ -46,6 +46,8 @@ class Favorite < ActiveRecord::Base
       html.gsub!("\##{match}".to_s, "<a href=\"http://search.twitter.com/search?q=%23#{match.to_s}\">\##{match.to_s.strip}</a>")
     end
     html.gsub!("\n", "<br />")
+    html.gsub!(/\<\s*script/, "&gt;script")
+    html.gsub!("</\s*script", "&gt;/script")
     html.to_s
   end
   
