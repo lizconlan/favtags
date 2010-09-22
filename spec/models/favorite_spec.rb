@@ -27,6 +27,18 @@ describe Favorite do
       fave.text = "I can haz #hashtags and #morehashtags"
       fave.hashtags.should == ["hashtags", "morehashtags"]
     end
+    
+    it 'should not return hashtags of less than 2 characters' do
+      fave = Favorite.new()
+      fave.text = "this shouldn't work #a"
+      fave.hashtags.should == []
+    end
+    
+    it 'should not return numbers preceded by the hash symbol as hashtags' do
+      fave = Favorite.new()
+      fave.text = "this is tweet number #1000"
+      fave.hashtags.should == []
+    end
   end
   
   describe 'when asked for urls' do
@@ -62,7 +74,12 @@ describe Favorite do
     
     it 'should link hashtags to search.twitter.com' do
       fave = Favorite.new(:text => "wish I'd written these specs sooner #lazy")
-      fave.html_text.should == 'wish I\'d written these specs sooner <a href="http://search.twitter.com/search?q=%23lazy">#lazy</a>'
+      fave.html_text.should ==  'wish I\'d written these specs sooner <a href="http://search.twitter.com/search?q=%23lazy">#lazy</a>'
+    end
+    
+    it 'should replace urls with short urls where available' do
+      fave = Favorite.new(:text => "wish I\'d written these specs sooner http://favtagger.com/fake_url_goes_here", :short_urls => "http://fvt.gr/favtagger")
+      fave.html_text.should ==  'wish I\'d written these specs sooner <a href="http://fvt.gr/favtagger">http://fvt.gr/favtagger</a>'
     end
   end
   
@@ -150,5 +167,73 @@ describe Favorite do
   it 'should return "+0700" if the tweet was posted from a time zone 7 hours ahead of GMT' do
     fave = Favorite.new(:twitterer_utc_offset => 25200)
     fave.utc_offset.should == "+0700"
+  end
+  
+  describe 'when asked to shorten a url' do
+    it 'should not shorten the url if it is less than 31 chars' do
+      fave = Favorite.new(:text => "http://is.gd")
+      fave.stub!(:save)
+      fave.should_receive(:short_urls=).with("")
+      
+      fave.create_short_urls
+    end
+    
+    it 'should shorten the url if it is more than 30 chars' do
+      fave = Favorite.new(:text => "http://favtagger.com/fake_long_url_goes_here")
+      RestClient.should_receive(:get).and_return(mock_model(RestClient::Response, :body => %Q|{"status_code":200,"data":{"hash": "d4Xucw"}}|))
+      fave.stub!(:save)
+      fave.should_receive(:short_urls=).with("http://fvt.gr/d4Xucw")
+      
+      fave.create_short_urls
+    end
+    
+    it 'should store a blank string if the url shortening process fails' do
+      fave = Favorite.new(:text => "http://favtagger.com/fake_long_url_goes_here")
+      RestClient.should_receive(:get).and_return(mock_model(RestClient::Response, :body => %Q|{"status_code":500}|))
+      fave.stub!(:save)
+      fave.should_receive(:short_urls=).with("")
+      
+      fave.create_short_urls
+    end
+  end
+  
+  describe 'when asked to delete' do
+    before do
+      @user = User.new(:id => 1, :twitter_id => '1313123')
+      @auth = mock_model(TwitterAuth)
+      @user.should_receive(:twitter).at_least(1).times.and_return(@auth)
+      @fave = Favorite.new(:tweet_id => '424352')
+      @fave.should_receive(:user).and_return(@user)
+      @tag = mock_model(Tag)
+      @tags = [@tag]
+    end
+    
+    it 'should delete the tags' do
+      @fave.should_receive(:tags).at_least(1).times.and_return(@tags)
+      @tags.should_receive(:delete).with(@tag)
+      
+      @fave.stub!(:destroy)
+      @auth.stub!(:post)
+      
+      @fave.delete
+    end
+    
+    it "should remove the favorite from the user's Twitter account" do
+      @fave.should_receive(:tags).at_least(1).times.and_return([])
+      
+      @fave.stub!(:destroy)
+      @auth.should_receive(:post).with("/favorites/destroy/424352")
+      
+      @fave.delete
+    end
+    
+    it "should call the destroy method" do
+      @fave.should_receive(:tags).at_least(1).times.and_return([])
+      
+      @auth.stub!(:post)
+      @fave.should_receive(:destroy)
+      
+      @fave.delete
+    end
   end
 end

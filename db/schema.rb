@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100830093417) do
+ActiveRecord::Schema.define(:version => 20100913110249) do
 
   create_table "conversations", :force => true do |t|
     t.integer "user_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20100830093417) do
     t.boolean  "reply_to_user_id"
     t.string   "source"
     t.string   "short_urls"
+    t.string   "geo_type"
   end
 
   create_table "favorites_tags", :id => false, :force => true do |t|

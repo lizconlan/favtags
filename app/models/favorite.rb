@@ -50,7 +50,8 @@ class Favorite < ActiveRecord::Base
   end
   
   def hashtags
-    text.scan(/(?:\s|^)#([a-zA-Z0-9\-]{3,})/).flatten
+    potentials = text.scan(/(?:\s|^)#([a-zA-Z0-9\-]{2,})/).flatten
+    potentials.delete_if { |x| x =~ /^[0-9]*$/}
   end
   
   def urls

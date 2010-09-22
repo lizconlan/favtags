@@ -1,0 +1,44 @@
+xml.instruct! :xml, :version=>"1.0" 
+ 
+xml.favorites do
+  for fave in @favorites
+    xml.favorite do
+      xml.id(fave.tweet_id)
+      xml.text(fave.text)
+      xml.in_reply_to_status_id(fave.reply_to_status)
+      xml.in_reply_to_screen_name(fave.reply_to_user)
+      xml.in_reply_to_user_id(fave.reply_to_user_id)
+      xml.source(fave.source)
+      unless fave.geo.blank?
+        xml.geo do
+          xml.coordinates(fave.geo)
+          xml.type(fave.geo_type)
+        end
+      end
+      xml.created_at(fave.posted)
+      if fave.tags.count > 0
+        xml.tags do
+          fave.tags.each do |tag|
+            xml.tag(tag.name)
+          end
+        end
+      end
+      xml.user do
+        xml.screen_name(fave.twitterer_name)
+        xml.name(fave.twitterer_real_name)
+        xml.id(fave.twitterer_id)
+        xml.location(fave.twitterer_location)
+        xml.description(fave.twitterer_description)
+        xml.profile_image_url(fave.twitterer_profile_image_url)
+        xml.url(fave.twitterer_url)
+        xml.protected(fave.twitterer_protected)
+        xml.created_at(fave.twitterer_created_at)
+        xml.utc_offset(fave.twitterer_utc_offset)
+        xml.time_zone(fave.twitterer_time_zone)
+        xml.geo_enabled(fave.twitterer_geo_enabled)
+        xml.verified(fave.twitterer_verified)
+        xml.lang(fave.twitterer_lang)
+      end
+    end
+  end
+end

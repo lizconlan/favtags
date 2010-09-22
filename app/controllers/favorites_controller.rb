@@ -28,9 +28,10 @@ class FavoritesController < ApplicationController
             @current_page = @max_page if @current_page > @max_page
             @favorites = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
           end
-          format.xml { render :xml => @favorites = tagged_faves }
-          format.json { render :json => tagged_faves }
-          format.js { render :json => tagged_faves }
+          @favorites = tagged_faves
+          format.xml { render :action => "gen_xml.rxml", :layout => false }
+          format.json { render :action => "gen_json.json.erb", :layout => false }
+          format.js { render :action => "gen_json.json.erb", :layout => false }
         end
     elsif current_user.favorites.count > 0
       @show_twitterer = true
@@ -42,9 +43,10 @@ class FavoritesController < ApplicationController
           @current_page = @max_page if @current_page > @max_page
           @favorites = current_user.favorites.paginate(:all, :page => @current_page)
         end
-        format.xml { render :xml => @favorites = current_user.favorites }
-        format.json { render :json => current_user.favorites.to_json }
-        format.js { render :json => current_user.favorites.to_json }
+        @favorites = current_user.favorites
+        format.xml { render :action => "gen_xml.rxml", :layout => false }
+        format.json { render :action => "gen_json.json.erb", :layout => false }
+        format.js { render :action => "gen_json.json.erb", :layout => false }
       end
     else
       @favorites = nil
@@ -183,6 +185,29 @@ class FavoritesController < ApplicationController
       redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
     else
       redirect_to :action => 'index', :page => params[:page]
+    end
+  end
+  
+  def retweet
+    tweet_id = params[:id]
+    
+    tweet = Favorite.find_by_tweet_id_and_user_id(tweet_id, current_user.id)
+    begin
+      response = current_user.twitter.post("/statuses/retweet/#{tweet_id}.json")
+    rescue Exception => exc
+      #do nothing
+    end
+    if session[:retweeted].nil?
+      retweets = []
+    else
+      retweets = session[:retweeted].split(",")
+    end
+    retweets << tweet_id
+    session[:retweeted] = retweets.join(",")
+    if params[:page] && params[:page] != "1"
+      redirect_to :action => 'index', :page => params[:page]
+    else
+      redirect_to :action => 'index'
     end
   end
 end

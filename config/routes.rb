@@ -17,6 +17,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/favorites/tags/:tag.:format', :controller => 'favorites', :action => 'index'
   map.connect '/favorites/:id/detag/:tag', :controller => 'favorites', :action => 'remove_tag'
   map.connect '/favorites/new_tag', :controller => 'favorites', :action => 'new_tag'
+  map.connect '/favorites/:id/retweet', :controller => 'favorites', :action => 'retweet'
+  
+  map.connect '/favorites/tags/:tag/delete', :controller => 'tags', :action => 'delete'
   
   map.connect '/credits', :controller => 'application', :action => 'credits'
   

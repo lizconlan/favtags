@@ -106,11 +106,14 @@ class User < TwitterAuth::GenericUser
           :source => tweet["source"],
           :posted => tweet["created_at"]
         )
-        fave.geo = tweet["geo"]["georss:point"] if tweet["geo"] && tweet["geo"]["georss:point"]
+        fave.geo = tweet["geo"]["coordinates"].join(", ") if tweet["geo"] && tweet["geo"]["coordinates"]
+        fave.geo_type = tweet["geo"]["type"] if tweet["geo"] && tweet["geo"]["type"]
         if self.autocreate_tags
           fave.hashtags.each do |hashtag|
             unless self.has_tag?(hashtag)
-              fave.tag(hashtag, self.id)
+              if hashtag.length > 2
+                fave.tag(hashtag, self.id)
+              end
             end
           end
         end
