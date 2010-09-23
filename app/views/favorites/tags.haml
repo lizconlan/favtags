@@ -7,3 +7,5 @@
   %p 
     = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name
     = "(#{tag.favorites.count})"
+    %br
+    =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link"}
