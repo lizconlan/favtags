@@ -57,7 +57,7 @@ class Favorite < ActiveRecord::Base
   end
   
   def urls
-    text.scan(/(?:\s|^)(https?:\/\/[a-zA-Z0-9\.\/\&\#\?\=\-\_\%\+\:]*)/).flatten
+    text.scan(/(?:\s|^)(https?:\/\/[a-zA-Z0-9\.\/\&\#\?\=\-\_\%\+\:]*)/i).flatten
   end
   
   def create_short_urls
