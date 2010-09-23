@@ -127,7 +127,11 @@ class Favorite < ActiveRecord::Base
     self.tags.each do |tag|
       self.tags.delete(tag)
     end
-    self.user.twitter.post("/favorites/destroy/#{self.tweet_id}")
+    begin
+      self.user.twitter.post("/favorites/destroy/#{self.tweet_id}")
+    rescue Exception => exc
+      #do nothing
+    end
     self.destroy
   end
 end
