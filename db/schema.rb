@@ -67,24 +67,6 @@ ActiveRecord::Schema.define(:version => 20100913110249) do
     t.integer "favorite_id", :null => false
   end
 
-  create_table "jobs", :force => true do |t|
-    t.string   "worker_class"
-    t.string   "worker_method"
-    t.text     "args"
-    t.text     "result"
-    t.integer  "priority"
-    t.integer  "progress"
-    t.string   "state"
-    t.integer  "lock_version",  :default => 0
-    t.datetime "start_at"
-    t.datetime "started_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "jobs", ["start_at"], :name => "index_jobs_on_start_at"
-  add_index "jobs", ["state"], :name => "index_jobs_on_state"
-
   create_table "tags", :force => true do |t|
     t.integer  "user_id"
     t.string   "name"
