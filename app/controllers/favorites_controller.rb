@@ -204,10 +204,13 @@ class FavoritesController < ApplicationController
     end
     retweets << tweet_id
     session[:retweeted] = retweets.join(",")
-    if params[:page] && params[:page] != "1"
-      redirect_to :action => 'index', :page => params[:page]
+    
+    if params[:account]
+      redirect_to :action => 'index', :page => params[:page], :account => params[:account]
+    elsif params[:tags]
+      redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
     else
-      redirect_to :action => 'index'
+      redirect_to :action => 'index', :page => params[:page]
     end
   end
 end
