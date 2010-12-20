@@ -14,11 +14,11 @@
       %span
         =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
       - if @account
-        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account}, {:class => :delete_link, :title => "delete this from your favorites"}
+        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => :delete_link, :title => "delete this from your favorites"}
       - elsif @tag
-        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag}, {:class => :delete_link, :title => "delete this from your favorites"}
+        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => :delete_link, :title => "delete this from your favorites"}
       - else
-        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id}, {:class => :delete_link, :title => "delete this from your favorites"}
+        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :page => params[:page]}, {:class => :delete_link, :title => "delete this from your favorites"}
       - unless tweet.twitterer_protected
         - if (session[:retweeted] and !session[:retweeted].split(",").include?(tweet.tweet_id)) or session[:retweeted].nil?
           %br
@@ -28,8 +28,8 @@
           %li
             ="#{tag.name}&nbsp;"
             - if @account
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - elsif @tag
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - else
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}

@@ -6,10 +6,13 @@ class TagsController < ApplicationController
     tag = Tag.find_by_name_and_user_id(tag_name, current_user.id)
     tag.delete
     
-    if params[:page] && params[:page] != "1"
-      redirect_to :action => 'index', :page => params[:page]
+    
+    if params[:account] != ""
+      redirect_to :action => 'index', :page => page, :account => params[:account]
+    elsif params[:tag] != ""
+      redirect_to :action => 'index', :page => page, :tag => params[:tag]
     else
-      redirect_to :action => 'index', :controller => 'favorites'
+      redirect_to :action => 'index', :page => page
     end
   end
 end
