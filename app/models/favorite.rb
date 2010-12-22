@@ -71,7 +71,7 @@ class Favorite < ActiveRecord::Base
         data = RestClient.get api_url
         result = JSON.parse(data.body)
         if result["status_code"] == 200
-          short_url = "http://fvt.gr/#{result["data"]["hash"]}"
+          short_url = result["data"]["url"]
           shortened << short_url
         else
           shortened << ""
