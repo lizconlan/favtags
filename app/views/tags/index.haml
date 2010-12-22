@@ -3,10 +3,14 @@
   &nbsp;&gt;&nbsp;
   %h2= "Your tags"
 
--@tags.each do |tag|
-  .editable_tag
-    = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name
-    = "(#{tag.favorites.count})"
-    %br
-    =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link"}
-    =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link"}
+- form_tag('/favorites/merge_tags') do
+  -@tags.each do |tag|
+    .editable_tag
+      %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
+      = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name
+      = "(#{tag.favorites.count})"
+      %br
+      =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link"}
+      =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link"}
+  .submit_merge
+    =submit_tag "Merge tags"

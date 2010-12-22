@@ -29,4 +29,36 @@ class TagsController < ApplicationController
       end
     end
   end
+  
+  def merge
+    unless request.post?
+      redirect_to "/favorites/tags"
+    end
+    
+    @tags = []
+    params.each do |param|
+      if param[0].include?('tag_')
+        @tags << Tag.find(param[1])
+      end
+    end
+    
+    if params[:into]
+      into = Tag.find(params[:into])
+      @tags.each do |tag|
+        unless tag.name == into.name
+          tag.favorites.each do |fave|
+            fave.detag(tag.name)
+            fave.tag(into.name, current_user.id)
+          end
+          tag.delete
+        end
+      end
+      redirect_to "/favorites/tags"        
+    end
+    
+    if @tags.count < 2
+      @error = "You must choose more than 1 tag to merge!"
+    end
+  end
+  
 end
