@@ -116,10 +116,6 @@ class FavoritesController < ApplicationController
     @accounts = current_user.faved_accounts
   end
   
-  def tags
-    @tags = current_user.tags
-  end
-  
   def new_tag
     if request.post?
       affected_tweets = params[:faves]

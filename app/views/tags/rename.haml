@@ -1,0 +1,13 @@
+#page_head
+  =link_to "#{current_user.name}'s favorites", :controller => :favorites
+  &nbsp;&gt;&nbsp;
+  %h2 Rename tag
+ 
+- form_tag do
+  %p
+    - if @error
+      %p= @error
+    ="New name for #{params[:tag]}:"
+    =hidden_field_tag :tag, params[:tag]
+    =text_field_tag :new_name
+    =submit_tag :submit
