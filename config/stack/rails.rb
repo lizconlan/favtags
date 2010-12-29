@@ -3,5 +3,5 @@ package :rails do
   gem 'rails'
   version '2.3.5'
   
-  requires :ruby
+  requires :ruby_enterprise
 end

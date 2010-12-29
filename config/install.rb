@@ -14,7 +14,7 @@ policy :passenger_stack, :roles => :app do
   requires :apache_expires_support  # stack/apache.rb
 
   requires :appserver               # Passenger
-  requires :ruby                    # Ruby
+  requires :ruby_enterprise         # Ruby
   requires :rails                   # Rails
   requires :database                # MySQL or Postgres
   requires :ruby_database_driver    # mysql or postgres gems

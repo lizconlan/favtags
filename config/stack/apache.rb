@@ -44,7 +44,7 @@ package :passenger, :provides => :appserver do
     has_directory "/usr/local/lib/ruby/gems/1.8/gems/passenger-#{version}"
   end
 
-  requires :apache, :apache2_prefork_dev, :ruby, :rubygems
+  requires :apache, :apache2_prefork_dev, :ruby_enterprise, :rubygems
 end
 
 # These "installers" are strictly optional, I believe
