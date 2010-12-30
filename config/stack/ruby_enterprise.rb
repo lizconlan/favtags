@@ -7,6 +7,7 @@ package :ruby_enterprise do
   source "http://rubyforge.org/frs/download.php/71096/ruby-enterprise-#{version}.tar.gz" do
     custom_install 'sudo ./installer --auto=/usr/local/ruby-enterprise'
     binaries.each {|bin| post :install, "ln -s #{REE_PATH}/bin/#{bin} /usr/local/bin/#{bin}" }
+    post :install, "ln -s #{REE_PATH}/lib/ruby /usr/local/lib/ruby"
   end
 
   verify do

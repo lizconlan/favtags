@@ -13,14 +13,14 @@ end
 
 package :apache2_prefork_dev do
   description 'A dependency required by some packages.'
-  apt 'apache2-prefork-dev'
+  apt 'apache2-prefork-dev libcurl4-openssl-dev '
 end
 
 package :passenger, :provides => :appserver do
   description 'Phusion Passenger (mod_rails)'
-  version '2.2.11'
+  version '3.0.2'
   gem "passenger" do
-    post :install, 'echo -en "\n\n\n\n" | sudo passenger-install-apache2-module'
+    post :install, 'echo -en "\n\n\n\n" | sudo /usr/local/lib/ruby/gems/1.8/gems/passenger-3.0.2/bin/passenger-install-apache2-module --auto'
 
     # Create the passenger conf file
     post :install, 'mkdir -p /etc/apache2/extras'

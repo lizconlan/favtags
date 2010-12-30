@@ -1,5 +1,5 @@
 # Require our stack
-%w(essential apache scm ruby mysql rails).each do |r|
+%w(essential apache scm ruby_enterprise mysql rails).each do |r|
   require File.join(File.dirname(__FILE__), 'stack', r)
 end
 
