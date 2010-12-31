@@ -66,22 +66,10 @@ module TwitterAuth
       save
     end
 
-    if TwitterAuth.oauth?
-      include TwitterAuth::OauthUser
-    else
-      include TwitterAuth::BasicUser
-    end
+    include TwitterAuth::OauthUser
 
     def utilize_default_validations
       true
-    end
-
-    def twitter
-      if TwitterAuth.oauth?
-        TwitterAuth::Dispatcher::Oauth.new(self)
-      else
-        TwitterAuth::Dispatcher::Basic.new(self)
-      end
     end
 
     def remember_me

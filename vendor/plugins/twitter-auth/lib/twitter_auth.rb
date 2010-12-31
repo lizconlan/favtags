@@ -6,18 +6,6 @@ module TwitterAuth
     @config[environment] ||= YAML.load(File.open(RAILS_ROOT + '/config/twitter_auth.yml').read)[environment]
   end
 
-  def self.base_url
-    config['base_url'] || 'https://api.twitter.com'
-  end
-
-  def self.path_prefix
-    URI.parse(base_url).path
-  end
-
-  def self.api_timeout
-    config['api_timeout'] || 10
-  end
-
   def self.encryption_key
     raise TwitterAuth::Cryptify::Error, 'You must specify an encryption_key in config/twitter_auth.yml' if config['encryption_key'].blank?
     config['encryption_key'] 
@@ -49,14 +37,10 @@ module TwitterAuth
   def self.oauth?
     strategy == :oauth
   end
-
-  def self.basic?
-    strategy == :basic
-  end
   
   # The OAuth consumer used by TwitterAuth for authentication. The consumer key and secret are set in your application's +config/twitter.yml+
   def self.consumer
-    options = {:site => TwitterAuth.base_url}
+    options = {:site => "https://api.twitter.com"}
     [ :authorize_path, 
       :request_token_path,
       :access_token_path,
@@ -71,30 +55,7 @@ module TwitterAuth
       options 
     )
   end
-
-  def self.net
-    uri = URI.parse(TwitterAuth.base_url)
-    net = Net::HTTP.new(uri.host, uri.port)
-    net.use_ssl = uri.scheme == 'https'
-    net.read_timeout = TwitterAuth.api_timeout
-    net
-  end
-
-  def self.authorize_path
-    config['authorize_path'] || '/oauth/authorize'
-  end
 end
 
 require 'twitter_auth/controller_extensions'
 require 'twitter_auth/cryptify'
-require 'twitter_auth/dispatcher/oauth'
-require 'twitter_auth/dispatcher/basic'
-require 'twitter_auth/dispatcher/shared'
-
-module TwitterAuth
-  module Dispatcher
-    class Error < StandardError; end
-    class Unauthorized < Error; end
-  end
-end
-

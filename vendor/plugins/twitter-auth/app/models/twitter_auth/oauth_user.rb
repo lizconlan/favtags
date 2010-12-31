@@ -6,16 +6,40 @@ module TwitterAuth
       end
 
       base.extend TwitterAuth::OauthUser::ClassMethods
-      base.extend TwitterAuth::Dispatcher::Shared
     end
     
     module ClassMethods
+      def handle_response(response)
+        case response
+        when Net::HTTPOK 
+          begin
+            JSON.parse(response.body)
+          rescue JSON::ParserError
+            response.body
+          end
+        when Net::HTTPUnauthorized
+          raise TwitterAuth::Dispatcher::Unauthorized, 'The credentials provided did not authorize the user.'
+        else
+          message = begin
+            JSON.parse(response.body)['error']
+          rescue JSON::ParserError
+            if match = response.body.match(/<error>(.*)<\/error>/)
+              match[1]
+            else
+              'An error occurred processing your Twitter request.'
+            end
+          end
+
+          raise TwitterAuth::Dispatcher::Error, message
+        end
+      end
+      
       def identify_or_create_from_access_token(token, secret=nil)
         raise ArgumentError, 'Must authenticate with an OAuth::AccessToken or the string access token and secret.' unless (token && secret) || token.is_a?(OAuth::AccessToken)
         
         token = OAuth::AccessToken.new(TwitterAuth.consumer, token, secret) unless token.is_a?(OAuth::AccessToken)
         
-        response = token.get(TwitterAuth.path_prefix + '/account/verify_credentials.json')
+        response = token.get("https://api.twitter.com" + '/account/verify_credentials.json')
         user_info = handle_response(response)
         
         if user = User.find_by_twitter_id(user_info['id'].to_s)
