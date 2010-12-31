@@ -187,9 +187,8 @@ class FavoritesController < ApplicationController
   def retweet
     tweet_id = params[:id]
     
-    tweet = Favorite.find_by_tweet_id_and_user_id(tweet_id, current_user.id)
     begin
-      response = current_user.twitter.post("/statuses/retweet/#{tweet_id}.json")
+      response = client(session['access_token'], session['access_secret']).retweet(tweet_id)
     rescue Exception => exc
       #do nothing
     end

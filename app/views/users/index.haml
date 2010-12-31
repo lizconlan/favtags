@@ -21,12 +21,14 @@
       %p
         You currently have 
         
-        %strong #{@current_user.api_calls[0]}
+        -api_calls = @current_user.api_calls(session['access_token'], session['access_secret'])
+        
+        %strong #{api_calls[:remaining_hits]}
         
         Twitter API calls left for this hour.
         
-        - if @current_user.api_calls[0].to_i < @current_user.api_calls[2]
-          Your API calls will be reset at #{@current_user.api_calls[1]}.
+        - if api_calls[:remaining_hits].to_i < api_calls[:hourly_limit].to_i
+          Your API calls will be reset at #api_calls[:reset_time]}.
     
     .group_box
       %h3

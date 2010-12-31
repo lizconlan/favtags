@@ -1,5 +1,5 @@
 #page_head
-  =link_to "#{current_user.name}'s favorites", :controller => :favorites
+  =link_to "#{@current_user.name}'s favorites", :controller => :favorites
   &nbsp;&gt;&nbsp;
   %h2 Load favorites
     
@@ -12,16 +12,18 @@
       %p
         Twitter allows you a limited number of API calls per hour. You currently have 
         
-        %strong #{@current_user.api_calls[0]}
+        -api_calls = @current_user.api_calls(session['access_token'], session['access_secret'])        
+        
+        %strong #{api_calls[:remaining_hits]}
         
         left.
         
-        - if @current_user.api_calls[0].to_i < @current_user.api_calls[2]
+        - if api_calls[:remaining_hits].to_i < api_calls[:hourly_limit].to_i
           %br
-          Your API calls will be reset at #{@current_user.api_calls[1]}.
+          Your API calls will be reset at #{api_calls[:reset_time]}.
         
       %p
-        - if current_user.favorites.count == 0
+        - if @current_user.favorites.count == 0
           You are about to load all your favorites :)
         - else
           Each set of 20 favorites that you load will cost you 1 API call. You are currently set to load #{@current_user.pages_to_load} sets of 20 at a time (but you can 

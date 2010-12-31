@@ -1,3 +1,5 @@
+require 'twitter'
+
 class User < TwitterAuth::GenericUser
   # Extend and define your user model as you see fit.
   # All of the authentication logic is handled by the 
@@ -5,9 +7,8 @@ class User < TwitterAuth::GenericUser
   has_many :tags, :order => 'name'
   has_many :favorites, :order => 'posted DESC'
 
-  def api_calls
-    response = self.twitter.get("/account/rate_limit_status.json")
-    [response["remaining_hits"], response["reset_time"], response["hourly_limit"]]
+  def api_calls(access_token, access_secret)
+    client(access_token, access_secret).rate_limit_status
   end
   
   def delete_favorites
@@ -15,7 +16,7 @@ class User < TwitterAuth::GenericUser
   end
   
   def update_favcount
-    user_data = self.twitter.get("/users/show/#{self.twitter_id}")
+    user_data = Twitter.get("/users/show/#{self.twitter_id}")
     fav_count = user_data["favorites_count"]
     self.favorites_count = fav_count
     save!
@@ -49,13 +50,24 @@ class User < TwitterAuth::GenericUser
   end
 
   private
+  
+    def client(access_token, access_secret)
+      Twitter.configure do |config|
+        config.consumer_key = TwitterAuth.config['oauth_consumer_key']
+        config.consumer_secret = TwitterAuth.config['oauth_consumer_secret']
+        config.oauth_token = access_token
+        config.oauth_token_secret = access_secret
+      end
+      @client ||= Twitter::Client.new
+    end
 
     def load_some_favorites
       tweets = "starting"
       i = 0
       while i < self.pages_to_load
         i += 1
-        tweets = self.twitter.get("/favorites.json?page=#{i}")
+        
+        tweets = client(access_token, access_secret).get("/favorites.json?page=#{i}")
         
         if tweets.blank?
           return ""
@@ -72,7 +84,7 @@ class User < TwitterAuth::GenericUser
       i = 0
       while !tweets.blank?
         i += 1
-        tweets = self.twitter.get("/favorites.json?page=#{i}")
+        tweets = client(access_token, access_secret).get("/favorites.json?page=#{i}")
                 
         tweets.each do |tweet|
           load_tweet(tweet)
