@@ -65,6 +65,7 @@ namespace :deploy do
     sudo "gem install haml"
     sudo "gem install rest-client"
     sudo "gem install daemons"
+    sudo "gem install twitter"
   end
   
   desc "Restarting apache and clearing the cache"

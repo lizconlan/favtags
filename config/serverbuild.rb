@@ -5,6 +5,21 @@ namespace :serverbuild do
   set :password, root_password
   
   task :user_setup, :roles => :app do
+    parts = deploy_to.split("/")
+    part_path = "/"
+    parts.each do |dir|
+      begin
+        part_path = "#{part_path}/#{dir}".squeeze("/")
+        sudo "mkdir #{part_path}" unless part_path == "/"
+      rescue
+        #whatever
+      end
+    end
+    begin
+      sudo "mkdir #{deploy_to}/releases"
+    rescue
+      #whatever
+    end
     sudo "mysqladmin -u root password \"#{sql_server_password}\""
     create_deploy_user
     sudo "chown #{deployuser} #{deploy_to}"
