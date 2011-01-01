@@ -12,7 +12,7 @@
       %p
         Twitter allows you a limited number of API calls per hour. You currently have 
         
-        -api_calls = @current_user.api_calls(session['access_token'], session['access_secret'])        
+        -api_calls = @current_user.api_calls()        
         
         %strong #{api_calls[:remaining_hits]}
         

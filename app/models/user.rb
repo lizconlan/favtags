@@ -7,7 +7,7 @@ class User < TwitterAuth::GenericUser
   has_many :tags, :order => 'name'
   has_many :favorites, :order => 'posted DESC'
 
-  def api_calls(access_token, access_secret)
+  def api_calls
     client(access_token, access_secret).rate_limit_status
   end
   
