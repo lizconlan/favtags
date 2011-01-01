@@ -3,6 +3,7 @@ tmp/**/*
 test
 coverage
 config/database.yml
+config/bitly.yml
 config/virtualserver/*
 config/twitter_auth.yml
 .DS_Store
