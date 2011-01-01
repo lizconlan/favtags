@@ -128,7 +128,7 @@ class Favorite < ActiveRecord::Base
       self.tags.delete(tag)
     end
     begin
-      client(session['access_token'], session['access_secret']).status_destroy(self.tweet_id)
+      client(current_user.access_token, current_user.access_secret).status_destroy(self.tweet_id)
     rescue Exception => exc
       #do nothing
     end

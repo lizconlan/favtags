@@ -188,7 +188,7 @@ class FavoritesController < ApplicationController
     tweet_id = params[:id]
     
     begin
-      response = client(session['access_token'], session['access_secret']).retweet(tweet_id)
+      response = client(current_user.access_token, current_user.access_secret).retweet(tweet_id)
     rescue Exception => exc
       #do nothing
     end
