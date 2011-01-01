@@ -6,7 +6,7 @@ class TagsController < ApplicationController
   end
   
   def delete
-    tag_name = params[:tag]
+    tag_name = params[:tag].gsub("--", "|").gsub("-", " ").gsub("|", "-")
     tag = Tag.find_by_name_and_user_id(tag_name, current_user.id)
     tag.delete
     
@@ -16,7 +16,7 @@ class TagsController < ApplicationController
   
   def rename
     if request.post?
-      tag = params[:tag]
+      tag = params[:tag].gsub("--", "|").gsub("-", " ").gsub("|", "-")
       chosen = params[:new_name]
       
       if Tag.find_by_name_and_user_id(chosen, current_user.id)
