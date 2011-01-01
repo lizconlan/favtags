@@ -33,8 +33,8 @@
           %li
             ="#{tag.name}&nbsp;"
             - if @account
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - elsif @tag
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :tags => @tag, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :tags => @tag.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - else
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}

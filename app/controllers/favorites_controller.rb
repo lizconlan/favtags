@@ -152,7 +152,7 @@ class FavoritesController < ApplicationController
   end
   
   def remove_tag
-    tag_name = params[:tag]
+    tag_name = params[:tag].gsub("--", "|").gsub("-", " ").gsub("|", "-")
     tweet_id = params[:id]
     
     tweet = Favorite.find_by_id_and_user_id(tweet_id, current_user.id)
