@@ -8,7 +8,7 @@
     =@error
   %a{:href => "/favorites/tags"} Go back to the tags page
 - else  
-  - form_tag('/favorites/merge_tags') do
+  - form_tag('/favorites/update_tags') do
     %p
       Choose which tag name to keep:
     -@tags.each do |tag|

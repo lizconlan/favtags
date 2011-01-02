@@ -3,7 +3,7 @@
   &nbsp;&gt;&nbsp;
   %h2= "Your tags"
 
-- form_tag('/favorites/merge_tags') do
+- form_tag('/favorites/update_tags') do
   -@tags.each do |tag|
     .editable_tag
       %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
@@ -12,5 +12,6 @@
       %br
       =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link"}
       =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link"}
-  .submit_merge
+  .submit_buttons
     =submit_tag "Merge tags"
+    =submit_tag "Delete tags"

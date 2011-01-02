@@ -10,7 +10,6 @@ class TagsController < ApplicationController
     tag = Tag.find_by_name_and_user_id(tag_name, current_user.id)
     tag.delete
     
-    
     redirect_to '/favorites/tags'
   end
   
@@ -30,35 +29,62 @@ class TagsController < ApplicationController
     end
   end
   
-  def merge
+  def update
     unless request.post?
       redirect_to "/favorites/tags"
     end
     
-    @tags = []
-    params.each do |param|
-      if param[0].include?('tag_')
-        @tags << Tag.find(param[1])
-      end
+    case params["commit"]
+      when "Delete tags"
+        delete_tags()
+      when "Merge tags"
+        merge_tags()
+      else
+        if params[:into]
+          merge_tags()
+        else
+          redirect_to "/favorites/tags"
+        end
     end
-    
-    if params[:into]
-      into = Tag.find(params[:into])
-      @tags.each do |tag|
-        unless tag.name == into.name
-          tag.favorites.each do |fave|
-            fave.detag(tag.name)
-            fave.tag(into.name, current_user.id)
-          end
+  end
+  
+  private
+    def delete_tags
+      params.each do |param|
+        if param[0].include?('tag_')
+          tag = Tag.find(param[1])
           tag.delete
         end
       end
-      redirect_to "/favorites/tags"        
+      redirect_to "/favorites/tags"
     end
+  
+  
+    def merge_tags
+      @tags = []
+      params.each do |param|
+        if param[0].include?('tag_')
+          @tags << Tag.find(param[1])
+        end
+      end
     
-    if @tags.count < 2
-      @error = "You must choose more than 1 tag to merge!"
+      if params[:into]
+        into = Tag.find(params[:into])
+        @tags.each do |tag|
+          unless tag.name == into.name
+            tag.favorites.each do |fave|
+              fave.detag(tag.name)
+              fave.tag(into.name, current_user.id)
+            end
+            tag.delete
+          end
+        end
+        redirect_to "/favorites/tags"        
+      end
+    
+      if @tags.count < 2
+        @error = "You must choose more than 1 tag to merge!"
+      end
     end
-  end
   
 end

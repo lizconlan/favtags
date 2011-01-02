@@ -17,6 +17,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '/favorites/:id/retweet', :controller => 'favorites', :action => 'retweet'
     
   map.connect '/favorites/tags', :controller => 'tags', :action => 'index'
+  map.merge '/favorites/update_tags', :controller => 'tags', :action => 'update'
   map.merge '/favorites/merge_tags', :controller => 'tags', :action => 'merge'
   map.connect '/favorites/tags/:tag', :controller => 'favorites', :action => 'index'
   map.connect '/favorites/tags/:tag.:format', :controller => 'favorites', :action => 'index'
