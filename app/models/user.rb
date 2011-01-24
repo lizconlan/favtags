@@ -67,7 +67,7 @@ class User < TwitterAuth::GenericUser
       while i < self.pages_to_load
         i += 1
         
-        tweets = client(access_token, access_secret).favorites(name, {:page => i})
+        tweets = client(access_token, access_secret).favorites(login, {:page => i})
         
         if tweets.blank?
           return ""
@@ -84,7 +84,7 @@ class User < TwitterAuth::GenericUser
       i = 0
       while !tweets.blank?
         i += 1
-        tweets = client(access_token, access_secret).favorites(name, {:page => i})
+        tweets = client(access_token, access_secret).favorites(login, {:page => i})
                 
         tweets.each do |tweet|
           load_tweet(tweet)
