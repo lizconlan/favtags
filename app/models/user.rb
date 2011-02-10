@@ -72,7 +72,9 @@ class User < TwitterAuth::GenericUser
         if tweets.blank?
           return ""
         end
-                
+        
+        unless tweets raise "Twitter appears to be having some issues, please try again later :("
+        
         tweets.each do |tweet|
           load_tweet(tweet)
         end
