@@ -18,22 +18,30 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
   %body
+    %header
+      - if current_user
+        #usernav
+          %a{:href => "/favorites"}
+            %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
+          #info
+            %img{:src => current_user.profile_image_url, :height => "20"}
+            .text
+              %b
+                =current_user.login
+              =current_user.favorites.count
+              faves loaded
+            
+          #nav_options
+            %nav
+              =link_to "Account", "/account"
+              =link_to "Load", "/favorites/load"
+              =link_to "Log out", logout_url
+      - else
+        %a{:href => "/"}
+          %img{:src => "/images/favtagger.gif", :width => "376", :height => "100", :alt => "Favtagger", :border => "0"}
+  
     #outer_container
       #inner_container
-        %header
-          - if current_user
-            #usernav
-              %a{:href => "/favorites"}
-                %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
-              #nav_options
-                %nav
-                  =link_to "Account", "/account"
-                  =link_to "Load", "/favorites/load"
-                  =link_to "Log out", logout_url
-          - else
-            %a{:href => "/"}
-              %img{:src => "/images/favtagger.gif", :width => "376", :height => "100", :alt => "Favtagger", :border => "0"}
-              
         #content          
           - if current_user && current_user.job_id
             - begin

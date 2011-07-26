@@ -1,7 +1,8 @@
 body
   font-family: Helvetica, Verdana, Arial, sans-serif
   font-size: 14pt
-  background-color: #c0deed
+  margin: 0 0 1em 0
+  background-color: white
 
 header
   display: block
@@ -79,9 +80,6 @@ a.twitter_button:active
   #inner_container
     width: 734px
     background-color: white
-    border-radius: 8px
-    -moz-border-radius: 8px
-    -webkit-border-radius: 8px
     display: inline
     float: left
 
@@ -116,21 +114,23 @@ a.twitter_button:active
         float: left
         
         .page_info
+          position: relative
           width: 543px
           clear: both
           padding: 0.5em 0
           text-align: center
-          background-color: silver
-          background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#E0E0E0), to(#E3E3E3), color-stop(.6,#C0C0C0))
-          background: -moz-linear-gradient(19% 75% 90deg,#C0C0C0, #E3E3E3, #E0E0E0 100%)
-          border-radius: 8px
-          -moz-border-radius: 8px
-          -webkit-border-radius: 8px
 
           a
             color: black
-            padding: 4px
             text-shadow: 1px 2px 2px white
+          
+          a.prev
+            position: absolute
+            left: 12px
+            
+          a.next
+            position: absolute
+            right: 12px
 
           a:hover
             color: #0000DD
@@ -268,13 +268,9 @@ a.twitter_button:active
 
 #usernav
   float: left
-  width: 751px
+  width: 100%
   min-height: 46px
-  margin-left: -8px
   text-align: left
-  border-radius: 8px
-  -moz-border-radius: 8px
-  -webkit-border-radius: 8px
   background-color: black
   background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#666666), to(#666666), color-stop(.6,#333))
   background: -moz-linear-gradient(0% 84% 90deg,#333333, #333333, #545454 40%)
@@ -283,9 +279,23 @@ a.twitter_button:active
     float: left
     margin: 4px 15px 0 15px
   
+  #info
+    float: left
+    color: white
+    padding-top: 0.4em
+    font-size: 0.75em
+    
+    .text
+      display: block
+      float: left
+      margin-top: 0.5em
+
+    img
+      padding: 1px
+      border: 3px double silver
+  
   #nav_options
     float: right
-    width: 535px
     text-align: right
     padding: 0.8em 13px 0 0
     
