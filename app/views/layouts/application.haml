@@ -57,6 +57,7 @@
                     = "(error occured at: #{job.updated_at})"
                   - else
                     Problem connecting to Twitter, please try again later
+                    =job.last_error
                     %br
                     = "(error occured at: #{job.updated_at})"
                 - else
