@@ -129,12 +129,9 @@ class User < TwitterAuth::GenericUser
             end
           end
         end
-        begin
-          self.favorites <<= fave
-        rescue Exception => exc
-          unless exc.message == "already loaded"
-            raise exc.message
-          end
+        ids = self.favorites.collect { |x| x.tweet_id }
+        unless ids.include?(fave.tweet_id)
+          self.favorites << fave
         end
       end
     end
