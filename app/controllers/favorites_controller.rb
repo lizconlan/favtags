@@ -41,7 +41,7 @@ class FavoritesController < ApplicationController
           @max_page = (current_user.favorites.count.to_f / Favorite.per_page).ceil
           @max_page = 1 if @max_page == 0
           @current_page = @max_page if @current_page > @max_page
-          @favorites = current_user.favorites.paginate(:all, :page => @current_page)
+          @favorites = current_user.favorites #.paginate(:all, :page => @current_page)
         end
         @favorites = current_user.favorites
         format.xml { render :action => "gen_xml.rxml", :layout => false }
