@@ -21,7 +21,7 @@ Rails::Initializer.run do |config|
   # config.gem "aws-s3", :lib => "aws/s3"
   config.gem "oauth"
   config.gem "ezcrypto"
-  config.gem "will_paginate", :version => "2.3.14"
+  config.gem "will_paginate", :version => "2.3.15"
   config.gem "json"
   config.gem "twitter"
   config.gem "haml"
