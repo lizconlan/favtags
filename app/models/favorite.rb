@@ -62,8 +62,10 @@ class Favorite < ActiveRecord::Base
     html = text
     counter = 0
     lengthened = []
+    full_links = []
     urls.each do |url|
       lengthened << url.short
+      full_links << url.full
       html.gsub!(url.short, "<a title=\"#{url.full}\" href=\"#{url.short}\">#{url.full.gsub(/\?(.*)/,"?&hellip;")}</a>")
     end
     html.scan(/(http(?:[^\s\"\<])*)/).each do |match|
@@ -71,9 +73,10 @@ class Favorite < ActiveRecord::Base
       if match =~ /(.*)\.$/
         match = $1
       end
-      unless lengthened.include?(match)
-        expanded = Favorite.expand_url(match)
-        unless expanded == match
+      unless lengthened.include?(match) or full_links.include?(match)
+        if expanded = Favorite.expand_url(match)
+          html.gsub!(match, "<a title=\"#{expanded}\" href=\"#{expanded}\">#{expanded.gsub(/\?(.*)/,"?&hellip;")}</a>")
+        else
           new_url = Url.new()
           new_url.short = match
           new_url.full = Favorite.expand_url(match)
