@@ -67,7 +67,7 @@ class User < TwitterAuth::GenericUser
       while i < self.pages_to_load
         i += 1
         
-        tweets = client(access_token, access_secret).favorites(login, {:page => i})
+        tweets = client(access_token, access_secret).favorites(login, {:page => i, :include_entities => 1})
         
         if tweets.blank?
           return ""
@@ -118,8 +118,11 @@ class User < TwitterAuth::GenericUser
           :source => tweet["source"],
           :posted => tweet["created_at"]
         )
+        #sort out the geo bit
         fave.geo = tweet["geo"]["coordinates"].join(", ") if tweet["geo"] && tweet["geo"]["coordinates"]
         fave.geo_type = tweet["geo"]["type"] if tweet["geo"] && tweet["geo"]["type"]
+        
+        #process the autotags (if requested)
         if self.autocreate_tags
           fave.hashtags.each do |hashtag|
             unless self.has_tag?(hashtag)
@@ -129,6 +132,29 @@ class User < TwitterAuth::GenericUser
             end
           end
         end
+        
+        #stash the decrapped the urls
+        url_entities = tweet["entities"]["urls"]
+        url_entities.each do |url_hash|
+          short_url = url_hash["url"]
+          original_url = url_hash["expanded_url"]
+          #begin
+            expanded_url = Favorite.expand_url(short_url)
+          #rescue
+          #  expanded_url = original_url
+          #end
+          new_url = Url.find_or_create_by_short_and_favorite_id(short_url, fave.id)
+          new_url.short = short_url
+          new_url.full = expanded_url
+          if fave.id
+            new_url.favorite_id = fave.id
+            new_url.save
+          else
+            fave.urls << new_url
+          end
+        end
+        
+        #store unless duplicate
         ids = self.favorites.collect { |x| x.tweet_id }
         unless ids.include?(fave.tweet_id)
           self.favorites << fave

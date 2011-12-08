@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100913110249) do
+ActiveRecord::Schema.define(:version => 20111208125034) do
 
   create_table "conversations", :force => true do |t|
     t.integer "user_id"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(:version => 20100913110249) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "urls", :force => true do |t|
+    t.string  "short"
+    t.string  "full"
+    t.integer "favorite_id"
+  end
+
+  add_index "urls", ["short"], :name => "index_urls_on_short"
 
   create_table "users", :force => true do |t|
     t.string   "twitter_id"

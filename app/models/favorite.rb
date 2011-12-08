@@ -7,6 +7,7 @@ class Favorite < ActiveRecord::Base
     
   belongs_to :user
   has_and_belongs_to_many :tags
+  has_many :urls
   
   validates_uniqueness_of :tweet_id, :scope => :user_id, :on	=> :create,
     :message => "already loaded"
@@ -20,6 +21,36 @@ class Favorite < ActiveRecord::Base
         []
       end
     end
+    
+    def expand_url url
+      bounces = 0 #not currently reported, but could be useful, maybe?!
+      response = ping_url(url)
+      while response[:moved] == true
+        bounces += 1
+        response = ping_url(response[:location])
+      end
+      return response[:location]
+    end
+    
+    def ping_url url
+      parts = URI.parse(url)
+      if parts.host.length > 8 and parts.host != "tinyurl.com"
+        #probably not intended as a shortener then, spit it back as-is
+        return {:moved => false, :location => url}
+      end
+      req = Net::HTTP.new(parts.host, parts.port)
+      header = req.head(parts.path)
+      case header.code 
+        when /30?/
+          if header.get_fields("location").first == url
+            return {:moved => false, :location => url}
+          else
+            return {:moved => true, :location => header.get_fields("location").first}
+          end
+        else
+          return {:moved => false, :location => url}
+      end
+    end
   end
   
   def shortened_urls
@@ -30,15 +61,29 @@ class Favorite < ActiveRecord::Base
   def html_text
     html = text
     counter = 0
-    urls.each do |match|
-      if shortened_urls[counter].nil? or shortened_urls[counter] == ""
-        short_url = match
-      else
-        short_url = shortened_urls[counter]
-      end
-      counter += 1
-      html.gsub!(match, "<a href=\"#{short_url}\">#{short_url}</a>")
+    lengthened = []
+    urls.each do |url|
+      lengthened << url.short
+      html.gsub!(url.short, "<a title=\"#{url.full}\" href=\"#{url.short}\">#{url.full.gsub(/\?(.*)/,"?&hellip;")}</a>")
     end
+    html.scan(/(http(?:[^\s\"\<])*)/).each do |match|
+      match = match.to_s
+      if match =~ /(.*)\.$/
+        match = $1
+      end
+      unless lengthened.include?(match)
+        expanded = Favorite.expand_url(match)
+        unless expanded == match
+          new_url = Url.new()
+          new_url.short = match
+          new_url.full = Favorite.expand_url(match)
+          urls << new_url
+          self.save
+          html.gsub!(match, "<a title=\"#{new_url.full}\" href=\"#{match}\">#{new_url.full.gsub(/\?(.*)/,"?&hellip;")}</a>")
+        end
+      end
+    end
+    
     html.scan(/(?:\W|,|^)(@[a-zA-Z0-9_]+)/).each do |match|
       html.gsub!(match.to_s, %Q|<a href="http://twitter.com/#{match.first.gsub("@", "")}">#{match.to_s.strip}</a>|)
     end
@@ -56,7 +101,7 @@ class Favorite < ActiveRecord::Base
     potentials.delete_if { |x| x =~ /^[0-9]*$/}
   end
   
-  def urls
+  def inline_urls
     text.scan(/(?:\s|^)(https?:\/\/[a-zA-Z0-9\.\/\&\#\?\=\-\_\%\+\:]*)/i).flatten
   end
   
@@ -65,7 +110,7 @@ class Favorite < ActiveRecord::Base
     api_key = conf[:api_key]
     
     shortened = []
-    urls.each do |url|
+    inline_urls.each do |url|
       if url.length > 30
         api_url = "http://api.bit.ly/v3/shorten?login=favtagger&apiKey=#{api_key}&longUrl=#{url}&format=json"
         data = RestClient.get api_url
@@ -134,4 +179,5 @@ class Favorite < ActiveRecord::Base
     end
     self.destroy
   end
+  
 end
