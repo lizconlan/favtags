@@ -74,8 +74,8 @@ class Favorite < ActiveRecord::Base
         match = $1
       end
       unless lengthened.include?(match) or full_links.include?(match)
-        if expanded = Favorite.expand_url(match)
-          html.gsub!(match, "<a title=\"#{expanded}\" href=\"#{expanded}\">#{expanded.gsub(/\?(.*)/,"?&hellip;")}</a>")
+        if expanded == Favorite.expand_url(match)
+          html.gsub!(match, "<a title=\"#{expanded}\" href=\"#{match}\">#{expanded.gsub(/\?(.*)/,"?&hellip;")}</a>")
         else
           new_url = Url.new()
           new_url.short = match
