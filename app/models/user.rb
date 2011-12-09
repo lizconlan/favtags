@@ -139,7 +139,7 @@ class User < TwitterAuth::GenericUser
           short_url = url_hash["url"]
           original_url = url_hash["expanded_url"]
           #begin
-            expanded_url = Favorite.expand_url(short_url)
+            expanded_url = UrlLengthener.expand_url(short_url)
           #rescue
           #  expanded_url = original_url
           #end

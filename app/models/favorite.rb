@@ -1,5 +1,6 @@
 require 'json'
 require 'rest_client'
+require 'lib/url_lengthener'
 
 class Favorite < ActiveRecord::Base
   cattr_reader :per_page
@@ -19,36 +20,6 @@ class Favorite < ActiveRecord::Base
         tag.favorites
       else
         []
-      end
-    end
-    
-    def expand_url url
-      bounces = 0 #not currently reported, but could be useful, maybe?!
-      response = ping_url(url)
-      while response[:moved] == true
-        bounces += 1
-        response = ping_url(response[:location])
-      end
-      return response[:location]
-    end
-    
-    def ping_url url
-      parts = URI.parse(url)
-      if parts.host.length > 8 and parts.host != "tinyurl.com"
-        #probably not intended as a shortener then, spit it back as-is
-        return {:moved => false, :location => url}
-      end
-      req = Net::HTTP.new(parts.host, parts.port)
-      header = req.head(parts.path)
-      case header.code 
-        when /30?/
-          if header.get_fields("location").first == url
-            return {:moved => false, :location => url}
-          else
-            return {:moved => true, :location => header.get_fields("location").first}
-          end
-        else
-          return {:moved => false, :location => url}
       end
     end
   end
@@ -73,14 +44,15 @@ class Favorite < ActiveRecord::Base
       if match =~ /(.*)\.$/
         match = $1
       end
-      unless lengthened.include?(match) or full_links.include?(match)
-        expanded = Favorite.expand_url(match)
+      
+      unless lengthened.include?(match) or full_links.include?(match) or match.include?("&hellip;")
+        expanded = UrlLengthener.expand_url(match)
         if expanded == match
           html.gsub!(match, "<a title=\"#{expanded}\" href=\"#{match}\">#{expanded.gsub(/\?(.*)/,"?&hellip;")}</a>")
         else
           new_url = Url.new()
           new_url.short = match
-          new_url.full = Favorite.expand_url(match)
+          new_url.full = UrlLengthener.expand_url(match)
           urls << new_url
           self.save
           html.gsub!(match, "<a title=\"#{new_url.full}\" href=\"#{match}\">#{new_url.full.gsub(/\?(.*)/,"?&hellip;")}</a>")
