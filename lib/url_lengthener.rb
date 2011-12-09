@@ -1,4 +1,7 @@
 class UrlLengthener
+  #vanity shorteners that only ever point back to their own site - if you see one of these, you already know what you're in for
+  EXEMPTIONS = ["bbc.in", "youtu.be", "flic.kr", "pic.twitter.com", "instagr.am", "econ.st", "lnkd.in", "tcrn.ch", "wpo.st", "on.wsj.com", "thetim.es", "ti.me", "tgr.ph", "slidesha.re", "seati.ms", "reut.rs", "nzh.tw", "nzh.tw", "nym.ag", "nyob.co", "nyti.ms", "lat.ms", "itv.co", "itun.es", "ind.pn", "huff.to", "gu.com", "gr.pn", "gaw.kr", "f24.my", "fxn.ws", "4sq.com", "onforb.es", "arst.ch"]
+  
   def self.expand_url url
     bounces = 0 #not currently reported, but could be useful, maybe?!
     response = ping_url(url)
@@ -12,7 +15,7 @@ class UrlLengthener
   private
     def self.ping_url url
       parts = URI.parse(url)
-      if parts.host == "youtu.be"
+      if EXEMPTIONS.include?(parts.host)
         #won't get much more sensible, just longer - return as-is
         return {:moved => false, :location => url}
       end
@@ -27,7 +30,11 @@ class UrlLengthener
           if header.get_fields("location").first == url
             return {:moved => false, :location => url}
           else
-            return {:moved => true, :location => header.get_fields("location").first}
+            if parts.host == "t.co" and header.get_fields("location").first =~ /^http:\/\/twitter.com\/[^\/]*\/status\/[0-9]*\/photo/
+              return {:moved => false, :location => "http://pic.twitter.com#{parts.path}"}
+            else
+              return {:moved => true, :location => header.get_fields("location").first}
+            end
           end
         else
           return {:moved => false, :location => url}
