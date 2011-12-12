@@ -1,32 +1,28 @@
-#page_head
+.page-header
   - if @tag
-    =link_to "#{current_user.name}'s favorites", :controller => :favorites
-    &nbsp;&gt;&nbsp;
-    %h2= "tag: #{@tag}"
+    %h2= "Favorites tagged \"#{@tag}\""
   - elsif @account
-    =link_to "#{current_user.name}'s favorites", :controller => :favorites
-    -if @favorites.first
-      &nbsp;&gt;&nbsp;
-      %h2= "#{@favorites.first.twitterer_name}"
+    %h2= "Favorites from #{@favorites.first.twitterer_name} (#{@favorites.first.twitterer_real_name})"
   - else
-    %h2 #{current_user.name}'s favorites
+    %h2 Favorites
 
 #faves
   - form_tag('/favorites/tag') do
-    .page_info
-      =render :partial => "navigation"
-      
-    .controls
-      .control_text
-        Actions: 
-        =hidden_field_tag :page, params[:page]
-        =hidden_field_tag :account, @account
-        =hidden_field_tag :tag, @tag
-        = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
-        %noscript
-          =submit_tag :submit
-            
-    .timeline
+    =render :partial => "navigation"
+    
+    =render :partial => "tabs"
+          
+    .timeline    
+      .controls
+        .control_text
+          Actions: 
+          =hidden_field_tag :page, params[:page]
+          =hidden_field_tag :account, @account
+          =hidden_field_tag :tag, @tag
+          = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
+          %noscript
+            =submit_tag :submit
+          
       - if @favorites.nil?
         .tweet
           Looks like you have no favorites stored. Maybe you should
@@ -45,5 +41,3 @@
 
     .page_info
       =render :partial => "navigation"
-      
-=render :partial => "tag_list"

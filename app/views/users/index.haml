@@ -1,21 +1,20 @@
-#page_head
+.page-header
   %h2
-    Account
+    Account Settings
     
 #section
   %article
-    .group_box
+    .well
       %h3
         Download your favorites
       %p
         It's your data, you should be able to keep it :)
-        %ul
-          %li
-            %a{:href => "/favorites.xml"} Download your favorites as XML
-          %li
-            %a{:href => "/favorites.json"} Download your favorites as JSON
+      %p
+        %a{:href => "/favorites.xml", :class => "btn primary"} Download XML
+        &nbsp;&nbsp;
+        %a{:href => "/favorites.json", :class => "btn primary"} Download JSON
     
-    .group_box
+    .well
       %h3
         API calls
       %p
@@ -30,7 +29,7 @@
         - if api_calls[:remaining_hits].to_i < api_calls[:hourly_limit].to_i
           Your API calls will be reset at #{api_calls[:reset_time]}.
     
-    .group_box
+    .well
       %h3
         Settings
       - form_tag('/account') do
@@ -47,22 +46,21 @@
               =check_box_tag("autocreate", "1", checked = current_user.autocreate_tags, options = {})
           %tr
             %td{:colspan => "2"}
-              %input{:type => "submit", :value => 'Save settings'}
+              %input{:type => "submit", :class => "btn primary", :value => 'Save settings'}
     
-    .group_box
+    .well
       %h3
         Control your Twitter account
       %p
         %a{:href => "http://twitter.com/account/connections"}
-          Edit your Twitter account connections
-          
-    .group_box
+          Edit your Twitter account connections on twitter.com
+        
+    .well
       %h3
         Leave Favtagger
       %p
         Was it something we said? Sorry about that.
-        %br
-        %br
-        %a{:href => "close_account"}
-          You can go if you really want to though
-        (we'll erase any data we hold about you)
+      %p
+        You can go if you really want to though (we'll erase any data we hold about you)
+      %p
+        %a{:href => "close_account", :class => "btn danger"} Delete Account

@@ -1,5 +1,20 @@
--if @current_page > 1
-  =link_to("&larr; Previous", {:controller => :favorites, :action => :index, :page => @current_page - 1, :tag => @tag, :account => @account}, :class => "prev")
-= "  Page #{@current_page} of #{@max_page}  "
--if @current_page < @max_page
-  =link_to("Next &rarr;", {:controller => :favorites, :action => :index, :page => @current_page + 1, :tag => @tag, :account => @account}, :class => "next")
+.pagination
+  %ul
+    %li{:class => @current_page > 1 ? nil : "disabled"}
+      -if @current_page > 1
+        =link_to("&larr; Previous", {:controller => :favorites, :action => :index, :page => @current_page - 1, :tag => @tag, :account => @account})
+      - else
+        %a{:href => "#"} &larr; Previous
+    - range = nav_range(@current_page, @max_page)
+    - range.each do |i|
+      - if i == "..."
+        %li{:class => "disabled"}
+          %a{:href => "#"} ...
+      - else    
+        %li{:class => i == @current_page ? "active" : nil}
+          =link_to(i, {:controller => :favorites, :action => :index, :page => i, :tag => @tag, :account => @account})
+    %li{:class => @current_page < @max_page ? nil : "disabled"}
+      - if @current_page < @max_page
+        =link_to("Next &rarr;", {:controller => :favorites, :action => :index, :page => @current_page + 1, :tag => @tag, :account => @account})
+      - else
+        %a{:href => "#"} Next &rarr;

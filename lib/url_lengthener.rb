@@ -13,8 +13,10 @@ class UrlLengthener
   end
   
   private
-    def self.ping_url url
+    def self.ping_url url      
       parts = URI.parse(url)
+      #return straight away if there's no host part
+      return {:moved => false, :location => url} unless parts.host
       if EXEMPTIONS.include?(parts.host)
         #won't get much more sensible, just longer - return as-is
         return {:moved => false, :location => url}
@@ -25,6 +27,11 @@ class UrlLengthener
       end
       req = Net::HTTP.new(parts.host, parts.port)
       header = req.head(parts.path)
+      return {:moved => false, :location => url} unless header.get_fields("location") #error occured somewhere, give me back my url
+      if header.get_fields("location").first[0..0] == "/"
+        #in-site redirection with relative url, return the original
+        return {:moved => false, :location => url}
+      end
       case header.code 
         when /30?/
           if header.get_fields("location").first == url

@@ -70,6 +70,7 @@ namespace :deploy do
   
   desc "Restarting apache and clearing the cache"
   task :restart, :roles => :app do
+    sudo "touch #{deploy_to}/tmp/restart.txt"
     sudo "/usr/sbin/apache2ctl restart"
   end
 end

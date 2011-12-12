@@ -1,0 +1,7 @@
+%ul.tabs
+  %li{:class => request.request_uri =~ /\/favorites(?:\/?)(?:\?.*)?$/ ? "active" : nil}
+    %a{:href => "/favorites"} Tweets
+  %li{:class => request.request_uri =~ /\/accounts/ ? "active" : nil}
+    %a{:href => "/favorites/accounts"} Accounts
+  %li{:class => request.request_uri =~ /\/tags/ ? "active" : nil}
+    %a{:href => "/favorites/tags"} Tags

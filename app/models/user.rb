@@ -134,23 +134,25 @@ class User < TwitterAuth::GenericUser
         end
         
         #stash the decrapped the urls
-        url_entities = tweet["entities"]["urls"]
-        url_entities.each do |url_hash|
-          short_url = url_hash["url"]
-          original_url = url_hash["expanded_url"]
-          #begin
-            expanded_url = UrlLengthener.expand_url(short_url)
-          #rescue
-          #  expanded_url = original_url
-          #end
-          new_url = Url.find_or_create_by_short_and_favorite_id(short_url, fave.id)
-          new_url.short = short_url
-          new_url.full = expanded_url
-          if fave.id
-            new_url.favorite_id = fave.id
-            new_url.save
-          else
-            fave.urls << new_url
+        url_entities = tweet["entities"]["urls"] if tweet["entities"] 
+        if url_entities
+          url_entities.each do |url_hash|
+            short_url = url_hash["url"]
+            original_url = url_hash["expanded_url"]
+            #begin
+              expanded_url = UrlLengthener.expand_url(short_url)
+            #rescue
+            #  expanded_url = original_url
+            #end
+            new_url = Url.find_or_create_by_short_and_favorite_id(short_url, fave.id)
+            new_url.short = short_url
+            new_url.full = expanded_url
+            if fave.id
+              new_url.favorite_id = fave.id
+              new_url.save
+            else
+              fave.urls << new_url
+            end
           end
         end
         

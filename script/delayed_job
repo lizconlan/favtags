@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'rubygems'
-require 'daemons'
+require 'daemon-spawn'
 dir = File.expand_path(File.join(File.dirname(__FILE__), '..'))
 
 daemon_options = {
@@ -11,7 +11,7 @@ daemon_options = {
 }
 
 
-Daemons.run_proc('job_runner', daemon_options) do
+DaemonSpawn.run_proc('job_runner', daemon_options) do
   if ARGV.include?('--')
     ARGV.slice! 0..ARGV.index('--')
   else

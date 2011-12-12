@@ -14,21 +14,6 @@
       %br    
       %span
         =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
-      - if @account
-        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => :delete_link, :title => "delete this from your favorites"}
-      - elsif @tag
-        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => :delete_link, :title => "delete this from your favorites"}
-      - else
-        = link_to "&#8416;", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :page => params[:page]}, {:class => :delete_link, :title => "delete this from your favorites"}
-      - unless tweet.twitterer_protected
-        - if (session[:retweeted] and !session[:retweeted].split(",").include?(tweet.tweet_id)) or session[:retweeted].nil?
-          %br
-          - if @account
-            = link_to "Retweet this", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => :retweet_link}
-          - elsif @tag
-            = link_to "Retweet this", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => :retweet_link}
-          - else
-            = link_to "Retweet this", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :page => params[:page]}, {:class => :retweet_link}
       %ul.tags
         -tweet.tags.each do |tag|
           %li
@@ -39,3 +24,22 @@
               %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :tags => @tag.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
             - else
               %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+      %div{:class => "button_bar"}
+        - unless tweet.twitterer_protected
+          - if (session[:retweeted] and !session[:retweeted].split(",").include?(tweet.tweet_id)) or session[:retweeted].nil?
+            - if @account
+              = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small"}
+            - elsif @tag
+              = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small"}
+            - else
+              = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small"}
+          &nbsp;
+        %a{:href => "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}", :class => "btn small"} View on Twitter.com
+        &nbsp;
+        - if @account
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+        - elsif @tag
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+        - else
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+  %br

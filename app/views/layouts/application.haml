@@ -5,8 +5,8 @@
     %meta{:charset => "utf-8"}
     %meta{:name => "description", :content => "Manage, tag and download your Twitter favourites"}
     %meta{:name => "keywords", :content => "twitter favourites,twitter favorites,tags,tagger,manage favourites,manage favorites"}
-    = stylesheet_link_tag "screen", :media => "screen"
-    = stylesheet_link_tag "print", :media => "print"
+    = stylesheet_link_tag "bootstrap.min.css", :media => "screen"
+    = stylesheet_link_tag "custom.css", :media => "screen"
     %script{:type => "text/javascript"}
       var _gaq = _gaq || [];
       _gaq.push(['_setAccount', 'UA-18281510-1']);
@@ -18,57 +18,62 @@
       var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
       })();
   %body
-    %header
-      - if current_user
-        #usernav
-          %a{:href => "/favorites"}
-            %img{:src => "/images/favtagger-logo.gif", :width => "171", :height => "39", :alt => "Favtagger", :border => "0"}
-          #info
-            %img{:src => current_user.profile_image_url, :height => "20"}
-            .text
-              %b
-                =current_user.login
-              =current_user.favorites.count
-              faves loaded
-            
-          #nav_options
-            %nav
-              =link_to "Account", "/account"
-              =link_to "Load", "/favorites/load"
-              =link_to "Log out", logout_url
-      - else
-        %a{:href => "/"}
-          %img{:src => "/images/favtagger.gif", :width => "376", :height => "100", :alt => "Favtagger", :border => "0"}
+    .topbar
+      .topbar-inner
+        .container        
+          #usernav
+            %h3
+              %a{:href => "/favorites", :class => "brand"} Favtagger
+              
+            - if current_user  
+              %span
+                %img{:src => current_user.profile_image_url, :height => "20"}
+                .text
+                  %b
+                    =current_user.login
+                  =current_user.favorites.count
+                  faves loaded
+          
+            %ul.nav
+              - if current_user
+                %li
+                  =link_to "Account", "/account"
+                %li
+                  =link_to "Load", "/favorites/load"
+                %li
+                  =link_to "Log out", logout_url
+              - else
+                %li
+                  =link_to "Log in", login_url
+          
   
-    #outer_container
-      #inner_container
-        #content          
-          - if current_user && current_user.job_id
-            - begin
-              - job = Delayed::Job.find(current_user.job_id)
-            - rescue
-              - job = nil
-            - if job
-              .loading_message
-                - if job.failed?
-                  - if job.last_error =~ /Rate limit exceeded./
-                    Rate limit exceeded, come back in an hour or so
-                    %br
-                    = "(error occured at: #{job.updated_at})"
-                  - else
-                    Problem connecting to Twitter, please try again later
-                    =job.last_error
-                    %br
-                    = "(error occured at: #{job.updated_at})"
+    %section#main
+      .container
+        .row
+          .span10
+            - if current_user && current_user.job_id
+              - begin
+                - job = Delayed::Job.find(current_user.job_id)
+              - rescue
+                - job = nil
+              - if job
+                - if job.failed? and job.updated_at > Time.now - 3600
+                  %div{:class => "alert-message block-message warning"}
+                    - if job.last_error =~ /Rate limit exceeded./
+                      Rate limit exceeded, come back in an hour or so
+                      %br
+                      = "(error occured at: #{job.updated_at})"
+                    - else
+                      Erm, something went wrong - Twitter API may be sulking. Please try again later
                 - else
-                  Refreshing favorites  
+                  %div{:class => "alert-message block-message info"}
+                    Refreshing favorites
 
-          = yield
+            = yield
 
-      %footer
-        %nav
-          %ul
-            %li
-              %a{:href=>"http://github.com/lizconlan/favtags"} Source code
-              %li
-                %a{:href=>"/credits"} Credits
+    %footer
+      %ul
+        %li
+          %a{:href=>"http://github.com/lizconlan/favtags"} Source code
+        %li
+          %a{:href=>"/credits"} Credits

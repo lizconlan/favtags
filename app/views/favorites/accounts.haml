@@ -1,9 +1,10 @@
-#page_head
-  =link_to "#{current_user.name}'s favorites", :controller => :favorites
-  &nbsp;&gt;&nbsp;
-  %h2= "Accounts you have faved"
+.page-header
+  %h2= "Faved Accounts"
+  
+=render :partial => "tabs"
 
--@accounts.each do |account|
-  %p 
-    = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
-    = "(#{account[:count]})"
+.account_list
+  -@accounts.each do |account|
+    %p 
+      = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
+      = "(#{account[:count]})"

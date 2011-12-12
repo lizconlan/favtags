@@ -1,6 +1,4 @@
-#page_head
-  =link_to "#{@current_user.name}'s favorites", :controller => :favorites
-  &nbsp;&gt;&nbsp;
+.page-header
   %h2 Load favorites
     
 #section
@@ -32,4 +30,4 @@
           if you want)
         
       - form_tag('/favorites/load') do
-        %input{:type => 'submit', :value => 'OK, load my favorites'}
+        %input{:type => 'submit', :class => 'btn primary', :value => 'OK, load my favorites'}
