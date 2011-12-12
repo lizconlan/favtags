@@ -8,7 +8,9 @@
           %strong
             =link_to tweet.twitterer_name, {:controller => 'favorites', :action => :index, :account => tweet.twitterer_name}, {:title => "view favorites posted by #{tweet.twitterer_name}"}
             (#{tweet.twitterer_real_name})
-            %br
+          %small
+            %a{:href => "http://twitter.com/#{tweet.twitterer_name}"} view account on twitter.com &rarr;
+          %br
         -if tweet.twitterer_protected
           %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
         %span= tweet.html_text
