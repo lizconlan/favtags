@@ -14,7 +14,7 @@
         %span= tweet.html_text
         %br    
         %span
-          =link_to "#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}", "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}"
+          ="#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}"
       %ul.tags
         -tweet.tags.each do |tag|
           %li
