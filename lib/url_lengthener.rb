@@ -13,8 +13,13 @@ class UrlLengthener
   end
   
   private
-    def self.ping_url url      
-      parts = URI.parse(url)
+    def self.ping_url url
+      begin
+        parts = URI.parse(url)
+      rescue
+        #return straight away if there's a problem with the url
+        return {:moved => false, :location => url}
+      end
       #return straight away if there's no host part
       return {:moved => false, :location => url} unless parts.host
       if EXEMPTIONS.include?(parts.host)
