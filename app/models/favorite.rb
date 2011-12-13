@@ -37,7 +37,7 @@ class Favorite < ActiveRecord::Base
     urls.each do |url|
       lengthened << url.short
       full_links << url.full
-      html.gsub!(url.short, "<a title=\"#{url.full}\" href=\"#{url.short}\">#{url.full.gsub(/\?(.*)/,"?&hellip;")}</a>")
+      html.gsub!(url.short, display_url(url.short, url.full))
     end
     html.scan(/(http(?:[^\s\"\<])*)/).each do |match|
       match = match.to_s
@@ -48,14 +48,14 @@ class Favorite < ActiveRecord::Base
       unless lengthened.include?(match) or full_links.include?(match) or match.include?("&hellip;")
         expanded = UrlLengthener.expand_url(match)
         if expanded == match
-          html.gsub!(match, "<a title=\"#{expanded}\" href=\"#{match}\">#{expanded.gsub(/\?(.*)/,"?&hellip;")}</a>")
+          html.gsub!(match, display_url(match, expanded))
         else
           new_url = Url.new()
           new_url.short = match
           new_url.full = UrlLengthener.expand_url(match)
           urls << new_url
           self.save
-          html.gsub!(match, "<a title=\"#{new_url.full}\" href=\"#{match}\">#{new_url.full.gsub(/\?(.*)/,"?&hellip;")}</a>")
+          html.gsub!(match, display_url(match, new_url.full))
         end
       end
     end
@@ -156,4 +156,14 @@ class Favorite < ActiveRecord::Base
     self.destroy
   end
   
+  def display_url(link, full_url)
+    display_url = full_url.dup
+    url_parts = URI.parse(display_url)
+    if url_parts.query
+      qs = "?..."
+    else
+      qs = ""
+    end
+    %Q|<a title="#{full_url}" href="#{link}">#{url_parts.host}#{url_parts.path}#{qs}</a>|
+  end
 end
