@@ -1,26 +1,27 @@
-body,fieldset{line-height: 1.3em;}
-section#main{margin-top:60px;}
-.topbar img{padding:8px 2px 0 20px;float:left;}
-.topbar span .text{color:#fff;padding:8px 4px 0 4px;float:left;}
-.container{width:650px;position:relative;}
+body,fieldset{line-height: 1.3em}
+section#main{margin-top:60px}
+.topbar img{padding:8px 2px 0 20px;float:left}
+.topbar span .text{color:#fff;padding:8px 4px 0 4px;float:left}
+.container{width:650px;position:relative}
 footer{text-align:center;background-color:#EEE;margin-bottom:0;padding-bottom:1em;border-top:1px solid #DDD}
-footer ul{list-style:none;padding:0;margin:0;}
-footer li{display:inline;padding:0 0.4em;}
-.timeline,.tag_list,.account_list{border-left:1px solid #DDD; border-right:1px solid #DDD;padding:1em;border-bottom:1px solid #DDD;}
-ul.tabs{margin-bottom:0;}
-a.twitter_button{display:block;width:150px;height:23px;background-image:url(/images/twitter_signin.png);text-indent: -9999px;}
-a.twitter_button:hover{background-position:center;}
-a.twitter_button:active{background-position:bottom;}
-.tweet input{float:left;}
-.tweet_body{margin-left:20px;font-size:15px;}
-.twitterer{padding-bottom:0.4em;}
-.button_bar{margin-left:24px;}
-.acc_link{color:#999;font-size:12px;}
-.acc_link a{color:#999;}
-.timestamp{font-size:0.8em;padding:0.6em 0;}
-.tweet_text{width:400px;}
-ul.tags{width:100%;list-style:none;margin:0.5em;margin-left:24px;padding:0 0 1em 0;}
-ul.tags li{font-size:0.8em;display:inline;padding:0.2em 0 0.2em 0.5em;margin-right:0.5em;margin-top:0.4em;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;background-color:silver;color:#000;font-size:13px;}
-ul.tags li .remove_tag{border-left: white 2px solid;}
-ul.tags li .remove_tag a {padding:0.2em 0.5em;color:black;}
-ul.tags li .remove_tag a:hover{border-top-right-radius:6px;border-bottom-right-radius:6px;-moz-border-radius-topright:6px;-moz-border-radius-bottomright:6px;-webkit-border-top-right-radius:6px;-webkit-border-bottom-right-radius:6px;background-color:black;color:silver;text-decoration:none;}
+footer ul{list-style:none;padding:0;margin:0}
+footer li{display:inline;padding:0 0.4em}
+.timeline,.tag_list,.account_list{border-left:1px solid #DDD; border-right:1px solid #DDD;padding:1em;border-bottom:1px solid #DDD}
+ul.tabs{margin-bottom:0}
+a.twitter_button{display:block;width:150px;height:23px;background-image:url(/images/twitter_signin.png);text-indent: -9999px}
+a.twitter_button:hover{background-position:center}
+a.twitter_button:active{background-position:bottom}
+.tweet input{float:left}
+.tweet_selection{float:left;margin-top:0.2em}
+.tweet_body{margin-left:20px;font-size:15px}
+.twitterer{padding-bottom:0.4em}
+.button_bar{margin-left:24px}
+.acc_link{color:#999;font-size:12px}
+.acc_link a{color:#999}
+.timestamp{font-size:0.8em;padding:0.6em 0}
+.tweet_text{width:400px}
+ul.tags{width:100%;list-style:none;margin:0.5em;margin-left:24px;padding:0 0 1em 0}
+ul.tags li{font-size:0.8em;display:inline;padding:0.2em 0 0.2em 0.5em;margin-right:0.5em;margin-top:0.4em;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;background-color:silver;color:#000;font-size:13px}
+ul.tags li .remove_tag{border-left: white 2px solid}
+ul.tags li .remove_tag a {padding:0.2em 0.5em;color:black}
+ul.tags li .remove_tag a:hover{border-top-right-radius:6px;border-bottom-right-radius:6px;-moz-border-radius-topright:6px;-moz-border-radius-bottomright:6px;-webkit-border-top-right-radius:6px;-webkit-border-bottom-right-radius:6px;background-color:black;color:silver;text-decoration:none}
