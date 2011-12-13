@@ -49,18 +49,17 @@ class User < TwitterAuth::GenericUser
     names
   end
 
-  private
-  
-    def client(access_token, access_secret)
-      Twitter.configure do |config|
-        config.consumer_key = TwitterAuth.config['oauth_consumer_key']
-        config.consumer_secret = TwitterAuth.config['oauth_consumer_secret']
-        config.oauth_token = access_token
-        config.oauth_token_secret = access_secret
-      end
-      @client ||= Twitter::Client.new
+  def client(access_token, access_secret)
+    Twitter.configure do |config|
+      config.consumer_key = TwitterAuth.config['oauth_consumer_key']
+      config.consumer_secret = TwitterAuth.config['oauth_consumer_secret']
+      config.oauth_token = access_token
+      config.oauth_token_secret = access_secret
     end
+    @client ||= Twitter::Client.new
+  end
 
+  private
     def load_some_favorites
       tweets = "starting"
       i = 0
