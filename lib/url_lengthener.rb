@@ -15,7 +15,7 @@ class UrlLengthener
   private
     def self.ping_url url
       begin
-        parts = URI.parse(url)
+        parts = URI.parse(url.gsub(" ", "%20"))
       rescue
         #return straight away if there's a problem with the url
         return {:moved => false, :location => url}

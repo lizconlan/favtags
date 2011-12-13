@@ -158,7 +158,7 @@ class Favorite < ActiveRecord::Base
   
   def display_url(link, full_url)
     display_url = full_url.dup
-    url_parts = URI.parse(display_url)
+    url_parts = URI.parse(display_url.gsub(" ", "%20"))
     if url_parts.query
       qs = "?..."
     else
