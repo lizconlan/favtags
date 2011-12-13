@@ -1,18 +1,18 @@
-#page_head
-  =link_to "#{current_user.name}'s favorites", :controller => :favorites
-  &nbsp;&gt;&nbsp;
+.page-header
   %h2 Merge tags
   
 - if @error
   %p 
     =@error
   %a{:href => "/favorites/tags"} Go back to the tags page
-- else  
-  - form_tag('/favorites/update_tags') do
-    %p
-      Choose which tag name to keep:
-    -@tags.each do |tag|
-      %input{:type => :hidden, :name => "tag_#{tag.id}", :value => "#{tag.id}" }
-      %input{:type => :radio, :name => "into", :value=> tag.id }= tag.name
-      %br
-    =submit_tag "Merge"
+- else
+  .tags
+    - form_tag('/favorites/update_tags') do
+      %p
+        Choose which tag name to keep:
+      -@tags.each do |tag|
+        %p
+          %input{:type => :hidden, :name => "tag_#{tag.id}", :value => "#{tag.id}" }
+          %input{:type => :radio, :name => "into", :id =>"tag_#{tag.id}", :value=> tag.id }
+          %label{:for => "tag_#{tag.id}"}= tag.name
+      =submit_tag "Merge", {:class => "btn primary"}
