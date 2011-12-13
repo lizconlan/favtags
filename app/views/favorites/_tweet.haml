@@ -8,15 +8,16 @@
           %strong
             =link_to tweet.twitterer_name, {:controller => 'favorites', :action => :index, :account => tweet.twitterer_name}, {:title => "view favorites posted by #{tweet.twitterer_name}"}
             (#{tweet.twitterer_real_name})
-          %small
-            %a{:href => "http://twitter.com/#{tweet.twitterer_name}"} view account on twitter.com &rarr;
-          %br
-        -if tweet.twitterer_protected
-          %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
-        %span= tweet.html_text
-        %br    
-        %span
-          ="#{tweet.posted.to_s(:twitter)} #{tweet.utc_offset}"
+          %span.acc_link
+            |
+            %a{:href => "http://twitter.com/#{tweet.twitterer_name}"} <b>@#{tweet.twitterer_name}</b> on twitter.com &rarr;
+        .tweet_text
+          -if tweet.twitterer_protected
+            %img.lock{:src => "/images/lock_icon.gif", :alt => "protected tweet", :width => "12", :height => "15"}
+          %span= tweet.html_text
+        %div{:class => "timestamp", :data => {:timestamp => "#{tweet.posted.to_s(:rfc822)}"} }
+          = display_time(tweet.posted, tweet.utc_offset)
+        
       %ul.tags
         -tweet.tags.each do |tag|
           %li
@@ -28,7 +29,16 @@
             - else
               %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
       %div{:class => "button_bar"}
+        - if @account
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+        - elsif @tag
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+        - else
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+        &nbsp;
+        %a{:href => "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}", :class => "btn small"} View on Twitter.com
         - unless tweet.twitterer_protected
+          &nbsp;
           - if (session[:retweeted] and !session[:retweeted].split(",").include?(tweet.tweet_id)) or session[:retweeted].nil?
             - if @account
               = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small"}
@@ -36,13 +46,4 @@
               = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small"}
             - else
               = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small"}
-          &nbsp;
-        %a{:href => "http://twitter.com/#{tweet.twitterer_name}/status/#{tweet.tweet_id}", :class => "btn small"} View on Twitter.com
-        &nbsp;
-        - if @account
-          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
-        - elsif @tag
-          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
-        - else
-          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
   %br

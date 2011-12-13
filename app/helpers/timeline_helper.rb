@@ -25,4 +25,14 @@ module TimelineHelper
     
     range
   end
+  
+  def display_time(time, utc_offset)
+    disp_time = time.dup
+    disp_time = disp_time.in_time_zone(utc_offset.to_i/100)
+    disp_time = disp_time.to_s(:display).gsub("AM", "am").gsub("PM", "pm")
+    if disp_time =~ /, 0(\d:)/
+      disp_time.gsub!(", 0#{$1}", ", #{$1}")
+    end
+    disp_time + " " + utc_offset
+  end
 end

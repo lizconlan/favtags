@@ -11,9 +11,12 @@ a.twitter_button{display:block;width:150px;height:23px;background-image:url(/ima
 a.twitter_button:hover{background-position:center;}
 a.twitter_button:active{background-position:bottom;}
 .tweet input{float:left;}
-.tweet_body{margin-left:20px;font-size:16px;}
+.tweet_body{margin-left:20px;font-size:15px;}
 .button_bar{margin-left: 24px;}
-.tweet small a{color: silver;font-size:12px;}
+.acc_link{color: #999;font-size:12px;}
+.acc_link a{color: #999;}
+.timestamp{font-size:0.8em;padding: 0.6em 0;}
+.tweet_text{width: 400px;padding-top: 0.4em;}
 ul.tags {
   width: 100%;
   list-style: none;
