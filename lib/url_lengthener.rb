@@ -31,7 +31,11 @@ class UrlLengthener
         return {:moved => false, :location => url}
       end
       req = Net::HTTP.new(parts.host, parts.port)
-      header = req.head(parts.path)
+      if parts.path.empty?
+        header = req.head("/")
+      else
+        header = req.head(parts.path)
+      end
       return {:moved => false, :location => url} unless header.get_fields("location") #error occured somewhere, give me back my url
       if header.get_fields("location").first[0..0] == "/"
         #in-site redirection with relative url, return the original
