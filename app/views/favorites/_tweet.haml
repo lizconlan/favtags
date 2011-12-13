@@ -18,17 +18,18 @@
           %span= tweet.html_text
         %div{:class => "timestamp", :data => {:timestamp => "#{tweet.posted.to_s(:rfc822)}"} }
           = display_time(tweet.posted, tweet.utc_offset)
-        
-      %ul.tags
-        -tweet.tags.each do |tag|
-          %li
-            ="#{tag.name}&nbsp;"
-            - if @account
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
-            - elsif @tag
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :tags => @tag.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
-            - else
-              %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+      
+      - if tweet.tags.count > 0
+        %ul.tags
+          -tweet.tags.each do |tag|
+            %li
+              ="#{tag.name}&nbsp;"
+              - if @account
+                %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              - elsif @tag
+                %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :tags => @tag.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              - else
+                %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
       %div{:class => "button_bar"}
         - if @account
           = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
