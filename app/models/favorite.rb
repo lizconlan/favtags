@@ -38,7 +38,7 @@ class Favorite < ActiveRecord::Base
     #stored short links
     urls.each do |url|
       lengthened << url.short
-      full_links << url.full
+      full_links << url.full.gsub(" ", "%20")
       html.gsub!(url.short, display_url(url.short, url.full))
     end
     
