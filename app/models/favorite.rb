@@ -39,7 +39,7 @@ class Favorite < ActiveRecord::Base
       full_links << url.full
       html.gsub!(url.short, display_url(url.short, url.full))
     end
-    html.scan(/(http(?:[^\s\"\<])*)/).each do |match|
+    html.scan(/(http(?:[^\s\"\”\<])*)/).each do |match|
       match = match.to_s
       if match =~ /(.*)\.$/
         match = $1
