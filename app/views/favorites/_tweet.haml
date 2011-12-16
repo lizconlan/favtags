@@ -23,7 +23,7 @@
         %ul.tags
           -tweet.tags.each do |tag|
             %li
-              ="#{tag.name}&nbsp;"
+              %a.tag{:href => "/favorites/tags/#{tag.name}"}= tag.name
               - if @account
                 %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
               - elsif @tag
