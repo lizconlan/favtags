@@ -35,9 +35,9 @@ class TagsController < ApplicationController
     end
     
     case params["commit"]
-      when "Delete tags"
+      when "Delete selected tags"
         delete_tags()
-      when "Merge tags"
+      when "Merge selected tags"
         merge_tags()
       else
         if params[:into]

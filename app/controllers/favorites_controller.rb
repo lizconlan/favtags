@@ -91,7 +91,6 @@ class FavoritesController < ApplicationController
             tweet.tag(tag.name, current_user.id)
           end
         end
-        action = params[:from]
         page = params[:page]
         page = 1 if page.to_i == 0
         if params[:account] != ""
@@ -147,7 +146,13 @@ class FavoritesController < ApplicationController
     end
     
     unless @fail_tag
-      redirect_to :action => 'index', :page => params[:page]
+      if params[:account] != ""
+        redirect_to :action => 'index', :page => params[:page], :account => params[:account]
+      elsif params[:tag] != ""
+        redirect_to :action => 'index', :page => params[:page], :tag => params[:tag]
+      else
+        redirect_to :action => 'index', :page => params[:page]
+      end
     end
   end
   
