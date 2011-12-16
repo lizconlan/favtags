@@ -32,3 +32,4 @@ ul.tags li .remove_tag a:hover{border-top-right-radius:6px;border-bottom-right-r
 .submit_buttons input{margin:0 0.6em;}
 .tags label{float:none;margin-left:10px;}
 .tags input{margin-top:0.3em;float:left;}
+.btn.primary{margin-left: 0.4em;}
