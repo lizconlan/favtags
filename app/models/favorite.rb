@@ -177,6 +177,6 @@ class Favorite < ActiveRecord::Base
     else
       qs = ""
     end
-    %Q|<a title="#{full_url}" href="#{link}">#{url_parts.host}#{url_parts.path}#{qs}</a>|
+    %Q|<a title="#{full_url}" href="#{link}">#{url_parts.host.gsub("www.","")}#{url_parts.path}#{qs}</a>|
   end
 end
