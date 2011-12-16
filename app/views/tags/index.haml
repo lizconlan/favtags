@@ -3,29 +3,30 @@
   
 =render :partial => "/favorites/tabs"
 
-%div{:class => "tag_list span9"}
-  - form_tag('/favorites/update_tags') do
-    .row
-      .span4
-        -@tags[0..(@tags.count/2).ceil].each do |tag|
-          .editable_tag
-            %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
-            = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name.gsub("-", "--").gsub(" ", "-")
-            = "(#{tag.favorites.count})"
-            .tag_buttons
-              =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link btn small"}
-              =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link btn small"}
-      .span4
-        -@tags[(@tags.count/2).ceil+1..@tags.count].each do |tag|
-          .editable_tag
-            %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
-            = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name.gsub("-", "--").gsub(" ", "-")
-            = "(#{tag.favorites.count})"
-            .tag_buttons
-              =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link btn small"}
-              =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link btn small"}
-    .row
-      .span9
-        .submit_buttons
-          =submit_tag "Merge tags", {:class => "btn primary"}
-          =submit_tag "Delete tags", {:class => "btn primary"}
+%div{:class => "tag_list"}
+  .span9
+    - form_tag('/favorites/update_tags') do
+      .row
+        .span4
+          -@tags[0..(@tags.count/2).ceil].each do |tag|
+            .editable_tag
+              %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
+              = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name.gsub("-", "--").gsub(" ", "-")
+              = "(#{tag.favorites.count})"
+              .tag_buttons
+                =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link btn small"}
+                =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link btn small"}
+        .span4
+          -@tags[(@tags.count/2).ceil+1..@tags.count].each do |tag|
+            .editable_tag
+              %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
+              = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name.gsub("-", "--").gsub(" ", "-")
+              = "(#{tag.favorites.count})"
+              .tag_buttons
+                =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link btn small"}
+                =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link btn small"}
+      .row
+        .span9
+          .submit_buttons
+            =submit_tag "Merge tags", {:class => "btn primary"}
+            =submit_tag "Delete tags", {:class => "btn primary"}

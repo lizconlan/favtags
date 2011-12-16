@@ -3,15 +3,16 @@
   
 =render :partial => "tabs"
 
-%div{:class => "account_list span9"}
-  .row
-    .span4
-      -@accounts[0..(@accounts.count/2).ceil].each do |account|
-        %p
-          = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
-          = "(#{account[:count]})"
-    .span4
-      -@accounts[(@accounts.count/2).ceil+1..@accounts.count].each do |account|
-        %p
-          = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
-          = "(#{account[:count]})"
+%div{:class => "account_list"}
+  .span9
+    .row
+      .span4
+        -@accounts[0..(@accounts.count/2).ceil].each do |account|
+          %p
+            = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
+            = "(#{account[:count]})"
+      .span4
+        -@accounts[(@accounts.count/2).ceil+1..@accounts.count].each do |account|
+          %p
+            = link_to account[:name], :controller => 'favorites', :action => 'index', :account => account[:name]
+            = "(#{account[:count]})"
