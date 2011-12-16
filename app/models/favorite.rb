@@ -34,11 +34,15 @@ class Favorite < ActiveRecord::Base
     counter = 0
     lengthened = []
     full_links = []
+    
+    #stored short links
     urls.each do |url|
       lengthened << url.short
       full_links << url.full
       html.gsub!(url.short, display_url(url.short, url.full))
     end
+    
+    #new short links
     html.scan(/(http(?:[^\s\"\”\<])*)/).each do |match|
       match = match.to_s
       if match =~ /(.*)\.$/
@@ -60,13 +64,21 @@ class Favorite < ActiveRecord::Base
       end
     end
     
+    #account names
     html.scan(/(?:\W|,|^)(@[a-zA-Z0-9_]+)/).each do |match|
       html.gsub!(match.to_s, %Q|<a href="http://twitter.com/#{match.first.gsub("@", "")}">#{match.to_s.strip}</a>|)
     end
+    
+    #hashtags
     hashtags.each do |match|
-      html.gsub!("\##{match}".to_s, "<a href=\"http://search.twitter.com/search?q=%23#{match.to_s}\">\##{match.to_s.strip}</a>")
+      html.gsub!("\##{match} ".to_s, "<a href=\"http://search.twitter.com/search?q=%23#{match.to_s}\">\##{match.to_s.strip}</a> ")
+      html.gsub!(/\##{match.to_s}$/, "<a href=\"http://search.twitter.com/search?q=%23#{match.to_s}\">\##{match.to_s.strip}</a>")
     end
+    
+    #html encode newlines
     html.gsub!("\n", "<br />")
+    
+    #html encode script tags
     html.gsub!(/\<\s*script/, "&gt;script")
     html.gsub!("</\s*script", "&gt;/script")
     html.to_s
@@ -74,7 +86,8 @@ class Favorite < ActiveRecord::Base
   
   def hashtags
     potentials = text.scan(/(?:\s|^)#([a-zA-Z0-9\-]{2,})/).flatten
-    potentials.delete_if { |x| x =~ /^[0-9]*$/}
+    potentials = potentials.delete_if { |x| x =~ /^[0-9]*$/}
+    potentials.delete_if { |x| !(" #{text} ".include?(" ##{x} "))}
   end
   
   def inline_urls
