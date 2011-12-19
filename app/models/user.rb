@@ -38,6 +38,10 @@ class User < TwitterAuth::GenericUser
     Favorite.find(:all, :conditions => ["text LIKE ? and user_id=?", "%#{search_string}%", self.id])
   end
   
+  def tag_list_with_count
+    faves = Favorite.find_by_sql("select tag.id, tag.name, count(fav.favorite_id) as count from tags tag inner join favorites_tags fav on tag.id = fav.tag_id where tag.user_id = #{self.id} group by fav.tag_id order by tag.name;")
+  end
+  
   def faved_accounts
     grouped_faves = self.favorites.group_by { |x| x.twitterer_name }
     accounts = []

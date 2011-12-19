@@ -12,7 +12,7 @@
             .editable_tag
               %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
               = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name.gsub("-", "--").gsub(" ", "-")
-              = "(#{tag.favorites.count})"
+              = "(#{tag.count})"
               .tag_buttons
                 =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link btn small"}
                 =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link btn small"}
@@ -21,7 +21,7 @@
             .editable_tag
               %input{:type => :checkbox, :id => tag.id, :name => "tag_#{tag.id}", :value=> tag.id }
               = link_to tag.name, :controller => 'favorites', :action => 'index', :tag => tag.name.gsub("-", "--").gsub(" ", "-")
-              = "(#{tag.favorites.count})"
+              = "(#{tag.count})"
               .tag_buttons
                 =link_to "delete", {:action => :delete, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "delete '#{tag.name}' tag", :class => "delete_tag_link btn small"}
                 =link_to "rename", {:action => :rename, :controller => 'tags', :tag => tag.name.gsub("-", "--").gsub(" ", "-")}, {:title => "rename '#{tag.name}' tag", :class => "delete_tag_link btn small"}

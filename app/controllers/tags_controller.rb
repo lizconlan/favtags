@@ -2,7 +2,7 @@ class TagsController < ApplicationController
   before_filter :login_required
   
   def index
-    @tags = current_user.tags
+    @tags = current_user.tag_list_with_count
   end
   
   def delete
