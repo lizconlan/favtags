@@ -31,6 +31,13 @@ class User < TwitterAuth::GenericUser
     end
   end
   
+  def search_faves(search_string)
+    search_string.gsub!("'", "\'")
+    search_string.gsub!("%", '\%')
+    search_string.gsub!(";", '\;')
+    Favorite.find(:all, :conditions => ["text LIKE ? and user_id=?", "%#{search_string}%", self.id])
+  end
+  
   def faved_accounts
     grouped_faves = self.favorites.group_by { |x| x.twitterer_name }
     accounts = []
