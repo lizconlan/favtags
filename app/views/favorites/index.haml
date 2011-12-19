@@ -3,9 +3,19 @@
     %h2= "Favorites tagged \"#{@tag}\""
   - elsif @account
     %h2= "Favorites from #{@favorites.first.twitterer_name} (#{@favorites.first.twitterer_real_name})"
+  - elsif @query
+    %h2= "Results for \"#{CGI::escapeHTML(@query)}\""
   - else
     %h2 Favorites
 
+- if current_user
+  #search_bar
+    %form{:action => "/favorites/search"}
+      %fieldset
+        %label{:for => "q"} Search:&nbsp;
+        %input{:type => :text, :id => "q", :name => "q", :value=> params[:q] }
+        %input{:type => "submit", :value => "Go", :class => "btn primary"}
+        
 #faves
   - form_tag('/favorites/tag') do
     =render :partial => "navigation"
@@ -19,15 +29,22 @@
           =hidden_field_tag :page, params[:page]
           =hidden_field_tag :account, @account
           =hidden_field_tag :tag, @tag
+          =hidden_field_tag :q, @query
           = select_tag :tag_choices, options_for_select(@tag_options), :onchange => "this.form.submit();"
           %noscript
             =submit_tag :submit
           
-      - if @favorites.nil?
-        .tweet
-          Looks like you have no favorites stored. Maybe you should
-          %a{:href => "/favorites/load"}
-            load some
+      - if @favorites.nil? or @favorites.empty?
+        .tweet_fail
+          - if @query
+            %p
+              Sorry there were no results for
+              %b= CGI::escapeHTML(@query)
+          - else
+            %p
+              Looks like you have no favorites stored. Maybe you should
+              %a{:href => "/favorites/load"}
+                load some
       - else
         -@show_tweep = true
         - if @favorites.count < 1

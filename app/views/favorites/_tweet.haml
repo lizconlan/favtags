@@ -28,6 +28,8 @@
                 %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :account => @account, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
               - elsif @tag
                 %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :tags => @tag.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
+              - elsif @query
+                %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :q => @query, :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
               - else
                 %span.remove_tag>= link_to "x", {:action => 'remove_tag', :id => tweet.id, :tag => tag.name.gsub("-", "--").gsub(" ", "-"), :page => params[:page]}, {:title => "remove '#{tag.name}' tag from this tweet"}
       %div{:class => "button_bar"}
@@ -35,6 +37,8 @@
           = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
         - elsif @tag
           = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
+        - elsif @query
+          = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :q => @query, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
         - else
           = link_to "Delete from favorites", {:controller => 'favorites', :action => :delete, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small danger", :title => "delete this from your favorites"}
         &nbsp;
@@ -46,5 +50,7 @@
               = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :account => @account, :page => params[:page]}, {:class => "btn small"}
             - elsif @tag
               = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :tags => @tag, :page => params[:page]}, {:class => "btn small"}
+            - elsif @query
+              = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :q => @query, :page => params[:page]}, {:class => "btn small"}
             - else
               = link_to "Retweet", {:controller => 'favorites', :action => :retweet, :id => tweet.tweet_id, :page => params[:page]}, {:class => "btn small"}

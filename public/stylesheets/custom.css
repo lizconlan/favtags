@@ -12,6 +12,7 @@ a.twitter_button{display:block;width:150px;height:23px;background-image:url(/ima
 a.twitter_button:hover{background-position:center}
 a.twitter_button:active{background-position:bottom}
 .tweet input{float:left}
+.tweet_fail p{margin-top:1.2em;margin-left:0.5em;font-size:1.1em}
 .tweet_selection{float:left;margin-top:0.2em}
 .tweet_body{margin-left:20px;font-size:15px}
 .twitterer{padding-bottom:0.4em}
@@ -35,7 +36,10 @@ ul.tags li a.tag:hover{border-top-left-radius:6px;border-bottom-left-radius:6px;
 .editable_tag .tag_buttons{margin-left:10px;padding:0.2em}
 .editable_tag .tag_buttons a{padding:0.4em 1em; margin:0 0.3em}
 .submit_buttons{text-align:center}
-.submit_buttons input{margin:0 0.6em;}
-.tags label{float:none;margin-left:10px;}
-.tags input{margin-top:0.3em;float:left;}
-.btn.primary{margin-left: 0.4em;}
+.submit_buttons input{margin:0 0.6em}
+.tags label{float:none;margin-left:10px}
+.tags input{margin-top:0.3em;float:left}
+.btn.primary{margin-left:0.4em}
+
+#search_bar{text-align:right}
+#search_bar label{float:none}

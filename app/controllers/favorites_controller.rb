@@ -7,6 +7,7 @@ class FavoritesController < ApplicationController
     unless tag_name.nil?
       @tag = tag_name.gsub("-", " ").gsub("  ", "-")
     end
+    @query = params[:q]
     
     @current_page = params[:page].to_i.zero? ? 1 : params[:page].to_i
     @current_page = 1 if @current_page.nil?
@@ -22,17 +23,36 @@ class FavoritesController < ApplicationController
       tagged_faves = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
       
        respond_to do |format|
-          format.html do ||
-            @max_page = (tagged_faves.count.to_f / Favorite.per_page).ceil
-            @max_page = 1 if @max_page == 0
-            @current_page = @max_page if @current_page > @max_page
-            @favorites = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
-          end
-          @favorites = tagged_faves
-          format.xml { render :action => "gen_xml.rxml", :layout => false }
-          format.json { render :action => "gen_json.json.erb", :layout => false }
-          format.js { render :action => "gen_json.json.erb", :layout => false }
+        format.html do ||
+          @max_page = (tagged_faves.count.to_f / Favorite.per_page).ceil
+          @max_page = 1 if @max_page == 0
+          @current_page = @max_page if @current_page > @max_page
+          @favorites = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
         end
+        @favorites = tagged_faves
+        format.xml { render :action => "gen_xml.rxml", :layout => false }
+        format.json { render :action => "gen_json.json.erb", :layout => false }
+        format.js { render :action => "gen_json.json.erb", :layout => false }
+      end
+    elsif @query
+      @show_twitterer = true
+      results = current_user.search_faves(@query)
+      
+      respond_to do |format|
+        format.html do ||
+          @max_page = (results.count.to_f / Favorite.per_page).ceil
+          @max_page = 1 if @max_page == 0
+          @current_page = @max_page if @current_page > @max_page
+          start_record = (@current_page - 1) * Favorite.per_page
+          last_record = start_record + Favorite.per_page - 1
+          last_record = results.count - 1 if results.count-1 < last_record
+          @favorites = results[start_record..last_record]
+        end
+        @favorites = results
+        format.xml { render :action => "gen_xml.rxml", :layout => false }
+        format.json { render :action => "gen_json.json.erb", :layout => false }
+        format.js { render :action => "gen_json.json.erb", :layout => false }
+      end
     elsif current_user.favorites.count > 0
       @show_twitterer = true
       
@@ -97,6 +117,8 @@ class FavoritesController < ApplicationController
           redirect_to :action => 'index', :page => page, :account => params[:account]
         elsif params[:tag] != ""
           redirect_to :action => 'index', :page => page, :tag => params[:tag]
+        elsif params[:q] != ""
+          redirect_to :action => 'index', :page => page, :q => params[:q]
         else
           redirect_to :action => 'index', :page => page
         end
@@ -150,6 +172,8 @@ class FavoritesController < ApplicationController
         redirect_to :action => 'index', :page => params[:page], :account => params[:account]
       elsif params[:tag] != ""
         redirect_to :action => 'index', :page => params[:page], :tag => params[:tag]
+      elsif params[:q] != ""
+        redirect_to :action => 'index', :page => params[:page], :q => params[:q]
       else
         redirect_to :action => 'index', :page => params[:page]
       end
@@ -168,6 +192,8 @@ class FavoritesController < ApplicationController
       redirect_to :action => 'index', :page => params[:page], :account => params[:account]
     elsif params[:tags]
       redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
+    elsif params[:q] != ""
+      redirect_to :action => 'index', :page => params[:page], :q => params[:q]
     else
       redirect_to :action => 'index', :page => params[:page]
     end
@@ -184,6 +210,8 @@ class FavoritesController < ApplicationController
       redirect_to :action => 'index', :page => params[:page], :account => params[:account]
     elsif params[:tags]
       redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
+    elsif params[:q] != ""
+      redirect_to :action => 'index', :page => params[:page], :q => params[:q]
     else
       redirect_to :action => 'index', :page => params[:page]
     end
@@ -209,6 +237,8 @@ class FavoritesController < ApplicationController
       redirect_to :action => 'index', :page => params[:page], :account => params[:account]
     elsif params[:tags]
       redirect_to :action => 'index', :page => params[:page], :tag => params[:tags]
+    elsif params[:q]
+      redirect_to :action => 'index', :page => params[:page], :q => params[:q]
     else
       redirect_to :action => 'index', :page => params[:page]
     end

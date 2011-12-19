@@ -1,5 +1,5 @@
 %ul.tabs
-  %li{:class => request.request_uri =~ /\/favorites(?:\/?)(?:\?.*)?$/ ? "active" : nil}
+  %li{:class => request.request_uri =~ /\/favorites(?:\/?)(?:search(?:\/?))?(?:\?.*)?$/ ? "active" : nil}
     %a{:href => "/favorites"} Tweets
   %li{:class => request.request_uri =~ /\/accounts/ ? "active" : nil}
     %a{:href => "/favorites/accounts"} Accounts

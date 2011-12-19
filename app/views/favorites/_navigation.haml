@@ -2,7 +2,7 @@
   %ul
     %li{:class => @current_page > 1 ? nil : "disabled"}
       -if @current_page > 1
-        =link_to("&larr; Previous", {:controller => :favorites, :action => :index, :page => @current_page - 1, :tag => @tag, :account => @account})
+        =link_to("&larr; Previous", {:controller => :favorites, :action => :index, :page => @current_page - 1, :tag => @tag, :account => @account, :q => @query})
       - else
         %a{:href => "#"} &larr; Previous
     - range = nav_range(@current_page, @max_page)
@@ -12,9 +12,9 @@
           %a{:href => "#"} ...
       - else    
         %li{:class => i == @current_page ? "active" : nil}
-          =link_to(i, {:controller => :favorites, :action => :index, :page => i, :tag => @tag, :account => @account})
+          =link_to(i, {:controller => :favorites, :action => :index, :page => i, :tag => @tag, :account => @account, :q => @query})
     %li{:class => @current_page < @max_page ? nil : "disabled"}
       - if @current_page < @max_page
-        =link_to("Next &rarr;", {:controller => :favorites, :action => :index, :page => @current_page + 1, :tag => @tag, :account => @account})
+        =link_to("Next &rarr;", {:controller => :favorites, :action => :index, :page => @current_page + 1, :tag => @tag, :account => @account, :q => @query})
       - else
         %a{:href => "#"} Next &rarr;
