@@ -43,12 +43,7 @@ class User < TwitterAuth::GenericUser
   end
   
   def faved_accounts
-    grouped_faves = self.favorites.group_by { |x| x.twitterer_name }
-    accounts = []
-    grouped_faves.keys.each do |account|
-      accounts << {:name => account, :count => grouped_faves[account].count }
-    end
-    accounts.sort { |a,b| [b[:count], a[:name]] <=> [a[:count], b[:name]] }
+    accounts = Favorite.find_by_sql("select twitterer_name as name, count(id) as count from favorites where user_id = #{self.id} group by twitterer_name order by count DESC, twitterer_name")
   end
 
   def has_tag? tag_name
