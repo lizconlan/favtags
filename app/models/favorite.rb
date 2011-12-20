@@ -14,9 +14,11 @@ class Favorite < ActiveRecord::Base
     :message => "already loaded"
   
   class << self
-    def find_all_by_tag_name_and_user_id tag_name, user_id
+    def find_all_by_tag_name_and_user_id(tag_name, user_id, page=1, all=false)
       tag = Tag.find_by_name_and_user_id(tag_name, user_id)
       if tag
+        paginate :per_page => self.per_page, :page => @current_page,
+                 :conditions => ['user_id = ?', current_user.id]
         tag.favorites
       else
         []

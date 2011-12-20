@@ -12,12 +12,12 @@ class FavoritesController < ApplicationController
     @current_page = params[:page].to_i.zero? ? 1 : params[:page].to_i
     @current_page = 1 if @current_page.nil?
         
-    
     if @account
-      @max_page = (current_user.favorites.find_all_by_twitterer_name(@account).count.to_f / Favorite.per_page).ceil
+      @favorites = Favorite.paginate :per_page => Favorite.per_page, :page => @current_page,
+               :conditions => ['user_id = ? and twitterer_name = ?', current_user.id, "#{@account}"]
+      @max_page = @favorites.total_pages
       @max_page = 1 if @max_page == 0
       @current_page = @max_page if @current_page > @max_page
-      @favorites = current_user.favorites.paginate_by_twitterer_name(@account, :page => @current_page)
     elsif @tag
       @show_twitterer = true
       tagged_faves = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
