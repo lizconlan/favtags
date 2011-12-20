@@ -16,14 +16,14 @@ a.twitter_button:active{background-position:bottom}
 .tweet_selection{float:left;margin-top:0.2em}
 .tweet_body{margin-left:20px;font-size:15px}
 .twitterer{padding-bottom:0.4em}
-.button_bar{margin-left:24px}
+.button_bar{margin-left:24px;clear:both;padding-top:1em;}
 .acc_link{color:#999;font-size:12px}
 .acc_link a{color:#999}
 .timestamp{font-size:0.8em;padding:0.6em 0}
 .tweet_text{width:400px}
 
-ul.tags{width:100%;list-style:none;margin:0.5em;margin-left:24px;padding:0 0 1em 0}
-ul.tags li{font-size:0.9em;display:inline;padding:0.2em 0;margin-right:0.5em;margin-top:0.4em;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;background-color:silver;color:#000}
+ul.tags{width:100%;list-style:none;margin:0.5em;margin-left:24px;padding:0 0 1em 0;clear:both}
+ul.tags li{font-size:0.9em;float:left;padding:0.2em 0;margin-right:0.5em;margin-top:0.4em;margin-bottom:0.4em;border-radius:6px;-moz-border-radius:6px;-webkit-border-radius:6px;background-color:silver;color:#000}
 ul.tags li .remove_tag{border-left: white 2px solid}
 
 ul.tags li .remove_tag a{padding:0.2em 0.5em;color:black}
