@@ -107,7 +107,7 @@ class Favorite < ActiveRecord::Base
     
     shortened = []
     inline_urls.each do |url|
-      if url.length > 30
+      if url and url.length > 30
         api_url = "http://api.bit.ly/v3/shorten?login=favtagger&apiKey=#{api_key}&longUrl=#{url}&format=json"
         data = RestClient.get api_url
         result = JSON.parse(data.body)
