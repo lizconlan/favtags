@@ -14,7 +14,8 @@ class FavoritesController < ApplicationController
         
     if @account
       @favorites = Favorite.paginate :per_page => Favorite.per_page, :page => @current_page,
-               :conditions => ['user_id = ? and twitterer_name = ?', current_user.id, "#{@account}"]
+               :conditions => ['user_id = ? and twitterer_name = ?', current_user.id, "#{@account}"],
+               :order => 'posted DESC'
       @max_page = @favorites.total_pages
       @max_page = 1 if @max_page == 0
       @current_page = @max_page if @current_page > @max_page
@@ -47,7 +48,8 @@ class FavoritesController < ApplicationController
     else
       @show_twitterer = true
       @favorites = Favorite.paginate :per_page => Favorite.per_page, :page => @current_page,
-               :conditions => ['user_id = ?', current_user.id]
+               :conditions => ['user_id = ?', current_user.id],
+               :order => 'posted DESC'
       
       if @favorites.empty?
         @favorites = nil

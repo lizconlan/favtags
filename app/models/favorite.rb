@@ -21,13 +21,15 @@ class Favorite < ActiveRecord::Base
       else
         paginate :per_page => self.per_page, :page => page,
                  :conditions => ['favorites.user_id = ? and tags.name = ?', user_id, "#{tag_name}"],
-                 :joins => "inner join favorites_tags on favorites.id = favorites_tags.favorite_id inner join tags on favorites_tags.tag_id = tags.id"
+                 :joins => "inner join favorites_tags on favorites.id = favorites_tags.favorite_id inner join tags on favorites_tags.tag_id = tags.id",
+                 :order => "posted DESC"
       end
     end
     
     def search(search, user, page=1)
       paginate :per_page => self.per_page, :page => page,
-               :conditions => ['text like ? and user_id = ?', "%#{search}%", user]
+               :conditions => ['text like ? and user_id = ?', "%#{search}%", user],
+               :order => "posted DESC"
     end
   end
   
