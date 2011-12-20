@@ -20,12 +20,15 @@ class UrlLengthener
         #return straight away if there's a problem with the url
         return {:moved => false, :location => url}
       end
+      
       #return straight away if there's no host part
-      return {:moved => false, :location => url} unless parts.host
+      return {:moved => false, :location => url} if parts.host.nil? or parts.host.empty?
+      
       if EXEMPTIONS.include?(parts.host)
         #won't get much more sensible, just longer - return as-is
         return {:moved => false, :location => url}
       end
+      
       if parts.host.length > 8 and parts.host != "tinyurl.com"
         #probably not intended as a shortener then - return as-is
         return {:moved => false, :location => url}
