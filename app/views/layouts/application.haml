@@ -57,13 +57,16 @@
               - rescue
                 - job = nil
               - if job
-                - if job.failed? and job.updated_at > Time.now - 3600
-                  %div{:class => "alert-message block-message warning"}
-                    - if job.last_error =~ /Rate limit exceeded./
-                      Rate limit exceeded, come back in an hour or so
-                      %br
-                      = "(error occured at: #{job.updated_at})"
-                    - else
+                - if job.failed? and job.updated_at < Time.now - 3600
+                  - if job.last_error =~ /Rate limit exceeded./
+                    - if current_user.api_calls[:reset_time] > Time.now and current_user.api_calls[:remaining_hits] < 1
+                      %div{:class => "alert-message block-message warning"}
+                        Twitter API rate limit exceeded :(
+                        %br
+                        %br
+                        = "You should get a fresh set in about #{(current_user.api_calls[:reset_time] - Time.now).to_i/60} minutes"
+                  - else
+                    %div{:class => "alert-message block-message warning"}
                       Erm, something went wrong while loading your favorites - might be a Twitter thing, might be us. Please try again later
                 - elsif !job.failed?
                   %div{:class => "alert-message block-message info"}
