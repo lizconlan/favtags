@@ -65,7 +65,7 @@
                       = "(error occured at: #{job.updated_at})"
                     - else
                       Erm, something went wrong - Twitter API may be sulking. Please try again later
-                - else
+                - elsif !job.failed?
                   %div{:class => "alert-message block-message info"}
                     Refreshing favorites
             = yield
