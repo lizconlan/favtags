@@ -23,7 +23,7 @@ class FavoritesController < ApplicationController
       tagged_faves = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
       
        respond_to do |format|
-        format.html do ||
+        format.html do
           @max_page = (tagged_faves.count.to_f / Favorite.per_page).ceil
           @max_page = 1 if @max_page == 0
           @current_page = @max_page if @current_page > @max_page
@@ -36,22 +36,16 @@ class FavoritesController < ApplicationController
       end
     elsif @query
       @show_twitterer = true
-      results = current_user.search_faves(@query)
-      
       respond_to do |format|
-        format.html do ||
-          @max_page = (results.count.to_f / Favorite.per_page).ceil
+        format.html do
+          @favorites = current_user.search_faves(@query, @current_page)
+          @max_page = @favorites.total_pages
           @max_page = 1 if @max_page == 0
           @current_page = @max_page if @current_page > @max_page
-          start_record = (@current_page - 1) * Favorite.per_page
-          last_record = start_record + Favorite.per_page - 1
-          last_record = results.count - 1 if results.count-1 < last_record
-          @favorites = results[start_record..last_record]
         end
-        @favorites = results
-        format.xml { render :action => "gen_xml.rxml", :layout => false }
-        format.json { render :action => "gen_json.json.erb", :layout => false }
-        format.js { render :action => "gen_json.json.erb", :layout => false }
+        format.xml { @favorites = current_user.search_faves(@query, 1, true) ; render :action => "gen_xml.rxml", :layout => false }
+        format.json { @favorites = current_user.search_faves(@query, 1, true) ; render :action => "gen_json.json.erb", :layout => false }
+        format.js { @favorites = current_user.search_faves(@query, 1, true) ; render :action => "gen_json.json.erb", :layout => false }
       end
     elsif current_user.favorites.count > 0
       @show_twitterer = true

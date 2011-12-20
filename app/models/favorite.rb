@@ -22,6 +22,11 @@ class Favorite < ActiveRecord::Base
         []
       end
     end
+    
+    def search(search, user, page=1)
+      paginate :per_page => self.per_page, :page => page,
+               :conditions => ['text like ? and user_id = ?', "%#{search}%", user]
+    end
   end
   
   def shortened_urls

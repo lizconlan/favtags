@@ -31,11 +31,15 @@ class User < TwitterAuth::GenericUser
     end
   end
   
-  def search_faves(search_string)
+  def search_faves(search_string, page=1, all=false)
     search_string.gsub!("'", "\'")
     search_string.gsub!("%", '\%')
     search_string.gsub!(";", '\;')
-    Favorite.find(:all, :conditions => ["text LIKE ? and user_id=?", "%#{search_string}%", self.id])
+    if all
+      Favorite.find(:all, :conditions => ["text LIKE ? and user_id=?", "%#{search_string}%", self.id])
+    else
+      Favorite.search(search_string, self.id, page)
+    end
   end
   
   def tag_list_with_count
