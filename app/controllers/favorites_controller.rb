@@ -20,19 +20,16 @@ class FavoritesController < ApplicationController
       @current_page = @max_page if @current_page > @max_page
     elsif @tag
       @show_twitterer = true
-      tagged_faves = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id)
-      
        respond_to do |format|
         format.html do
-          @max_page = (tagged_faves.count.to_f / Favorite.per_page).ceil
+          @favorites = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id, @current_page)   
+          @max_page = @favorites.total_pages
           @max_page = 1 if @max_page == 0
           @current_page = @max_page if @current_page > @max_page
-          @favorites = tagged_faves.paginate(:page => @current_page, :order => 'posted DESC')
         end
-        @favorites = tagged_faves
-        format.xml { render :action => "gen_xml.rxml", :layout => false }
-        format.json { render :action => "gen_json.json.erb", :layout => false }
-        format.js { render :action => "gen_json.json.erb", :layout => false }
+        format.xml { @favorites = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id, 1, true) ; render :action => "gen_xml.rxml", :layout => false }
+        format.json { @favorites = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id, 1, true) ; render :action => "gen_json.json.erb", :layout => false }
+        format.js { @favorites = Favorite.find_all_by_tag_name_and_user_id(@tag, current_user.id, 1, true) ; render :action => "gen_json.json.erb", :layout => false }
       end
     elsif @query
       @show_twitterer = true

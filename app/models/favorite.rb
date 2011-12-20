@@ -15,13 +15,13 @@ class Favorite < ActiveRecord::Base
   
   class << self
     def find_all_by_tag_name_and_user_id(tag_name, user_id, page=1, all=false)
-      tag = Tag.find_by_name_and_user_id(tag_name, user_id)
-      if tag
-        paginate :per_page => self.per_page, :page => @current_page,
-                 :conditions => ['user_id = ?', current_user.id]
+      if all
+        tag = Tag.find_by_name_and_user_id(tag_name, user_id)
         tag.favorites
       else
-        []
+        paginate :per_page => self.per_page, :page => page,
+                 :conditions => ['favorites.user_id = ? and tags.name = ?', user_id, "#{tag_name}"],
+                 :joins => "inner join favorites_tags on favorites.id = favorites_tags.favorite_id inner join tags on favorites_tags.tag_id = tags.id"
       end
     end
     
