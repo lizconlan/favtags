@@ -183,12 +183,16 @@ class Favorite < ActiveRecord::Base
     while full_url[-1,1] == '#'
       full_url = full_url[0..full_url.length-2]
     end
-    url_parts = URI.parse(full_url)
-    if url_parts.query
-      qs = "?..."
-    else
-      qs = ""
+    begin
+      url_parts = URI.parse(full_url)
+      if url_parts.query
+        qs = "?..."
+      else
+        qs = ""
+      end
+      return %Q|<a title="#{full_url}" href="#{link}">#{url_parts.host.gsub("www.","")}#{url_parts.path}#{qs}</a>|
+    rescue
+      return %Q|<a title="#{full_url}" href="#{link}">#{full_url}</a>|
     end
-    %Q|<a title="#{full_url}" href="#{link}">#{url_parts.host.gsub("www.","")}#{url_parts.path}#{qs}</a>|
   end
 end
