@@ -180,6 +180,9 @@ class Favorite < ActiveRecord::Base
   
   def display_url(link, full_url)
     full_url = full_url.gsub(" ", "%20").gsub('"', "%22")
+    while full_url[-1,1] == '#'
+      full_url = full_url[0..full_url.length-2]
+    end
     url_parts = URI.parse(full_url)
     if url_parts.query
       qs = "?..."
