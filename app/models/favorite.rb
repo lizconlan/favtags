@@ -2,7 +2,6 @@ require 'json'
 require 'iconv'
 require 'rest_client'
 require 'lib/url_lengthener'
-require 'htmlentities'
 
 class Favorite < ActiveRecord::Base
   cattr_reader :per_page
