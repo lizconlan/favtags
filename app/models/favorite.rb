@@ -1,6 +1,8 @@
 require 'json'
+require 'iconv'
 require 'rest_client'
 require 'lib/url_lengthener'
+require 'htmlentities'
 
 class Favorite < ActiveRecord::Base
   cattr_reader :per_page
@@ -39,7 +41,11 @@ class Favorite < ActiveRecord::Base
   end
   
   def html_text
-    html = text
+    ic = Iconv.new('UTF-8//IGNORE', 'UTF-8')
+    html = ic.iconv(text + ' ')[0..-2]
+    
+    html.gsub!(/[”“”]/, '"')
+    
     counter = 0
     lengthened = []
     full_links = []
@@ -47,16 +53,24 @@ class Favorite < ActiveRecord::Base
     #stored short links
     urls.each do |url|
       lengthened << url.short
-      full_links << url.full.gsub(" ", "%20")
-      html.gsub!(url.short, display_url(url.short, url.full))
+      full = url.full.gsub(" ", "%20")
+      full_links << full
+      html.gsub!(url.short, display_url(url.short, full))
     end
+    
+    
+    # if html =~ (/t\.co\/Ml02zcZL/)
+    #   raise html.inspect
+    # end
     
     #new short links
     html.scan(/(http(?:[^\s\"\”\<])*)/).each do |match|
-      match = match.to_s
+      match = match.to_s      
       if match =~ /(.*)\.$/
         match = $1
       end
+      
+      p match[-1,1]
       
       unless lengthened.include?(match) or full_links.include?(match) or match.include?("&hellip;")
         expanded = UrlLengthener.expand_url(match)
