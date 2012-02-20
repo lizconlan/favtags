@@ -60,11 +60,9 @@ class Favorite < ActiveRecord::Base
     #new short links
     html.scan(/(http(?:[^\s\"\”\<])*)/).each do |match|
       match = match.to_s      
-      if match =~ /(.*)\[.|,]$/
+      if match =~ /(.*)[.|,]$/
         match = $1
       end
-      
-      p match[-1,1]
       
       unless lengthened.include?(match) or full_links.include?(match) or match.include?("&hellip;")
         expanded = UrlLengthener.expand_url(match)
