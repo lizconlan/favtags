@@ -37,7 +37,11 @@ class UrlLengthener
       if parts.path.empty?
         header = req.head("/")
       else
-        header = req.head(parts.path)
+        begin
+          header = req.head(parts.path)
+        rescue
+          return {:moved => false, :location => url} #argh, it's all gone wrong - put the original back
+        end
       end
       return {:moved => false, :location => url} unless header.get_fields("location") #error occured somewhere, give me back my url
       if header.get_fields("location").first[0..0] == "/"
