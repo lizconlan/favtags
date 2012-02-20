@@ -57,15 +57,10 @@ class Favorite < ActiveRecord::Base
       html.gsub!(url.short, display_url(url.short, full))
     end
     
-    
-    # if html =~ (/t\.co\/Ml02zcZL/)
-    #   raise html.inspect
-    # end
-    
     #new short links
     html.scan(/(http(?:[^\s\"\”\<])*)/).each do |match|
       match = match.to_s      
-      if match =~ /(.*)\.$/
+      if match =~ /(.*)\[.|,]$/
         match = $1
       end
       
