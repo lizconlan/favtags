@@ -69,8 +69,6 @@ class Favorite < ActiveRecord::Base
         match = $1
       end
       
-      p match[-1,1]
-      
       unless lengthened.include?(match) or full_links.include?(match) or match.include?("&hellip;")
         expanded = UrlLengthener.expand_url(match)
         if expanded == match
@@ -80,7 +78,6 @@ class Favorite < ActiveRecord::Base
           new_url.short = match
           new_url.full = UrlLengthener.expand_url(match)
           urls << new_url
-          self.save
           html.gsub!(match, display_url(match, new_url.full))
         end
       end
@@ -184,7 +181,7 @@ class Favorite < ActiveRecord::Base
       self.tags.delete(tag)
     end
     begin
-      user.client(user.access_token, user.access_secret).favorite_destroy(self.tweet_id)
+      user.client.favorite.destroy(:id => self.tweet_id)
     rescue Exception => exc
       #do nothing
     end
