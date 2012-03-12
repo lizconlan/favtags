@@ -1,6 +1,6 @@
 class UrlLengthener
   #vanity shorteners that only ever point back to their own site - if you see one of these, you already know what you're in for
-  EXEMPTIONS = ["bbc.in", "youtu.be", "flic.kr", "pic.twitter.com", "instagr.am", "econ.st", "lnkd.in", "tcrn.ch", "wpo.st", "on.wsj.com", "thetim.es", "ti.me", "tgr.ph", "slidesha.re", "seati.ms", "reut.rs", "nzh.tw", "nzh.tw", "nym.ag", "nyob.co", "nyti.ms", "lat.ms", "itv.co", "itun.es", "ind.pn", "huff.to", "gu.com", "gr.pn", "gaw.kr", "f24.my", "fxn.ws", "4sq.com", "onforb.es", "arst.ch"]
+  EXEMPTIONS = ["bbc.in", "youtu.be", "flic.kr", "pic.twitter.com", "instagr.am", "econ.st", "lnkd.in", "tcrn.ch", "wpo.st", "on.wsj.com", "thetim.es", "ti.me", "tgr.ph", "slidesha.re", "seati.ms", "reut.rs", "nzh.tw", "nzh.tw", "nym.ag", "nyob.co", "nyti.ms", "lat.ms", "itv.co", "itun.es", "ind.pn", "huff.to", "gu.com", "gr.pn", "gaw.kr", "f24.my", "fxn.ws", "4sq.com", "onforb.es", "arst.ch", "github.com"]
   
   def self.expand_url url
     bounces = 0 #not currently reported, but could be useful, maybe?!
@@ -24,6 +24,9 @@ class UrlLengthener
       #return straight away if there's no host part
       return {:moved => false, :location => url} if parts.host.nil? or parts.host.empty?
       
+      #return straight away if it's a non-standard port and not a t.co link
+      return {:moved => false, :location => url} if parts.port != 80 and parts.host != "t.co"
+      
       if EXEMPTIONS.include?(parts.host)
         #won't get much more sensible, just longer - return as-is
         return {:moved => false, :location => url}
@@ -33,11 +36,15 @@ class UrlLengthener
         #probably not intended as a shortener then - return as-is
         return {:moved => false, :location => url}
       end
-      req = Net::HTTP.new(parts.host, parts.port)
+      req = Net::HTTP.new(parts.host, 80)
       if parts.path.empty?
         header = req.head("/")
       else
-        header = req.head(parts.path)
+        begin
+          header = req.head(parts.path)
+        rescue
+          return {:moved => false, :location => url} #argh, it's all gone wrong - put the original back
+        end
       end
       return {:moved => false, :location => url} unless header.get_fields("location") #error occured somewhere, give me back my url
       if header.get_fields("location").first[0..0] == "/"
