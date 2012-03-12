@@ -79,10 +79,16 @@ class User < TwitterAuth::GenericUser
       while i < self.pages_to_load
         i += 1
         
-        tweets = client.favorites?({:page => i, :include_entities => 1})
+        if page == 1
+          tweets = client.favorites?({:count => 20, :include_entities => 1})
+        else
+          tweets = client.favorites?({:count => 21, :max_id => @max, :include_entities => 1})
+        end
         
         if tweets.blank?
           return ""
+        else
+          @max = tweets.last.id
         end
         
         tweets.each do |tweet|
