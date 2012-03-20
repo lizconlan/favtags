@@ -176,7 +176,7 @@ class Favorite < ActiveRecord::Base
       self.tags.delete(tag)
     end
     begin
-      user.client.favorite.destroy!(:id => self.tweet_id)
+      user.client.favorites.destroy!(:id => self.tweet_id)
     rescue Exception => exc
       #do nothing
     end
