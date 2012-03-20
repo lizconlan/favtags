@@ -1,6 +1,9 @@
 #section
   %article
     .text_panel
+      .page-header
+        %h2 Why Favtagger?
+        
       %p Got <a href="http://twitter.com">Twitter</a> account?
   
       %p Use favorites?
@@ -8,5 +11,55 @@
       %p Ever look at your favorites list and think, "if only I could organise this somehow"?
   
       %p This online app is for you!
-    
+      
       =link_to "Sign in with Twitter", login_url, {:class => "twitter_button" }
+      
+      %br
+      .page-header
+        %h3 Yes, but what does it <i>do</i>?
+      
+      %p Well it's still in beta so I'm still puzzling that out but once you've imported your favorites, you can...
+      
+      %h4 View them, most recent first
+        
+      %img{:src => "/images/tweets.jpg", :width => "586", :height =>"245", :alt => "List of tweets"}
+      
+      %p
+        You can tag them, delete them (this unfavorites them from Twitter too), retweet them and link to them on Twitter.com too.
+      
+      %h4 View tweets from a specific account
+      
+      %img{:src => "/images/account_tweets.jpg", :width => "550", :height =>"227", :alt => "List of tweets from a specific account"}
+      
+      %p
+        All the same features as before but one account at a time.
+        
+      %h4 Make up your own tags and view by those
+      
+      %img{:src => "/images/tagged_tweets.jpg", :width => "568", :height => "269", :alt => "List of tweets tagged screenshot"}
+      
+      %p
+        Or let the autotag feature take the strain - it will make tags for you based on hashtags it finds in the tweets. Switched off by default as it can be a bit overwhelming if you have a large number of faved tweets.
+      
+      %h4 Export your favorites in a choice of popular formats
+      
+      %img{:src => "/images/export.jpg", :width =>"536", :height => "125", :alt => "Export panel"}
+      
+      %br
+      %h4 Search
+      
+      %p
+        It's pretty basic but you can also search your stored tweets if there's something specific you're trying to find. I'm not going to waste your bandwidth showing you a picture of a search box.
+        
+      %br
+      .page-header
+        %h3 Wait, why do you need read/write access to my Twitter account?
+        
+      %p To allow you to manage, delete and retweet your favorites. There might even be a reply function one day. Favtagger will never post anything to your account without your consent though, that would be rude.
+      
+      %br
+      .page-header
+        %h3 Can I leave if I hate it?
+        
+      %p Yeah, sure - no hard feelings. If you delete your account any data held about you on Favtagger's servers will be wiped (no undo, so make sure you mean it!) and instructions are provided so you can revoke the app's access privileges to your Twitter account.
+      
