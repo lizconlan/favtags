@@ -18,8 +18,9 @@ module TwitterAuth
             response.body
           end
         when Net::HTTPUnauthorized
-          raise TwitterAuth::Dispatcher::Unauthorized, 'The credentials provided did not authorize the user.'
+          raise 'The credentials provided did not authorize the user.'
         else
+          raise response.inspect
           message = begin
             JSON.parse(response.body)['error']
           rescue JSON::ParserError
@@ -30,7 +31,7 @@ module TwitterAuth
             end
           end
 
-          raise TwitterAuth::Dispatcher::Error, message
+          raise message
         end
       end
       
@@ -39,7 +40,7 @@ module TwitterAuth
         
         token = OAuth::AccessToken.new(TwitterAuth.consumer, token, secret) unless token.is_a?(OAuth::AccessToken)
         
-        response = token.get("https://api.twitter.com" + '/account/verify_credentials.json')
+        response = token.get("https://api.twitter.com" + '/1.1/account/verify_credentials.json')
         user_info = handle_response(response)
         
         if user = User.find_by_twitter_id(user_info['id'].to_s)
