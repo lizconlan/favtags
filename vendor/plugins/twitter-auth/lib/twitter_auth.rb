@@ -40,7 +40,7 @@ module TwitterAuth
   
   # The OAuth consumer used by TwitterAuth for authentication. The consumer key and secret are set in your application's +config/twitter.yml+
   def self.consumer
-    options = {:site => "https://api.twitter.com"}
+    options = {:site => "https://api.twitter.com/1.1"}
     [ :authorize_path, 
       :request_token_path,
       :access_token_path,
