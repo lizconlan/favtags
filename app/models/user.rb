@@ -135,7 +135,7 @@ class User < TwitterAuth::GenericUser
         if self.autocreate_tags
           fave.hashtags.each do |hashtag|
             unless self.has_tag?(hashtag)
-              if hashtag.length > 2
+              if hashtag and hashtag.length > 2
                 fave.tag(hashtag, self.id)
               end
             end
