@@ -23,7 +23,7 @@ Rails::Initializer.run do |config|
   config.gem "ezcrypto"
   config.gem "will_paginate", :version => "2.3.15"
   config.gem "json"
-  config.gem "twitter"
+  config.gem "grackle"
   config.gem "haml"
   config.gem "iconv"
 

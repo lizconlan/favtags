@@ -73,7 +73,6 @@ class Favorite < ActiveRecord::Base
           new_url.short = match
           new_url.full = UrlLengthener.expand_url(match)
           urls << new_url
-          self.save
           html.gsub!(match, display_url(match, new_url.full))
         end
       end
@@ -177,7 +176,7 @@ class Favorite < ActiveRecord::Base
       self.tags.delete(tag)
     end
     begin
-      user.client(user.access_token, user.access_secret).favorite_destroy(self.tweet_id)
+      user.client.favorites.destroy!(:id => self.tweet_id)
     rescue Exception => exc
       #do nothing
     end
